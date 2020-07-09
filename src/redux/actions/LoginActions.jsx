@@ -1,0 +1,73 @@
+import url from "../config/loginAPIURL";
+import urlProfile from "../config/usersAPIURL";
+import {
+  LoginLogin,
+  LoginError,
+  LoginProfileGet,
+  LoginProfileError,
+  LoginProfileUpdate
+} from "../constants/LoginConstants";
+import history from "../../routes/history";
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
+
+import {
+ LoginToast,
+ ProfileToast,
+ ProfileUpdateToast,
+ ProfileErrorToast
+} from '../../components/toasts/loginToasts';
+
+export const LoginAuthentication = (formValues) => async dispatch => {
+  dispatch(showLoading('loginBar')); 
+  await url.post("/users/login", formValues)
+    .then(function(response) {
+      let data = response.headers;
+      dispatch(LoginLogin(data));       
+      dispatch(hideLoading('loginBar'));
+      dispatch(LoginToast);          
+    })
+    .catch(function(error) {
+      dispatch(LoginError(error));    
+      dispatch(hideLoading('loginBar'));
+    });  
+    history.push("/app/"); 
+};
+
+export const LoginProfile = () => async (dispatch,getState) => { 
+  let userid = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
+  let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
+  //console.log('user :'+userid);
+  await urlProfile.get(`/${userid}`,{headers:{
+    'Content-Type':'application/json',
+    'Authorization':token     
+  }})
+    .then(function(response) {
+      let data = response.data;
+      dispatch(LoginProfileGet(data));   
+      dispatch(ProfileToast); 
+    })
+    .catch(function(error) {
+      dispatch(LoginProfileError(error));        
+    });  
+};
+
+export const ProfileUpdate = (values) => async (dispatch,getState) => { 
+  dispatch(showLoading('LOADINGBAR')); 
+  let userid = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
+  let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization; 
+  await urlProfile.put(`/${userid}`,values,{headers:{
+      'Content-Type':'application/json',
+      'Authorization':token     
+    }})
+    .then(function(response) {
+      let data = response.data;
+      dispatch(LoginProfileUpdate(data));  
+      dispatch(hideLoading('LOADINGBAR'));  
+      dispatch(ProfileUpdateToast); 
+    })
+    .catch(function(error) {
+      dispatch(LoginProfileError(error));   
+      dispatch(hideLoading('LOADINGBAR'));  
+      dispatch(ProfileErrorToast);
+    });  
+};
