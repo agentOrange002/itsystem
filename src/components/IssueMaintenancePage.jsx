@@ -75,6 +75,24 @@ class IssueMaintenancePage extends Component {
                 ]
             },
             {
+                label: 'Tickets',
+                icon: 'pi pi-fw pi-ticket',
+                items: [
+                    {
+                        label: 'Open Ticket',
+                        icon: 'pi pi-fw pi-plus',
+                        url: `${urlparam}`
+
+                    },
+                    {
+                        label: 'Close Ticket',
+                        icon: 'pi pi-fw pi-times',
+                        url: `${urlparam}`
+                    },
+
+                ]
+            },
+            {
                 label: 'Category',
                 icon: 'pi pi-fw pi-folder',
                 url: `${urlparam}categories`                

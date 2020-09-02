@@ -8,6 +8,7 @@ import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Dialog} from 'primereact/dialog';
+import {Messages} from "primereact/messages";
 
 import history from "../routes/history";
 import {connect} from 'react-redux';
@@ -34,6 +35,7 @@ class IssueDetailsPage extends Component {
        state = {
             issueIDselected:null,
             IssueLogVisible:false,
+            ticketinfo:null,
             visible:false,
             userid: null,
             breadcrumdItems: [
@@ -51,6 +53,11 @@ class IssueDetailsPage extends Component {
                     command:() => {this.setState({visible:true}); }
                  },   
                  {
+                    label:'Create Ticket',
+                    icon:'pi pi-fw pi-plus',
+                    command: () => {console.log('Create Ticket')}
+                 },
+                 {
                     label:'Print',
                     icon:'pi pi-fw pi-print',
                     command: () => {console.log('Print Issue')}
@@ -61,7 +68,22 @@ class IssueDetailsPage extends Component {
 
     componentDidMount() {
         this.setState({userid:this.props.authlogin.loginState.loginResponse.userid });
+       // this.noticket();
     }
+    
+    componentDidUpdate(prevProps,prevState){
+        if(this.state.issueIDselected !== prevState.issueIDselected)  {
+            this.noticket();
+        }
+    }
+
+    welcome = () => {
+        this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    }
+    noticket = () => {
+        this.messages.show({severity: 'error', summary: 'No Ticket Found', detail: 'No ticket opened for this issue', sticky:true});
+    }
+
 
     addMessage = (event) => {
         event.preventDefault();
@@ -69,6 +91,7 @@ class IssueDetailsPage extends Component {
     }  
 
     render() {        
+       
         return ( 
             <div className="p-grid p-fluid">               
                 <div className="p-col-12" >
@@ -79,11 +102,13 @@ class IssueDetailsPage extends Component {
                         <Menubar model={this.state.tieredItems} >                               
                             <Button label="Add Message" icon="pi pi-plus" onClick={this.addMessage}    
                               disabled={this.state.issueIDselected === null ? "disabled" : undefined} />
+                              
                         </Menubar >
                     </div>
-                    <div style={MyStyle.paddingTop}>                  
+                    <div style={MyStyle.paddingTop}>        
+                    <Messages ref={(el) => this.messages = el}></Messages>          
                     <Panel header='Issue Details' toggleable={true}>
-                        <Fieldset legend={_.isEmpty(this.state.issueIDselected)?`Issue Form`:`Selected Issue ID - ${this.state.issueIDselected.id}`}>
+                        <Fieldset legend={_.isEmpty(this.state.issueIDselected)?`Issue Info`:`Selected Issue ID - ${this.state.issueIDselected.id}`}>
                             <div className='p-grid p-fluid'>   
                                 <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
                                     <span className="p-float-label">
@@ -172,6 +197,30 @@ class IssueDetailsPage extends Component {
                                 </div>
                             </div>
                         </Fieldset>                     
+                        <Fieldset legend="Ticket Info">
+                            <div className='p-grid p-fluid'>   
+                                <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
+                                    <span className="p-float-label">
+                                        <InputText id="tid" 
+                                        value={_.isEmpty(this.state.issueIDselected)?`NONE`:`${this.state.issueIDselected.id}`} 
+                                        style={MyStyle.width} 
+                                        tooltip='Ticket ID' tooltipOptions={MyStyle.tooltip}
+                                        readOnly/>
+                                        <label htmlFor="tid">Ticket ID</label>
+                                    </span>            
+                                </div> 
+                                <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
+                                    <span className="p-float-label">
+                                        <InputText id="tstatus" 
+                                        value={_.isEmpty(this.state.issueIDselected)?`NONE`:`${this.state.issueIDselected.id}`} 
+                                        style={MyStyle.width} 
+                                        tooltip='Ticket Status' tooltipOptions={MyStyle.tooltip}
+                                        readOnly/>
+                                        <label htmlFor="tstatus">Ticket Status</label>
+                                    </span>            
+                                </div> 
+                            </div>
+                        </Fieldset>
                     </Panel >                   
                     <Dialog header="Find Issue ID" 
                         visible={this.state.visible}  

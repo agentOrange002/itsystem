@@ -38,6 +38,16 @@ class IssueMaintenanceDataTable extends Component {
                 command: (event) => this.assignSupport(this.state.selectedIssue)
             },
             {
+                label: 'Open Ticket', 
+                icon: 'pi pi-fw pi-plus', 
+                command: (event) => this.ownedThisIssue(this.state.selectedIssue)
+            },
+            {
+                label: 'Close Ticket', 
+                icon: 'pi pi-fw pi-times', 
+                command: (event) => this.ownedThisIssue(this.state.selectedIssue)
+            },
+            {
                 label: 'Delete', 
                 icon: 'pi pi-fw pi-times', 
                 command: (event) => this.deleteIssue(this.state.selectedIssue)

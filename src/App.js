@@ -128,7 +128,7 @@ class App extends Component {
 					{label: 'Issue Maintenance', icon: 'pi pi-fw pi-file', to: '/app/issuemaintenance'},
 					{label: 'Issue Details', icon: 'pi pi-fw pi-file', to: '/app/issuedetails'},
                 ]
-            },
+            },          
             {
                 label: 'Tasks', icon: 'pi pi-fw pi-desktop', 
                 items:  [
@@ -237,6 +237,8 @@ class App extends Component {
         });
 
         return (
+           
+           
             <div className={wrapperClass} onClick={this.onWrapperClick}>
                 
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
@@ -250,7 +252,7 @@ class App extends Component {
                 </div>
 
                 <div className="layout-main">
-              
+               
                 <Switch>
                     <Route path="/app/" exact component={Dashboard} />
                     <Route path="/app/forms" component={FormsDemo} />
@@ -269,7 +271,7 @@ class App extends Component {
                     <Route path="/app/usermaintenance" component={UserMaintenancePage} />
                     <Route path="/app/testdatatable" component={DataTableDemo} />
                     <Route path="/app/accountprofile" component={AccountProfile} />
-                    <Route path="/app/taskmaintenance" component={TaskMaintenance} />
+                    <Route path="/app/taskmaintenance" component={TaskMaintenance} />                
                 </Switch>
                 </div>
 
@@ -277,6 +279,7 @@ class App extends Component {
 
                 <div className="layout-mask"></div>
             </div>
+        
         );
     }
 }

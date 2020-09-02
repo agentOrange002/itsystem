@@ -12,7 +12,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { LogOut } from './components/commands/Logout';
 
 const MyStyle = {
-    paddingTop: { paddingTop: '10px' },
+    paddingTop: {       
+        position:"fixed",
+        top: '0px',
+        left:"0px",
+        right:"0",
+        height:"6px",       
+        },
     width:{ width: '200px' },
     bc: { backgroundColor: '#191919' },
     Button: { marginLeft: 4, backgroundColor: '#191919' }
@@ -65,7 +71,11 @@ class AppTopbar extends Component {
 
     render() {
         return (
-            <div className="layout-topbar clearfix">
+            <>
+           
+            
+            <div className="layout-topbar clearfix">      
+           
 
                 <ToastContainer position="top-right"
                     autoClose={5000}
@@ -106,12 +116,15 @@ class AppTopbar extends Component {
                         <span className="layout-topbar-item-text">User</span>
                         <span className="layout-topbar-icon pi pi-user"/>
                     </button>  */}
-                </div>
+                </div>              
+                
                 <div style={MyStyle.paddingTop}>
                     <HeaderProgressBar nameofbar={"LOADINGBAR"} />
                 </div>
+       
             </div>
-        );
+            </>
+        );   
     }
 }
 
