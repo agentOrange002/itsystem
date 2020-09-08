@@ -29,12 +29,14 @@ const MyStyle = {
     width: { width: "100%" },
     tooltip: {position: 'top'},
    dialogstyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
+   ticketdialogstyle: {width: '350px',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
 }
 
 class IssueDetailsPage extends Component {    
        state = {
             issueIDselected:null,
             IssueLogVisible:false,
+            TicketVisible: false,
             ticketinfo:null,
             visible:false,
             userid: null,
@@ -51,17 +53,18 @@ class IssueDetailsPage extends Component {
                     label:'Find Issue',
                     icon:'pi pi-fw pi-search',
                     command:() => {this.setState({visible:true}); }
-                 },   
-                 {
-                    label:'Create Ticket',
-                    icon:'pi pi-fw pi-plus',
-                    command: () => {console.log('Create Ticket')}
-                 },
+                 },                  
                  {
                     label:'Print',
                     icon:'pi pi-fw pi-print',
-                    command: () => {console.log('Print Issue')}
-                 }
+                    command: () => {this.printIssue();}
+                 },
+                 {
+                    label:'Create Ticket',
+                    icon:'pi pi-fw pi-plus',
+                    command: () => {this.createTicket();}
+                 },
+
             ]
            
         };    
@@ -83,12 +86,48 @@ class IssueDetailsPage extends Component {
     noticket = () => {
         this.messages.show({severity: 'error', summary: 'No Ticket Found', detail: 'No ticket opened for this issue', sticky:true});
     }
+    pleaseselectissue = () => {
+        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Please Select Issue First!'});
+    }
 
 
     addMessage = (event) => {
         event.preventDefault();
         this.setState({IssueLogVisible: true});
     }  
+
+    createTicket = () => {     
+        if(_.isEmpty(this.state.issueIDselected)) {
+            this.pleaseselectissue();
+        } 
+        else{
+            this.setState({TicketVisible: true});
+        }        
+    }
+
+    printIssue = () => {
+        if(_.isEmpty(this.state.issueIDselected)) {
+            this.pleaseselectissue();
+        } 
+        else{
+          
+        }        
+    }
+
+    renderFooter(name) {
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} autoFocus />
+            </div>
+        );
+    }
+
+    onHide(name) {
+        this.setState({
+            [`${name}`]: false
+        });
+    }
 
     render() {        
        
@@ -237,6 +276,16 @@ class IssueDetailsPage extends Component {
                         modal={true} 
                         onHide={() => this.setState({IssueLogVisible: false})}>
                        <IssueLogMessage onVisible={(isvisible) => this.setState({IssueLogVisible:isvisible})} dataIssueId={_.isEmpty(this.state.issueIDselected)?`NONE`:`${this.state.issueIDselected.issueId}`}/>
+                    </Dialog>         
+                    <Dialog header="Create Ticket Message"                        
+                        visible={this.state.TicketVisible}                         
+                        modal style={MyStyle.ticketdialogstyle}
+                        footer={this.renderFooter('TicketVisible')}                         
+                        onHide={() => this.onHide('TicketVisible')}>
+                        <div className="confirmation-content">
+                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
+                            <span>Are you sure you want to create a ticket for this issue?</span>
+                        </div>
                     </Dialog>         
                     {/* <Button label="Show" icon="pi pi-info-circle" onClick={(e) => this.setState({visible: true})} /> */}
                     </div>    

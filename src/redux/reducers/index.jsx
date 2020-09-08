@@ -15,6 +15,7 @@ import {USERS} from './UsersReducer';
 import {ISSUES} from './IssuesReducers';
 import {ISSUELOGS} from './IssueLogsReducers';
 import {CATEGORIES} from './CategoryReducer';
+import {TICKETS} from './TicketReducers';
 
 const encryptor = createEncryptor({
   secretKey: "mydirtylittlesecret",
@@ -70,6 +71,13 @@ const categoriesPC = {
   transforms: [encryptor],
 }
 
+const ticketsPC = {
+  key: 'categories',
+  storage: storageSession,
+  blacklist: ['TICKETS'],
+  transforms: [encryptor],
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
   loadingBar: loadingBarReducer,
@@ -78,7 +86,8 @@ const rootReducer = combineReducers({
   USERS: persistReducer(cookieUsersAuthPersistConfig, USERS),
   ISSUES: persistReducer(issuesPC,ISSUES),  
   ISSUELOGS: persistReducer(issuelogsPC,ISSUELOGS),
-  CATEGORIES: persistReducer(categoriesPC,CATEGORIES)
+  CATEGORIES: persistReducer(categoriesPC,CATEGORIES),
+  TICKETS: persistReducer(ticketsPC,TICKETS)
 });
 
 export default persistReducer(cookieAuthPersistConfig,rootReducer);
