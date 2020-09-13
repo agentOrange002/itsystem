@@ -1,5 +1,5 @@
 import {
-    TICKET_GET_ALL,
+    TICKET_GET_ALL_BY_ISSUEID,
     TICKET_GET_BY_ID,
     TICKET_SAVE,
     TICKET_UPDATE,
@@ -16,7 +16,7 @@ const TicketsState = {
 
 export const TICKETS = (state = TicketsState, action) => {
     switch (action.type) {
-        case TICKET_GET_ALL:
+        case TICKET_GET_ALL_BY_ISSUEID:
             return {
                 ...state,
                 ticketResponse: _.mapKeys(action.payload, 'ticketId'),              

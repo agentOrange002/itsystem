@@ -13,7 +13,7 @@ import {Messages} from "primereact/messages";
 import history from "../routes/history";
 import {connect} from 'react-redux';
 
-// import {submitReportIssue} from "../redux/actions/reportissue";
+import {saveTicket,getAllTicketsByIssueId} from "../redux/actions/TicketActions";
 // import {Field,reduxForm} from 'redux-form';
 
 import _ from 'lodash';
@@ -70,26 +70,46 @@ class IssueDetailsPage extends Component {
         };    
 
     componentDidMount() {
-        this.setState({userid:this.props.authlogin.loginState.loginResponse.userid });
-       // this.noticket();
+        this.setState({userid:this.props.authlogin.loginState.loginResponse.userid });      
     }
     
-    componentDidUpdate(prevProps,prevState){
-        if(this.state.issueIDselected !== prevState.issueIDselected)  {
-            this.noticket();
+    async componentDidUpdate(prevProps,prevState){
+        if(this.state.issueIDselected !== prevState.issueIDselected)  {           
+           await this.props.getAllTicketsByIssueId(this.state.issueIDselected.issueId);           
+            this.lastArrayTicket();    
+            
+            if(_.isEmpty(this.state.ticketinfo)){               
+                console.log("this issue has no ticket");
+                 this.noticket();
+             }
         }
+
+        // if(this.state.ticketinfo !== prevState.ticketinfo) {    
+        //       if(!_.isEmpty(this.state.ticketinfodateOpened)&&_.isEmpty(!this.state.ticketinfo.dateClosed)) {
+        //           this.noticket();
+        //        }
+        // }       
     }
+
+    
 
     welcome = () => {
         this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
+
     noticket = () => {
-        this.messages.show({severity: 'error', summary: 'No Ticket Found', detail: 'No ticket opened for this issue', sticky:true});
+        this.messages.show({severity: 'error', summary: 'No Ticket Found', detail: 'No ticket opened for this issue', sticky:true});      
     }
+
     pleaseselectissue = () => {
         this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Please Select Issue First!'});
     }
 
+    lastArrayTicket = () =>  {      
+        let ticketdetails = this.props.tickets;    
+       this.setState({ticketinfo: ticketdetails.pop()});     
+        // return ticketdetails.pop();
+    }
 
     addMessage = (event) => {
         event.preventDefault();
@@ -118,7 +138,7 @@ class IssueDetailsPage extends Component {
         return (
             <div>
                 <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-text" />
-                <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} autoFocus />
+                <Button label="Yes" icon="pi pi-check" onClick={() => this.onSave(name)} autoFocus />
             </div>
         );
     }
@@ -128,9 +148,12 @@ class IssueDetailsPage extends Component {
             [`${name}`]: false
         });
     }
+    
+    onSave(name) {
+        this.props.saveTicket(this.state.issueIDselected.issueId).then(this.setState({[`${name}`]: false }));      
+    }
 
-    render() {        
-       
+    render() {               
         return ( 
             <div className="p-grid p-fluid">               
                 <div className="p-col-12" >
@@ -241,7 +264,7 @@ class IssueDetailsPage extends Component {
                                 <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
                                     <span className="p-float-label">
                                         <InputText id="tid" 
-                                        value={_.isEmpty(this.state.issueIDselected)?`NONE`:`${this.state.issueIDselected.id}`} 
+                                        value={_.isEmpty(this.state.ticketinfo) ? `NONE` : `${this.state.ticketinfo.ticketId}`} 
                                         style={MyStyle.width} 
                                         tooltip='Ticket ID' tooltipOptions={MyStyle.tooltip}
                                         readOnly/>
@@ -251,7 +274,7 @@ class IssueDetailsPage extends Component {
                                 <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
                                     <span className="p-float-label">
                                         <InputText id="tstatus" 
-                                        value={_.isEmpty(this.state.issueIDselected)?`NONE`:`${this.state.issueIDselected.id}`} 
+                                        value={_.isEmpty(this.state.ticketinfo) ? `NONE`:`${_.isEmpty(this.state.ticketinfo.dateClosed) ? `OPEN`: `CLOSED`}`} 
                                         style={MyStyle.width} 
                                         tooltip='Ticket Status' tooltipOptions={MyStyle.tooltip}
                                         readOnly/>
@@ -302,8 +325,11 @@ class IssueDetailsPage extends Component {
 
 const mapStateToProps = state => {
     return {
-      authlogin: state.LOGIN_AUTHENTICATION
+      authlogin: state.LOGIN_AUTHENTICATION,
+      tickets: Object.values(state.TICKETS.ticketResponse)
     };
 };
+
+const mapDispatchProps = {saveTicket,getAllTicketsByIssueId}
  
-export default connect(mapStateToProps,null)(IssueDetailsPage);
+export default connect(mapStateToProps,mapDispatchProps)(IssueDetailsPage);

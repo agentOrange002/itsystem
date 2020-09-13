@@ -1,5 +1,5 @@
 export const TICKET_ERROR = 'TICKET_ERROR';
-export const TICKET_GET_ALL = 'TICKET_GET_ALL';
+export const TICKET_GET_ALL_BY_ISSUEID = 'TICKET_GET_ALL_BY_ISSUEID';
 export const TICKET_GET_BY_ID = 'TICKET_GET_BY_ID';
 export const TICKET_SAVE = 'TICKET_SAVE';
 export const TICKET_UPDATE = 'TICKET_UPDATE';
@@ -11,9 +11,9 @@ export const TicketError  = error => {
     } );
 }
 
-export const TicketGetAll  = data => {
+export const TicketGetAllByIssueId  = data => {
     return ( {
-        type: 'TICKET_GET_ALL', payload:data
+        type: 'TICKET_GET_ALL_BY_ISSUEID', payload:data
     } );
 }
 
