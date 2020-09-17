@@ -4,11 +4,10 @@ import {Fieldset} from 'primereact/fieldset';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
-
 import {connect} from 'react-redux';
-import {saveIssue} from "../redux/actions/IssuesActions";
+import {saveIssue} from "../../../redux/actions/IssuesActions";
 import {Field, reduxForm} from 'redux-form';
-import {maxLength150, minLength10} from './messages/errorFieldNotification';
+import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
 
 class AddNewIssue extends Component {
 

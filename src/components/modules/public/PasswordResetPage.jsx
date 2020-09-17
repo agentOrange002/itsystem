@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-
 import {Button} from "primereact/button";
 import {Fieldset} from "primereact/fieldset";
 import {Panel} from "primereact/panel";
 import {Password} from 'primereact/password';
-
 import {connect} from 'react-redux';
 import {Field,reduxForm} from 'redux-form';
-import {required,passwordsMustMatch, minLength10} from './messages/errorFieldNotification';
-
+import {required,passwordsMustMatch, minLength10} from '../../messages/errorFieldNotification';
 
 class PasswordResetPage extends Component {
   

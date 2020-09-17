@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import {CarService} from '../../../service/CarService';
 
 class UserDataTable extends Component {
 

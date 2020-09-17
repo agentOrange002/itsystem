@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
 import {Panel} from 'primereact/panel';
@@ -9,15 +8,12 @@ import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Dialog} from 'primereact/dialog';
 import {Messages} from "primereact/messages";
-
-import history from "../routes/history";
+import { TabView,TabPanel } from 'primereact/tabview';
+import history from "../../../routes/history";
 import {connect} from 'react-redux';
-
-import {saveTicket,getAllTicketsByIssueId} from "../redux/actions/TicketActions";
+import {saveTicket,getAllTicketsByIssueId} from "../../../redux/actions/TicketActions";
 // import {Field,reduxForm} from 'redux-form';
-
 import _ from 'lodash';
-
 import IssueDataTable from './IssueDataTable';
 import IssueLogsDataView from './IssueLogsDataView';
 import IssueLogMessage from './IssueLogMessage';
@@ -168,9 +164,11 @@ class IssueDetailsPage extends Component {
                         </Menubar >
                     </div>
                     <div style={MyStyle.paddingTop}>        
-                    <Messages ref={(el) => this.messages = el}></Messages>          
+                    <Messages ref={(el) => this.messages = el}></Messages>    
                     <Panel header='Issue Details' toggleable={true}>
-                        <Fieldset legend={_.isEmpty(this.state.issueIDselected)?`Issue Info`:`Selected Issue ID - ${this.state.issueIDselected.id}`}>
+                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+                        <TabPanel header="Information">
+                        <Fieldset legend={_.isEmpty(this.state.issueIDselected)?`Issue`:`Selected Issue ID - ${this.state.issueIDselected.id}`}>
                             <div className='p-grid p-fluid'>   
                                 <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
                                     <span className="p-float-label">
@@ -258,31 +256,42 @@ class IssueDetailsPage extends Component {
                                     </span>   
                                 </div>
                             </div>
-                        </Fieldset>                     
-                        <Fieldset legend="Ticket Info">
-                            <div className='p-grid p-fluid'>   
-                                <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
-                                    <span className="p-float-label">
-                                        <InputText id="tid" 
-                                        value={_.isEmpty(this.state.ticketinfo) ? `NONE` : `${this.state.ticketinfo.ticketId}`} 
-                                        style={MyStyle.width} 
-                                        tooltip='Ticket ID' tooltipOptions={MyStyle.tooltip}
-                                        readOnly/>
-                                        <label htmlFor="tid">Ticket ID</label>
-                                    </span>            
-                                </div> 
-                                <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
-                                    <span className="p-float-label">
-                                        <InputText id="tstatus" 
-                                        value={_.isEmpty(this.state.ticketinfo) ? `NONE`:`${_.isEmpty(this.state.ticketinfo.dateClosed) ? `OPEN`: `CLOSED`}`} 
-                                        style={MyStyle.width} 
-                                        tooltip='Ticket Status' tooltipOptions={MyStyle.tooltip}
-                                        readOnly/>
-                                        <label htmlFor="tstatus">Ticket Status</label>
-                                    </span>            
-                                </div> 
-                            </div>
-                        </Fieldset>
+                        </Fieldset>          
+                        </TabPanel>
+                        <TabPanel header="Ticket" disabled={_.isEmpty(this.state.issueIDselected) ? true: false} >
+                            <Fieldset legend="Ticket">
+                                <div className='p-grid p-fluid'>   
+                                    <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
+                                        <span className="p-float-label">
+                                            <InputText id="tid" 
+                                            value={_.isEmpty(this.state.ticketinfo) ? `NONE` : `${this.state.ticketinfo.ticketId}`} 
+                                            style={MyStyle.width} 
+                                            tooltip='Ticket ID' tooltipOptions={MyStyle.tooltip}
+                                            readOnly/>
+                                            <label htmlFor="tid">Ticket ID</label>
+                                        </span>            
+                                    </div> 
+                                    <div className='p-col-12 p-md-6' style={MyStyle.divTopPx}>
+                                        <span className="p-float-label">
+                                            <InputText id="tstatus" 
+                                            value={_.isEmpty(this.state.ticketinfo) ? `NONE`:`${_.isEmpty(this.state.ticketinfo.dateClosed) ? `OPEN`: `CLOSED`}`} 
+                                            style={MyStyle.width} 
+                                            tooltip='Ticket Status' tooltipOptions={MyStyle.tooltip}
+                                            readOnly/>
+                                            <label htmlFor="tstatus">Ticket Status</label>
+                                        </span>            
+                                    </div> 
+                                </div>
+                            </Fieldset>
+                        </TabPanel>
+                        <TabPanel header="Task" disabled={_.isEmpty(this.state.issueIDselected) ? true: false}>
+                           <Fieldset legend="Task" >
+
+                           </Fieldset>
+                        </TabPanel>
+                    </TabView> 
+                                   
+                       
                     </Panel >                   
                     <Dialog header="Find Issue ID" 
                         visible={this.state.visible}  

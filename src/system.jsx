@@ -5,11 +5,11 @@ import {connect} from 'react-redux';
 // import ScrollToTop from './ScrollToTop';
 import App from './App';
 import PrivateRoute from './routes/privateroute';
-import ReportIssuePage from './components/ReportIssuePage';
-import SignupPage from './components/SignupPage';
-import UserImagePage from './components/userimage';
-import LoginPage from './components/LoginPage';
-import PasswordResetPage from './components/PasswordResetPage';
+import ReportIssuePage from './components/modules/public/ReportIssuePage';
+import SignupPage from './components/modules/public/SignupPage';
+import UserImagePage from './components/modules/public/userimage';
+import LoginPage from './components/modules/public/LoginPage';
+import PasswordResetPage from './components/modules/public/PasswordResetPage';
 
 class System extends Component {  
     render() { 

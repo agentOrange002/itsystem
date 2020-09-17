@@ -3,11 +3,10 @@ import {Fieldset} from 'primereact/fieldset';
 import {Button} from 'primereact/button';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {InputText} from 'primereact/inputtext';
-
 import {connect} from 'react-redux';
-import {saveIssueLog} from "../redux/actions/IssueLogsActions";
+import {saveIssueLog} from "../../../redux/actions/IssueLogsActions";
 import {Field, reduxForm} from 'redux-form';
-import {maxLength150, minLength10} from './messages/errorFieldNotification';
+import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
 
 const MyStyle = {
     Div: {paddingTop: "20px"},

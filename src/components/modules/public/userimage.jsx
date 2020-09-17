@@ -1,54 +1,39 @@
 import React, {Component} from "react";
-
 import {connect} from "react-redux";
-import { submitUserImage,getUserImage } from "../redux/actions/PublicActions";
-
-
+import { submitUserImage,getUserImage } from "../../../redux/actions/PublicActions";
 import {Fieldset} from "primereact/fieldset";
 import {Panel} from "primereact/panel";
 import {InputText} from "primereact/inputtext";
 import {FileUpload} from 'primereact/fileupload';
 import {Button} from "primereact/button";
-
 import Resizer from "react-image-file-resizer";
-
-import HeaderProgressBar from './HeaderProgressBar';
-
+import HeaderProgressBar from '../../modules/tools/HeaderProgressBar';
 import _ from "lodash";
 
-class UserImagePage extends Component
-{
+class UserImagePage extends Component {
+
     state = {          
-        userId:'',   
-       
-        image: []
-        
+        userId:'',          
+        image: []        
     }
 
-    componentDidMount()
-    {
-            
+    componentDidMount() {           
 
-    }
-    
+    }    
 
     onUpload = (event) => {
         this.growl.show({ sticky:'true', severity: 'success', summary: 'Success', detail: 'File Uploaded'});
     }
 
-    setImageName = (event) =>
-    {
+    setImageName = (event) => {
         this.setState({imageName: event.target.value});
     }
 
-    setUserID = (event) =>
-    {
+    setUserID = (event) => {
       this.setState({userId: event.target.value})
     }
 
-
-    uploadUserImage = async (event) => 
-    {
+    uploadUserImage = async (event) => {
         await Resizer.imageFileResizer(event.files[0],86,86,'PNG',100,0,
           uri => {
              this.setState({image: [uri]});    
@@ -60,9 +45,6 @@ class UserImagePage extends Component
     submissionUI = (event) => {
       this.props.submitUserImage(this.state);
     }
-
-   
-  
 
   render() {    
     return (

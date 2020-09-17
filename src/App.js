@@ -5,18 +5,18 @@ import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import AppProfile from './AppProfile';
 import {Route,Switch} from 'react-router-dom';
-import {Dashboard} from './components/Dashboard';
-import {FormsDemo} from './components/FormsDemo';
-import {SampleDemo} from './components/SampleDemo';
-import {DataDemo} from './components/DataDemo';
-import {PanelsDemo} from './components/PanelsDemo';
-import {OverlaysDemo} from './components/OverlaysDemo';
-import {MenusDemo} from './components/MenusDemo';
-import {MessagesDemo} from './components/MessagesDemo';
-import {ChartsDemo} from './components/ChartsDemo';
-import {MiscDemo} from './components/MiscDemo';
-import {EmptyPage} from './components/EmptyPage';
-import {Documentation} from "./components/Documentation";
+import {Dashboard} from './components/js/Dashboard';
+import {FormsDemo} from './components/js/FormsDemo';
+import {SampleDemo} from './components/js/SampleDemo';
+import {DataDemo} from './components/js/DataDemo';
+import {PanelsDemo} from './components/js/PanelsDemo';
+import {OverlaysDemo} from './components/js/OverlaysDemo';
+import {MenusDemo} from './components/js/MenusDemo';
+import {MessagesDemo} from './components/js/MessagesDemo';
+import {ChartsDemo} from './components/js/ChartsDemo';
+import {MiscDemo} from './components/js/MiscDemo';
+import {EmptyPage} from './components/js/EmptyPage';
+import {Documentation} from "./components/js/Documentation";
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -27,14 +27,14 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 
-import IssueMaintenancePage from './components/IssueMaintenancePage';
-import IssueDetailsPage from './components/IssueDetailsPage';
-import UserMaintenancePage from './components/UserMaintenancePage';
+import IssueMaintenancePage from './components/modules/issue/IssueMaintenancePage';
+import IssueDetailsPage from './components/modules/issue/IssueDetailsPage';
+import UserMaintenancePage from './components/modules/user/UserMaintenancePage';
 import history from "./routes/history";
 
-import DataTableDemo from './components/Test';
-import AccountProfile from './components/AccountProfile';
-import TaskMaintenance from './components/TaskMaintenance';
+import DataTableDemo from './components/modules/public/Test';
+import AccountProfile from './components/modules/account/AccountProfile';
+import TaskMaintenance from './components//modules/task/TaskMaintenance';
 
 class App extends Component {
 

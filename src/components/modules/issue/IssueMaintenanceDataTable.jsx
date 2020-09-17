@@ -3,10 +3,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Button} from 'primereact/button';
 import {connect} from 'react-redux';
-import {getAllIssues,ownedThisIssue} from '../redux/actions/IssuesActions';
+import {getAllIssues,ownedThisIssue} from '../../../redux/actions/IssuesActions';
 import {ContextMenu} from 'primereact/contextmenu';
 import {Dialog} from 'primereact/dialog';
-
 import AssignedSupportDialog from './AssignedSupportDialog';
 import _ from 'lodash';
 import {Fieldset} from 'primereact/fieldset';

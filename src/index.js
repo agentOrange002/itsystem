@@ -1,11 +1,12 @@
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import System from './system';
+import System from './System';
 
 import './index.css';
 
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
 import 'primereact/resources/themes/luna-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -14,8 +15,7 @@ import {Provider} from 'react-redux';
 import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 
-
-import { Router} from 'react-router-dom'
+import {Router} from 'react-router-dom'
 
 import history from './routes/history';
 

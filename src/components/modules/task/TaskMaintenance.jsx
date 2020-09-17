@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
 import {Panel} from 'primereact/panel';
+import history from "../../../routes/history";
 
-import history from "../routes/history";
-
-const urlparam = 'http://localhost:3000/#/app/taskmaintenance/';
+const urlparam = `${window.location.origin}/#/app/taskmaintenance/`;
 
 const MyStyle = {
     paddingB: {paddingBottom: '.5em'},

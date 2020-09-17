@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
 import { Panel } from 'primereact/panel';
 import { Password } from 'primereact/password';
-import { TabMenu } from 'primereact/tabmenu';
 import { Button } from 'primereact/button';
 import _ from 'lodash';
 import { FileUpload } from 'primereact/fileupload';
 import Resizer from "react-image-file-resizer";
-import { ProfileUpdate } from '../redux/actions/LoginActions';
+import { ProfileUpdate } from '../../../redux/actions/LoginActions';
+import { TabView,TabPanel } from 'primereact/tabview';
+import { Fieldset } from 'primereact/fieldset';
 
 
 const MyStyle = {
@@ -27,14 +28,7 @@ class AccountProfile extends Component {
 
     state = {
         profile: {},
-        image: [],
-        items: [
-            { label: 'Profile', icon: 'pi pi-fw pi-user' },
-            { label: 'Address', icon: 'pi pi-fw pi-list' },
-            { label: 'Image', icon: 'pi pi-fw pi-image' },
-            { label: 'Password', icon: 'pi pi-fw pi-lock' },
-            // { label: 'Settings', icon: 'pi pi-fw pi-cog' }
-        ]
+        image: []       
     }
 
     componentDidMount() {
@@ -49,7 +43,7 @@ class AccountProfile extends Component {
     renderProfile = () => {
         return (
             <>
-                <div className="p-fluid p-formgrid p-grid">
+             <div className="p-fluid p-formgrid p-grid">
                     <div className="p-field p-col-12 p-md-6">
                         <label htmlFor="userid">User ID</label>
                         <InputText id="userid" type="text" defaultValue={this.state.profile.userId} onChange={(e) => this.setState({ profile: { ...this.state.profile, userId: e.target.value } })} />
@@ -66,17 +60,18 @@ class AccountProfile extends Component {
                         <label htmlFor="lastname6">Lastname</label>
                         <InputText id="lastname6" type="text" defaultValue={this.state.profile.lastName} onChange={(e) => this.setState({ profile: { ...this.state.profile, lastName: e.target.value } })} />
                     </div>
-                </div>
-                <div className='button' style={MyStyle.DivButton}>
-                    <span>
-                        <Button
-                            icon='pi pi-save'
-                            label='Update Profile'
-                            style={MyStyle.Button}
-                            onClick={this.onClickUpdateProfile}
-                        />
-                    </span>
-                </div>
+                    </div>
+                    <div className='button' style={MyStyle.DivButton}>
+                        <span>
+                            <Button
+                                icon='pi pi-save'
+                                label='Update Profile'
+                                style={MyStyle.Button}
+                                onClick={this.onClickUpdateProfile}
+                            />
+                        </span>
+                    </div>
+               
             </>
         );
     }
@@ -192,32 +187,35 @@ class AccountProfile extends Component {
                 </div>
             </>
         );
-    }
-
-    renderSwitch = (param) => {
-        switch (param) {
-            case 'Profile':
-                return this.renderProfile();
-            case 'Address':
-                return this.renderAddress();
-            case 'Image':
-                return this.renderImage();
-            case 'Password':
-                return this.renderPassword();
-            default:
-                return this.renderProfile();
-        }
-    }
+    }  
 
     render() {
         return (
             <div className="p-grid">
                 <div className="p-col-12">
-                    <TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({ activeItem: e.value })} />
-                    <div className="card card-w-title">
-                        <h1>Account {_.isEmpty(this.state.activeItem) ? 'Profile' : this.state.activeItem.label}</h1>
-                        {_.isEmpty(this.state.activeItem) ? this.renderProfile() : this.renderSwitch(this.state.activeItem.label)}
-                    </div>
+                <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+                    <TabPanel header="Profile" leftIcon='pi pi-fw pi-user'>
+                        <Fieldset legend="Account Profile">
+                            {this.renderProfile()}
+                        </Fieldset>
+                    </TabPanel>
+                    <TabPanel header="Address" leftIcon='pi pi-fw pi-list'>
+                        <Fieldset legend="Account Address">
+                            {this.renderAddress()}
+                        </Fieldset>
+                    </TabPanel>
+                    <TabPanel header="Image" leftIcon='pi pi-fw pi-image'>
+                        <Fieldset legend="Account Image">
+                            {this.renderImage()}
+                        </Fieldset>
+                    </TabPanel>
+                    <TabPanel header="Password" leftIcon='pi pi-fw pi-lock'>
+                         <Fieldset legend="Account Password">
+                            {this.renderPassword()}
+                        </Fieldset>
+                     </TabPanel>
+                </TabView>
+                   
                 </div>
             </div>
         );
@@ -231,4 +229,5 @@ const mapStateToProps = state => {
 };
 
 const masDispatchToProps = { ProfileUpdate };
+
 export default connect(mapStateToProps, masDispatchToProps)(AccountProfile);

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {Button} from 'primereact/button';
-
 import {InputText} from 'primereact/inputtext';
 import {Fieldset} from 'primereact/fieldset';
-
 import {connect} from 'react-redux';
-import {saveCategory} from '../redux/actions/CategoriesActions';
+import {saveCategory} from '../../../redux/actions/CategoriesActions';
 import {Field, reduxForm} from 'redux-form';
-import {maxLength150, minLength10} from './messages/errorFieldNotification';
+import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
 
 class AddNewCategory extends Component {
     

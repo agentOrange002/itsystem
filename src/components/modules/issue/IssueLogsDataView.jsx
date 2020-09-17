@@ -4,10 +4,8 @@ import {Panel} from 'primereact/panel';
 import {DataView, DataViewLayoutOptions} from "primereact/dataview";
 import {Button} from "primereact/button";
 import {Dropdown} from "primereact/dropdown";
-
 import {connect} from 'react-redux';
-
-import {getIssueLogByIssueID} from '../redux/actions/IssueLogsActions';
+import {getIssueLogByIssueID} from '../../../redux/actions/IssueLogsActions';
 
 const MyStyle = {
     padding: {padding: '.5em'},

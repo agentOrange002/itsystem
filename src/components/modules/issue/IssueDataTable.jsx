@@ -3,11 +3,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
-
 import {connect} from 'react-redux';
-import {getAllIssues} from '../redux/actions/IssuesActions';
-import {getIssueLogByIssueID} from "../redux/actions/IssueLogsActions";
-
+import {getAllIssues} from '../../../redux/actions/IssuesActions';
+import {getIssueLogByIssueID} from "../../../redux/actions/IssueLogsActions";
 import _ from 'lodash';
 
 const MyStyle = {

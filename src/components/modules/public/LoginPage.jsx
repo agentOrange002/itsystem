@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {LoginAuthentication} from "../redux/actions/LoginActions";
+import {LoginAuthentication} from "../../../redux/actions/LoginActions";
 import {Field, reduxForm} from 'redux-form';
-import {errorEmail, warningAol, minLength10} from './messages/errorFieldNotification';
+import {errorEmail, warningAol, minLength10} from '../../messages/errorFieldNotification';
 import {Link} from "react-router-dom";
-import history from "../routes/history";
-
+import history from "../../../routes/history";
 import {Fieldset} from "primereact/fieldset";
 import {Panel} from "primereact/panel";
 import {InputText} from "primereact/inputtext";
 import {Password} from "primereact/password";
 import {Button} from "primereact/button";
 import {Messages} from "primereact/messages";
-
-import logo from "../images/Logo.png";
-import '../stylesheets/jimboynewSS.css';
-import HeaderProgressBar from './HeaderProgressBar';
+import logo from "../../../images/Logo.png";
+import '../../../stylesheets/jimboynewSS.css';
+import HeaderProgressBar from '../tools/HeaderProgressBar';
 
 
 const MyStyle = {

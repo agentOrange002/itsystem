@@ -1,28 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {submitReportIssue} from "../redux/actions/PublicActions";
+import {submitReportIssue} from "../../../redux/actions/PublicActions";
 import {Field, reduxForm} from 'redux-form';
-import {errorEmail, warningAol, maxLength150, minLength10} from './messages/errorFieldNotification';
-
+import {errorEmail, warningAol, maxLength150, minLength10} from '../../messages/errorFieldNotification';
 import {Button} from 'primereact/button';
 import {Panel} from 'primereact/panel';
 import {InputText} from 'primereact/inputtext';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {Fieldset} from "primereact/fieldset";
 import {Messages} from "primereact/messages";
-
-import HeaderProgressBar from './HeaderProgressBar';
-
+import HeaderProgressBar from '../tools/HeaderProgressBar';
 import {ToastContainer} from 'react-toastify';
 
-class ReportIssuePage extends Component
-{
+class ReportIssuePage extends Component {
+
     state = {
         isError: false
     }
 
-    renderInput({input, label, meta: {touched, error, warning}})
-    {
+    renderInput({input, label, meta: {touched, error, warning}})   {
         return (
             <div className='p-col-12 p-md-12' style={{paddingTop: "20px"}}>
                 <span className="p-float-label">

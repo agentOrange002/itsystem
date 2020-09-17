@@ -35,10 +35,10 @@ export const getAllTicketsByIssueId= (issueId) => async (dispatch,getState) => {
     }) 
 };
 
-export const saveTicket = (formValues) => async (dispatch,getState) => {    
+export const saveTicket = (issueId) => async (dispatch,getState) => {    
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
    dispatch(showLoading('LOADINGBAR')); 
-    await apiURL.post('',formValues,{headers:{
+    await apiURL.post(`/${issueId}`,{headers:{
         'Content-Type':'application/json',
         'Authorization':token     
       }})

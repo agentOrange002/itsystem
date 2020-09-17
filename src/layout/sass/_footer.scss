@@ -2,7 +2,13 @@
     @include transition(margin-left $transitionDuration);
     background-color: $footerBgColor;
     padding: 1em 2em;
+   
+    display: block;
+  
+   
 
+  
+  
     img {
         vertical-align: middle;
     }

@@ -4,11 +4,10 @@ import {Fieldset} from 'primereact/fieldset';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {AutoComplete} from 'primereact/autocomplete';
-
 import _ from 'lodash';
 import {connect} from 'react-redux';
-import {assignedSupport} from "../redux/actions/IssuesActions";
-import {getAllCategories} from "../redux/actions/CategoriesActions";
+import {assignedSupport} from "../../../redux/actions/IssuesActions";
+import {getAllCategories} from "../../../redux/actions/CategoriesActions";
 
 const MyStyle = {
     itemTemplateStyle: { fontSize: '16px', float: 'left', margin: '10px 10px 0 0' },

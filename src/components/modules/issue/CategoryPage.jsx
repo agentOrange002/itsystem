@@ -3,12 +3,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
-
 import {connect} from 'react-redux';
-import {getAllCategories} from '../redux/actions/CategoriesActions';
-
+import {getAllCategories} from '../../../redux/actions/CategoriesActions';
 import _ from 'lodash';
-
 import AddNewCategory from './AddNewCategory';
 
 const MyStyle = {
@@ -17,8 +14,8 @@ const MyStyle = {
     DialogStyle : {width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px'}
 }
 
-class CategoryPage extends Component 
-{
+class CategoryPage extends Component {
+    
     state = {
         data: [],
         selectedCategory: null,

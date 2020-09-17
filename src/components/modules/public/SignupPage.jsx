@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-
 import {Field,reduxForm} from 'redux-form';
-import {errorEmail, warningAol, passwordsMustMatch, minLength10, required} from './messages/errorFieldNotification';
+import {errorEmail, warningAol, passwordsMustMatch, minLength10, required} from '../../messages/errorFieldNotification';
 import {connect} from "react-redux";
-import {signupUser} from "../redux/actions/PublicActions";
-
+import {signupUser} from "../../../redux/actions/PublicActions";
 import {Button} from "primereact/button";
 import {Fieldset} from "primereact/fieldset";
 import {Panel} from "primereact/panel";
 import {InputText} from "primereact/inputtext";
 import {Password} from 'primereact/password';
-
-import HeaderProgressBar from './HeaderProgressBar';
+import HeaderProgressBar from '../../modules/tools/HeaderProgressBar';
 
 class SignupPage extends Component {
 

@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-
 import {Switch, Route} from 'react-router-dom';
-import history from "../routes/history";
-
+import history from "../../../routes/history";
 import IssueMaintenanceDataTable from './IssueMaintenanceDataTable';
 import AddNewIssue from './AddNewIssue';
 import AssignedSupport from './AssignedSupport';
 import CategoryPage from './CategoryPage';
 import _ from 'lodash';
 
-const urlparam = 'http://localhost:3000/#/app/issuemaintenance/';
+const urlparam = `${window.location.origin}/#/app/issuemaintenance/`;
 
 const MyStyle = { 
     paddingB : {
@@ -104,6 +102,10 @@ class IssueMaintenancePage extends Component {
         ]
 
     };
+
+    componentDidMount(){
+        console.log("location :"+window.location.origin);
+    }
 
     chooseIssue = (issue) => {
         if (!_.isEmpty(issue)) {

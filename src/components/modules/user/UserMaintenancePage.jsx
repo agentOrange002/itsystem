@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-
 import {Switch,Route} from 'react-router-dom';
-import history from "../routes/history";
-
+import history from "../../../routes/history";
 import UserDataTable from './UserDataTable';
 
-const urlparam = 'http://localhost:3000/#/app/usermaintenance/';
+const urlparam = `${window.location.origin}/#/app/usermaintenance/`;
 
 class UserMaintenance extends Component
  {

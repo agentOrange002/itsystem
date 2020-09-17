@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 
 import PropTypes from 'prop-types';
 
-import HeaderProgressBar from './components/HeaderProgressBar';
+import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

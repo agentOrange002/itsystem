@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-
 import {Fieldset} from 'primereact/fieldset';
 import {Button} from 'primereact/button';
 import {AutoComplete} from 'primereact/autocomplete';
-
 import _ from 'lodash';
 import {connect} from 'react-redux';
-import {getAllUsers} from '../redux/actions/UsersActions';
-import {assignedSupport} from "../redux/actions/IssuesActions";
-import {getAllCategories} from "../redux/actions/CategoriesActions";
+import {getAllUsers} from '../../../redux/actions/UsersActions';
+import {assignedSupport} from "../../../redux/actions/IssuesActions";
+import {getAllCategories} from "../../../redux/actions/CategoriesActions";
 
 const MyStyle = {
     AutoComplete: {

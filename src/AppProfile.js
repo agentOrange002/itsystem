@@ -61,9 +61,9 @@ class AppProfile extends Component {
         return  (
             <div className="layout-profile">             
                 <div>
-              <img src={`data:image/png;charset=utf-8;base64,${picture}`} alt="LoginProfile" />
-               
-                   {/* // <img src="assets/layout/images/profile.png" alt="User Image" /> */}
+                    <img src={_.isEmpty(picture) ? "assets/layout/images/profile.png" :`data:image/png;charset=utf-8;base64,${picture}` } alt="LoginProfile" />
+                    {/* {`data:image/png;charset=utf-8;base64,${picture}`}  */}
+                    {/* // <img src="assets/layout/images/profile.png" alt="User Image" /> */}
                 </div>
                 <button className="p-link layout-profile-link" onClick={this.onClick}>
                 <span className="username">{this.props.LOGIN_PROFILE.profileState.profileResponse.firstName} {this.props.LOGIN_PROFILE.profileState.profileResponse.lastName}</span>
