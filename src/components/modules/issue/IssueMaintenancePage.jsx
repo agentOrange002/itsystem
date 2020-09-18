@@ -103,9 +103,9 @@ class IssueMaintenancePage extends Component {
 
     };
 
-    componentDidMount(){
-        console.log("location :"+window.location.origin);
-    }
+    // componentDidMount(){
+    //     console.log("location :"+window.location.origin);
+    // }
 
     chooseIssue = (issue) => {
         if (!_.isEmpty(issue)) {

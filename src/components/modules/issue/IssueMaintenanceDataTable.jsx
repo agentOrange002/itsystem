@@ -10,6 +10,8 @@ import AssignedSupportDialog from './AssignedSupportDialog';
 import _ from 'lodash';
 import {Fieldset} from 'primereact/fieldset';
 
+import ReduxBlockUi from 'react-block-ui/redux';
+
 const MyStyle = {
     DialogStyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
     OTIDialogStyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
@@ -142,6 +144,7 @@ class IssueMaintenanceDataTable extends Component {
     render() {
         const paginatorLeft = <Button icon="pi pi-refresh" onClick={this.refreshTable}/>;          
         return (
+            <ReduxBlockUi block="ISSUES_LOADING" unblock="ISSUES_GET_ALL">           
             <div className="content-section implementation">             
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={this.hideContext} />
                 <DataTable
@@ -200,6 +203,7 @@ class IssueMaintenanceDataTable extends Component {
                                      
                 </Dialog>
             </div>
+            </ReduxBlockUi>
         );
     }
 }

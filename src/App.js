@@ -26,6 +26,7 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
+import 'react-block-ui/style.css';
 
 import IssueMaintenancePage from './components/modules/issue/IssueMaintenancePage';
 import IssueDetailsPage from './components/modules/issue/IssueDetailsPage';

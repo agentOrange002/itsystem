@@ -1,5 +1,4 @@
-import 
-{
+import {
   ISSUES_ERROR,
   ISSUES_GET_ALL,
   ISSUES_GET_BY_ID,

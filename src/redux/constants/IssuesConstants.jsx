@@ -6,6 +6,13 @@ export const ISSUES_DELETE = 'ISSUES_DELETE';
 export const ISSUES_ERROR = 'ISSUES_ERROR';
 export const ISSUES_ASSIGNED_SUPPORT = 'ISSUES_ASSIGNED_SUPPORT';
 export const ISSUES_OWNED_THIS_ISSUE = 'ISSUES_OWNED_THIS_ISSUE';
+export const ISSUES_LOADING = 'ISSUES_LOADING';
+
+export const IssuesLoading = () => {
+    return ( {
+        type: 'ISSUES_LOADING'
+    } );
+}
  
 export const IssuesGetAll = data => {
     return ( {

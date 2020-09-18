@@ -7,7 +7,8 @@ import {
     IssuesUpdate,
     IssuesDelete,
     IssuesAssignedSupport,
-    IssuesOwnedThisIssue
+    IssuesOwnedThisIssue,
+    IssuesLoading
 } from '../constants/IssuesConstants';
 import {showLoading,hideLoading} from 'react-redux-loading-bar';
 import {reset} from 'redux-form';
@@ -31,6 +32,7 @@ import {
 
 export const getAllIssues = () => async (dispatch,getState) => {  
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
+    dispatch(IssuesLoading());
     dispatch(showLoading('LOADINGBAR'));
     await apiURL.get('/all',{headers:{
         'Content-Type':'application/json',
