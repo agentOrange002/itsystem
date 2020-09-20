@@ -211,6 +211,7 @@ export class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
+                
                 <div className="p-col-12 p-md-6 p-lg-4">
                     <Panel header="Tasks" style={{height: '100%'}}>
                         <ul className='task-list'>

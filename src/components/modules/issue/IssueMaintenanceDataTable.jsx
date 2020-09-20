@@ -219,4 +219,5 @@ const mapStateToProps = state => {
 //     getAllIssues: () => dispatch(getAllIssues())
 // });
 const mapDispatchToProps = {getAllIssues,ownedThisIssue};
+
 export default connect(mapStateToProps, mapDispatchToProps)(IssueMaintenanceDataTable);
