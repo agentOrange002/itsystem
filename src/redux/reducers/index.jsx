@@ -10,18 +10,18 @@ import Cookies from 'cookies-js';
 
 import {loadingBarReducer} from 'react-redux-loading-bar';
 
-import {LOGIN_AUTHENTICATION, LOGIN_PROFILE} from './LoginReducers';
+import {LOGIN_AUTHENTICATION, LOGIN_PROFILE} from './LoginReducer';
 import {USERS} from './UsersReducer';
-import {ISSUES} from './IssuesReducers';
-import {ISSUELOGS} from './IssueLogsReducers';
+import {ISSUES} from './IssuesReducer';
+import {ISSUELOGS} from './IssueLogsReducer';
 import {CATEGORIES} from './CategoryReducer';
-import {TICKETS} from './TicketReducers';
+import {TICKETS} from './TicketReducer';
+import {DASHBOARD} from './DashboardReducer';
 
 const encryptor = createEncryptor({
   secretKey: "mydirtylittlesecret",
   onError(error) {
-    // Handle the error.
-    
+    // Handle the error.    
   },
 })
 
@@ -49,6 +49,14 @@ const cookieUsersAuthPersistConfig = {
   blacklist: ['USERS'],   
   transforms: [encryptor],
 }
+
+const dashboardPC = {
+  key: 'dashboard',
+  storage: storageSession,
+  blacklist: ['DASHBOARD'],
+  transforms: [encryptor],
+}
+
 
 const issuesPC = {
   key: 'issues',
@@ -87,7 +95,8 @@ const rootReducer = combineReducers({
   ISSUES: persistReducer(issuesPC,ISSUES),  
   ISSUELOGS: persistReducer(issuelogsPC,ISSUELOGS),
   CATEGORIES: persistReducer(categoriesPC,CATEGORIES),
-  TICKETS: persistReducer(ticketsPC,TICKETS)
+  TICKETS: persistReducer(ticketsPC,TICKETS),
+  DASHBOARD: persistReducer(dashboardPC,DASHBOARD)
 });
 
 export default persistReducer(cookieAuthPersistConfig,rootReducer);

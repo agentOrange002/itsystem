@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-
-import {Panel} from 'primereact/panel';
-import {Button} from 'primereact/button';
-
 import {connect} from 'react-redux';
-
+import {getDashboard} from '../../../redux/actions/DashboardActions';
 import _ from 'lodash';
 
+const MyStyle = {
+    issuesCreated: {backgroundColor:'#000066',color:'#ffffff'},
+    ticketsOpened: {backgroundColor:'#000066',color:'#ffffff'},
+    tasksOpened: {backgroundColor:'#000066',color:'#ffffff'},
+    issuesClosed: {backgroundColor:'#000066',color:'#ffffff'}
+};
+
 class SupportDashBoard extends Component {
-    state = {  }
+    
+    state = { activeIndex: 0 }
+
+    async componentDidMount () {
+        await this.props.getDashboard();
+    }
 
     getUnresolvedIssues = (issues) => {
         let result = null;
@@ -16,7 +24,7 @@ class SupportDashBoard extends Component {
             result = 0;
         }
         else {
-            result = _.size(_.filter(issues, function(issue) { if (issue.issueStatus == 'OPENED') return o }));
+            result = _.size(_.filter(issues, function(issue) { if (issue.issueStatus === 'OPENED') return issue }));
         }       
         return result;
     }
@@ -27,31 +35,30 @@ class SupportDashBoard extends Component {
             <div className="p-col-12 p-lg-4">
                 <div className="card summary">
                     <span className="title">Issues</span>
-                    <span className="detail">Number of Unresolved Issues</span>
-                    <span className="count visitors">{this.getUnresolvedIssues(this.props.ISSUES)}</span>
+                    <span className="detail">Number of Opened Issues</span>
+                    <span className="count issues">{this.getUnresolvedIssues(this.props.ISSUES)}</span> 
                 </div>
             </div>
             <div className="p-col-12 p-lg-4">
                 <div className="card summary">
                     <span className="title">Tickets</span>
                     <span className="detail">Number of Tickets Opened</span>
-                    <span className="count purchases">534</span>
+                    <span className="count tickets">534</span>
                 </div>
             </div>
             <div className="p-col-12 p-lg-4">
                 <div className="card summary">
                     <span className="title">Tasks</span>
                     <span className="detail">Tasks to be done.</span>
-                    <span className="count revenue">3,200</span>
+                    <span className="count tasks">3,200</span>
                 </div>
             </div>
 
             <div className="p-col-12 p-md-6 p-xl-3">
                 <div className="highlight-box">
-                    <div className="initials" style={{backgroundColor:'#007be5',color:'#00448f'}}><span>TV</span></div>
-                    <div className="highlight-details ">
-                        <i className="pi pi-search"/>
-                        <span>Total Queries</span>
+                    <div className="initials" style={MyStyle.issuesCreated}><span>  <i className="pi pi-search"/></span></div>
+                    <div className="highlight-details ">                      
+                        <span>Issues Created</span>
                         <span className="count">523</span>
                     </div>
                 </div>
@@ -59,10 +66,9 @@ class SupportDashBoard extends Component {
 
             <div className="p-col-12 p-md-6 p-xl-3">
                 <div className="highlight-box">
-                    <div className="initials" style={{backgroundColor:'#ef6262',color:'#a83d3b'}}><span>TI</span></div>
-                    <div className="highlight-details ">
-                        <i className="pi pi-question-circle"/>
-                        <span>Total Issues</span>
+                    <div className="initials" style={MyStyle.ticketsOpened}><span>  <i className="pi pi-question-circle"/></span></div>
+                    <div className="highlight-details ">                      
+                        <span>Tickets Opened</span>
                         <span className="count">81</span>
                     </div>
                 </div>
@@ -70,9 +76,9 @@ class SupportDashBoard extends Component {
 
             <div className="p-col-12 p-md-6 p-xl-3">
                 <div className="highlight-box">
-                    <div className="initials" style={{backgroundColor:'#20d077',color:'#038d4a'}}><span>OI</span></div>
+                    <div className="initials" style={MyStyle.tasksOpened}><span><i className="pi pi-filter"/></span></div>
                     <div className="highlight-details ">
-                        <i className="pi pi-filter"/>
+                       
                         <span>Open Issues</span>
                         <span className="count">21</span>
                     </div>
@@ -80,77 +86,17 @@ class SupportDashBoard extends Component {
             </div>
             <div className="p-col-12 p-md-6 p-xl-3">
                 <div className="highlight-box">
-                    <div className="initials" style={{backgroundColor:'#f9c851',color:'#b58c2b'}}><span>CI</span></div>
-                    <div className="highlight-details ">
-                        <i className="pi pi-check"/>
+                    <div className="initials" style={MyStyle.issuesClosed}><span><i className="pi pi-check"/></span></div>
+                    <div className="highlight-details ">                      
                         <span>Closed Issues</span>
                         <span className="count">60</span>
                     </div>
                 </div>
             </div>
 
-      
-                <Panel header="Activity" style={{height:'100%'}}>
-                    <div className="activity-header">
-                        <div className="p-grid">
-                            <div className="p-col-6">
-                                <span style={{fontWeight:'bold'}}>Last Activity</span>
-                                <p>Updated 1 minute ago</p>
-                            </div>
-                            <div className="p-col-6" style={{textAlign:'right'}}>
-                                <Button label="Refresh" icon="pi pi-refresh" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <ul className="activity-list">
-                        <li>
-                            <div className="count">$900</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Income</div>
-                                <div className="p-col-6">95%</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="count" style={{backgroundColor:'#f9c851'}}>$250</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Tax</div>
-                                <div className="p-col-6">24%</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="count" style={{backgroundColor:'#20d077'}}>$125</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Invoices</div>
-                                <div className="p-col-6">55%</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="count" style={{backgroundColor:'#f9c851'}}>$250</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Expenses</div>
-                                <div className="p-col-6">15%</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="count" style={{backgroundColor:'#007be5'}}>$350</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Bonus</div>
-                                <div className="p-col-6">5%</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="count" style={{backgroundColor:'#ef6262'}}>$500</div>
-                            <div className="p-grid">
-                                <div className="p-col-6">Revenue</div>
-                                <div className="p-col-6">25%</div>
-                            </div>
-                        </li>
-                    </ul>
-                </Panel>
-            
-
-
+            <div className="p-col-12 p-md-12 p-lg-12">    
+              
+            </div>    
             </>
         );
     }
@@ -159,9 +105,10 @@ class SupportDashBoard extends Component {
 const mapStateToProps = state => {
     return {
         ISSUES: Object.values(state.ISSUES.issuesResponse),     
+        DASHBOARD: state.DASHBOARD.dashboardResponse
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {getDashboard};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SupportDashBoard);

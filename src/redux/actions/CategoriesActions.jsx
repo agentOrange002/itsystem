@@ -1,5 +1,10 @@
 import apiURL from '../config/categoryAPIURL';
-import {CategoryError,CategoryGetAll,CategorySave} from '../constants/CategoryConstants';
+import {
+    CategoryError,
+    CategoryGetAll,
+    CategorySave,
+    CategoryLoading
+} from '../constants/CategoryConstants';
 import {showLoading,hideLoading} from 'react-redux-loading-bar';
 //import {reset} from 'redux-form';
 
@@ -12,6 +17,7 @@ import {
 
 export const getAllCategories= () => async (dispatch,getState) => {    
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
+    dispatch(CategoryLoading());
     dispatch(showLoading('LOADINGBAR'));  
     await apiURL.get(`/all`,{headers:{
         'Content-Type':'application/json',

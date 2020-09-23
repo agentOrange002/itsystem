@@ -7,9 +7,6 @@ import
     USER_ERROR,
     REPORT_ISSUE_SUBMIT,
     REPORT_ISSUE_ERROR,
-    
-   
-
 } from '../constants/PublicConstants';
 
 import {USERS_SIGNUP, USERS_ERROR} from '../constants/UsersConstants';

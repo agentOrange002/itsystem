@@ -27,6 +27,7 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 import 'react-block-ui/style.css';
+import 'loaders.css/loaders.min.css';
 
 import IssueMaintenancePage from './components/modules/issue/IssueMaintenancePage';
 import IssueDetailsPage from './components/modules/issue/IssueDetailsPage';
@@ -36,6 +37,7 @@ import history from "./routes/history";
 import DataTableDemo from './components/modules/public/Test';
 import AccountProfile from './components/modules/account/AccountProfile';
 import TaskMaintenance from './components//modules/task/TaskMaintenance';
+import SupportDashboard from './components/modules/dashboard';
 
 class App extends Component {
 
@@ -108,6 +110,7 @@ class App extends Component {
     createMenu() {
         this.menu = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {history.push('/app/');}},
+            {label: 'Support Dashboard', icon: 'pi pi-fw pi-home', command: () => {history.push('/app/supportdashboard');}},
             // {
             //     label: 'Menu Modes', icon: 'pi pi-fw pi-cog',
             //     items: [
@@ -124,12 +127,21 @@ class App extends Component {
             //     ]
             // },
             {
+                label: 'My Documents', icon: 'pi pi-fw pi-folder', 
+                items:  [
+                    {label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'},
+                    {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
+					{label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'},
+                ]
+            },   
+            {
                 label: 'Issues', icon: 'pi pi-fw pi-desktop', 
                 items:  [
 					{label: 'Issue Maintenance', icon: 'pi pi-fw pi-file', to: '/app/issuemaintenance'},
 					{label: 'Issue Details', icon: 'pi pi-fw pi-file', to: '/app/issuedetails'},
                 ]
-            },          
+            },       
+           
             {
                 label: 'Tasks', icon: 'pi pi-fw pi-desktop', 
                 items:  [
@@ -256,6 +268,7 @@ class App extends Component {
                
                 <Switch>
                     <Route path="/app/" exact component={Dashboard} />
+                    <Route path="/app/supportdashboard" component={SupportDashboard} />
                     <Route path="/app/forms" component={FormsDemo} />
                     <Route path="/app/sample" component={SampleDemo} />
                     <Route path="/app/data" component={DataDemo} />

@@ -4,6 +4,13 @@ export const CATEGORY_GET_BY_ID = 'CATEGORY_GET_BY_ID';
 export const CATEGORY_SAVE = 'CATEGORY_SAVE';
 export const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
 export const CATEGORY_DELETE = 'CATEGORY_DELETE';
+export const CATEGORY_LOADING = 'CATEGORY_LOADING';
+
+export const CategoryLoading  = () => {
+    return ( {
+        type: 'CATEGORY_LOADING'
+    } );
+}
 
 export const CategoryError  = error => {
     return ( {

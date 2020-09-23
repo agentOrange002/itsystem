@@ -23,16 +23,16 @@
             padding: 7px 14px;
             @include border-radius($borderRadius);
             
-            &.visitors {
-                background-color: #20d077;
+            &.issues {
+                background-color: #000066;
             }
             
-            &.purchases {
-                background-color: #f9c851;
+            &.tickets {
+                background-color: #000066;
             }
             
-            &.revenue {
-                background-color: #007be5;
+            &.tasks {
+                background-color: #000066;
             }
         }
     }
