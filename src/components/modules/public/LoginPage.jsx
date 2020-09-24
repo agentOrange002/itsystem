@@ -12,9 +12,7 @@ import {Password} from "primereact/password";
 import {Button} from "primereact/button";
 import {Messages} from "primereact/messages";
 import logo from "../../../images/Logo.png";
-import '../../../stylesheets/jimboynewSS.css';
 import HeaderProgressBar from '../tools/HeaderProgressBar';
-
 
 const MyStyle = {
     LoginSpanStyle : {width:'100%'},

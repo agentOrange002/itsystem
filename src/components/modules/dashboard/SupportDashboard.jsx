@@ -24,7 +24,10 @@ class SupportDashBoard extends Component {
             result = 0;
         }
         else {
-            result = _.size(_.filter(issues, function(issue) { if (issue.issueStatus === 'OPENED') return issue }));
+            result = _.size(_.filter(issues, function(issue) { 
+                if (issue.issueStatus === 'OPENED') 
+                return issue 
+            }));
         }       
         return result;
     }

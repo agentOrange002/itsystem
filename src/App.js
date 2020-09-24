@@ -17,17 +17,6 @@ import {ChartsDemo} from './components/js/ChartsDemo';
 import {MiscDemo} from './components/js/MiscDemo';
 import {EmptyPage} from './components/js/EmptyPage';
 import {Documentation} from "./components/js/Documentation";
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
-import '@fullcalendar/common/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-import './layout/layout.scss';
-import './App.scss';
-import 'react-block-ui/style.css';
-import 'loaders.css/loaders.min.css';
 
 import IssueMaintenancePage from './components/modules/issue/IssueMaintenancePage';
 import IssueDetailsPage from './components/modules/issue/IssueDetailsPage';
@@ -127,7 +116,8 @@ class App extends Component {
             //     ]
             // },
             {
-                label: 'My Documents', icon: 'pi pi-fw pi-folder', 
+                label: 'My Documents', 
+                icon: 'pi pi-fw pi-folder', 
                 items:  [
                     {label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'},
                     {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
@@ -203,6 +193,33 @@ class App extends Component {
         ];
     }
 
+    // mdSideMenu(){
+    //     let mdresult =  {
+    //         label: 'My Documents', 
+    //         icon: 'pi pi-fw pi-folder', 
+    //         // items:  [
+    //         //     {label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'},
+    //         //     {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
+    //         //     {label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'},
+    //         // ]
+    //     }
+    //     let itemArray = [{label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'}]     
+    //     let newItemArray = null;
+    //     if(true===true){
+    //         newItemArray = [...itemArray, 
+    //             {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
+    //             {label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'}
+    //         ]
+    //     } 
+    //     else {
+    //         newItemArray = itemArray;
+    //     }
+
+
+    //     mdresult.items = newItemArray;
+    //     return mdresult; 
+    // }
+
     addClass(element, className) {
         if (element.classList)
             element.classList.add(className);
@@ -222,13 +239,10 @@ class App extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.mobileMenuActive)
-        {
+        if (this.state.mobileMenuActive) {
             this.addClass(document.body, 'body-overflow-hidden');
-        }
-            
-        else
-        {
+        }            
+        else {
             this.removeClass(document.body, 'body-overflow-hidden');
         }          
     }  
