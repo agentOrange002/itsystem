@@ -7,59 +7,67 @@ export const ISSUES_ERROR = 'ISSUES_ERROR';
 export const ISSUES_ASSIGNED_SUPPORT = 'ISSUES_ASSIGNED_SUPPORT';
 export const ISSUES_OWNED_THIS_ISSUE = 'ISSUES_OWNED_THIS_ISSUE';
 export const ISSUES_LOADING = 'ISSUES_LOADING';
+export const ISSUES_RESET = 'ISSUES_RESET';
+
+export const IssuesReset = () => {
+    return ( {
+        type: ISSUES_RESET
+    } );
+}
+ 
 
 export const IssuesLoading = () => {
     return ( {
-        type: 'ISSUES_LOADING'
+        type: ISSUES_LOADING
     } );
 }
  
 export const IssuesGetAll = data => {
     return ( {
-        type: 'ISSUES_GET_ALL', payload:data
+        type: ISSUES_GET_ALL, payload:data
     } );
 }
 
 export const IssuesGetById = data => {
     return ( {
-        type: 'ISSUES_GET_BY_ID', payload:data
+        type: ISSUES_GET_BY_ID, payload:data
     } );
 }
 
 export const IssuesSave = data => {
     return ( {
-        type: 'ISSUES_SAVE', payload:data
+        type: ISSUES_SAVE, payload:data
     } );
 }
 
 export const IssuesUpdate = data => {
     return ( {
-        type: 'ISSUES_UPDATE', payload:data
+        type: ISSUES_UPDATE, payload:data
     } );
 }
 
 export const IssuesDelete = data => {
     return ( {
-        type: 'ISSUES_DELETE', payload:data
+        type: ISSUES_DELETE, payload:data
     } );
 }
 
 
 export const IssuesError  = error => {
     return ( {
-        type: 'ISSUES_ERROR', error:error
+        type: ISSUES_ERROR, error:error
     } );
 }
  
 export const IssuesAssignedSupport = data => {
     return ( {
-        type: 'ISSUES_ASSIGNED_SUPPORT', payload:data
+        type: ISSUES_ASSIGNED_SUPPORT, payload:data
     } );
 }
 
 export const IssuesOwnedThisIssue = data => {
     return ( {
-        type: 'ISSUES_OWNED_THIS_ISSUE', payload:data
+        type: ISSUES_OWNED_THIS_ISSUE, payload:data
     } );
 }
 

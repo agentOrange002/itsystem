@@ -14,6 +14,7 @@ import {Messages} from "primereact/messages";
 import logo from "../../../images/Logo.png";
 import HeaderProgressBar from '../tools/HeaderProgressBar';
 
+
 const MyStyle = {
     LoginSpanStyle : {width:'100%'},
     DivStyle : {paddingTop: "15px"},
@@ -134,6 +135,7 @@ class LoginPage extends Component {
                     </div>
                     <div className="p-col-12 p-md-3 p-lg-4 p-col-align-center">
                         <div className="box">
+                           
                             <Panel header='Infomation Technology Support System'>
                                 <Messages ref={el => (this.messages = el)}></Messages>
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -150,6 +152,7 @@ class LoginPage extends Component {
                                     </div>
                                 </form>
                             </Panel>
+                            
                         </div>
                         <div className="box" style={MyStyle.BoxDivStyle}>
                             <Link to="#" style={MyStyle.LinkStyleLeft}><u>Forgot Password?</u></Link>

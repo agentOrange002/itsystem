@@ -11,7 +11,7 @@ const MyStyle = {
     paddingT: {paddingTop: '.5em'} 
 }
 
-class TaskMaintenance extends Component {
+class TaskMaintenancePage extends Component {
     state = { 
         breadcrumdItems: [
             {label: 'Task'},
@@ -98,4 +98,4 @@ class TaskMaintenance extends Component {
     }
 }
  
-export default TaskMaintenance;
+export default TaskMaintenancePage;

@@ -8,6 +8,7 @@ import AddNewIssue from './AddNewIssue';
 import AssignedSupport from './AssignedSupport';
 import CategoryPage from './CategoryPage';
 import _ from 'lodash';
+import JimRoute from '../../../routes/jimroute';
 
 const urlparam = `${window.location.origin}/#/app/issuemaintenance/`;
 
@@ -133,15 +134,13 @@ class IssueMaintenancePage extends Component {
                     </div>
                     <div style={MyStyle.paddingT}>
                         <Switch>
-                            <Route path="/app/issuemaintenance/"
-                                exact
-                                render={(props) => <IssueMaintenanceDataTable {...props} issueChoose={this.chooseIssue} />}
+                            <Route path="/app/issuemaintenance/"                           
+                                exact render={(props) => <IssueMaintenanceDataTable {...props} issueChoose={this.chooseIssue} checkName='IssueMaintenance'/>}
                             />
-                            <Route path="/app/issuemaintenance/newissue" component={AddNewIssue} />
-                            <Route path="/app/issuemaintenance/assignedsupport" 
-                                render={(props) => <AssignedSupport {...props} issueChooseId={id} />}
-                            />
-                            <Route path="/app/issuemaintenance/categories"  component={CategoryPage} />
+                            <JimRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />
+                            <JimRoute path="/app/issuemaintenance/assignedsupport" 
+                                render={(props) => <AssignedSupport {...props} issueChooseId={id} />} checkName='IssueMaintenance'/>
+                            <JimRoute path="/app/issuemaintenance/categories"  component={CategoryPage} checkName='IssueMaintenance'/>
                         </Switch>
                     </div>
                 </div>

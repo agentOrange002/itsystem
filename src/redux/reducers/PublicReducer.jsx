@@ -1,26 +1,24 @@
-import
-{
-    USER_IMAGE_GET, 
+import {
+    USER_IMAGE_GET,
     USER_IMAGE_SUBMIT,
     USER_IMAGE_ERROR,
+    USER_IMAGE_RESET,
     USER_SIGNUP,
-    USER_ERROR,
+    USER_SIGNUP_ERROR,
+    USER_SIGNUP_RESET,
     REPORT_ISSUE_SUBMIT,
     REPORT_ISSUE_ERROR,
+    REPORT_ISSUE_RESET,
 } from '../constants/PublicConstants';
-
-import {USERS_SIGNUP, USERS_ERROR} from '../constants/UsersConstants';
 
 const getuserimageState = {
     userimageResponse: [],
-    fetchLoading: false,
     fetchError: false,
     fetchErrorMessage: null
 };
 
 const reportissueState = {
     reportissue: [],
-    fetchLoading: false,
     fetchError: false,
     fetchErrorMessage: null
 };
@@ -28,40 +26,41 @@ const reportissueState = {
 
 const submituserimageState = {
     userimageResponse: [],
-    fetchLoading: false,
     fetchError: false,
     fetchErrorMessage: null
 };
 
 const usersState = {
     usersResponse: [],
-    fetchLoading: false,
     fetchError: false,
     fetchErrorMessage: null
 };
 
-
-export const PUBLICGETUSERIMAGE = (state = {getuserimageState}, action) =>
-{
-    switch (action.type)
-    {
+export const PUBLICGETUSERIMAGE = (state = { getuserimageState }, action) => {
+    switch (action.type) {
+        case USER_IMAGE_RESET:
+            return {
+                ...state,
+                getuserimageState: {
+                    userimageResponse: [],                    
+                    fetchError: false,
+                    fetchErrorMessage: null
+                }
+            };
         case USER_IMAGE_GET:
             return {
                 ...state,
                 getuserimageState: {
-                    userimageResponse: action.payload,
-                    fetchLoading: false,
+                    userimageResponse: action.payload,                   
                     fetchError: false,
                     fetchErrorMessage: null
                 }
             };
-      
         case USER_IMAGE_ERROR:
             return {
                 ...state,
                 getuserimageState: {
-                    userimageResponse: [],
-                    fetchLoading: false,
+                    userimageResponse: [],                  
                     fetchError: true,
                     fetchErrorMessage: action.error
                 }
@@ -72,27 +71,31 @@ export const PUBLICGETUSERIMAGE = (state = {getuserimageState}, action) =>
 };
 
 
-export const PUBLICREPORTISSUE = (state = {reportissueState}, action) =>
-{
-    switch (action.type)
-    {
+export const PUBLICREPORTISSUE = (state = { reportissueState }, action) => {
+    switch (action.type) {
+        case REPORT_ISSUE_RESET:
+            return {
+                ...state,
+                reportissueState: {
+                    reportissue: [],                 
+                    fetchError: false,
+                    fetchErrorMessage: null
+                }
+            };
         case REPORT_ISSUE_SUBMIT:
             return {
                 ...state,
                 reportissueState: {
-                    reportissue: action.payload,
-                    fetchLoading: false,
+                    reportissue: action.payload,                
                     fetchError: false,
                     fetchErrorMessage: null
                 }
             };
-       
         case REPORT_ISSUE_ERROR:
             return {
                 ...state,
                 reportissueState: {
-                    reportissue: [],
-                    fetchLoading: false,
+                    reportissue: [],                 
                     fetchError: true,
                     fetchErrorMessage: action.error
                 }
@@ -102,27 +105,31 @@ export const PUBLICREPORTISSUE = (state = {reportissueState}, action) =>
     }
 };
 
-export const PUBLICSUBMITUSERIMAGE = (state = {submituserimageState}, action) =>
-{
-    switch (action.type)
-    {
+export const PUBLICSUBMITUSERIMAGE = (state = { submituserimageState }, action) => {
+    switch (action.type) {
+        case USER_IMAGE_RESET:
+            return {
+                ...state,
+                submituserimageState: {
+                    userimageResponse: [],                 
+                    fetchError: false,
+                    fetchErrorMessage: null
+                }
+            };
         case USER_IMAGE_SUBMIT:
             return {
                 ...state,
                 submituserimageState: {
-                    userimageResponse: action.payload,
-                    fetchLoading: false,
+                    userimageResponse: action.payload,                  
                     fetchError: false,
                     fetchErrorMessage: null
                 }
             };
-     
         case USER_IMAGE_ERROR:
             return {
                 ...state,
                 submituserimageState: {
-                    userimageResponse: [],
-                    fetchLoading: false,
+                    userimageResponse: [],                    
                     fetchError: true,
                     fetchErrorMessage: action.error
                 }
@@ -132,27 +139,31 @@ export const PUBLICSUBMITUSERIMAGE = (state = {submituserimageState}, action) =>
     }
 };
 
-export const PUBLICUSERSIGNUP = (state = {usersState}, action) =>
-{
-    switch (action.type)
-    {
-        case USER_SIGNUP:
+export const PUBLICUSERSIGNUP = (state = { usersState }, action) => {
+    switch (action.type) {  
+        case USER_SIGNUP_RESET:
             return {
                 ...state,
                 usersState: {
-                    usersResponse: action.payload,
-                    fetchLoading: false,
+                    usersResponse: [],                
                     fetchError: false,
                     fetchErrorMessage: null
                 }
             };
-      
-        case USER_ERROR:
+        case USER_SIGNUP:
             return {
                 ...state,
                 usersState: {
-                    usersResponse: [],
-                    fetchLoading: false,
+                    usersResponse: action.payload,                  
+                    fetchError: false,
+                    fetchErrorMessage: null
+                }
+            };
+        case USER_SIGNUP_ERROR:
+            return {
+                ...state,
+                usersState: {
+                    usersResponse: [],                  
                     fetchError: true,
                     fetchErrorMessage: action.error
                 }

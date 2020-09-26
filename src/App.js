@@ -4,7 +4,7 @@ import AppTopbar from './AppTopbar';
 import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import AppProfile from './AppProfile';
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 import {Dashboard} from './components/js/Dashboard';
 import {FormsDemo} from './components/js/FormsDemo';
 import {SampleDemo} from './components/js/SampleDemo';
@@ -25,8 +25,13 @@ import history from "./routes/history";
 
 import DataTableDemo from './components/modules/public/Test';
 import AccountProfile from './components/modules/account/AccountProfile';
-import TaskMaintenance from './components//modules/task/TaskMaintenance';
+import TicketMaintenancePage from './components/modules/ticket/TicketMaintenancePage'
+import TaskMaintenancePage from './components/modules/task/TaskMaintenancePage';
 import SupportDashboard from './components/modules/dashboard';
+
+import JimRoute from './routes/jimroute';
+import UnauthorizedPage from './components/modules/error/UnauthorizedPage';
+import NotFoundPage from './components/modules/error/NotFoundPage';
 
 class App extends Component {
 
@@ -130,7 +135,14 @@ class App extends Component {
 					{label: 'Issue Maintenance', icon: 'pi pi-fw pi-file', to: '/app/issuemaintenance'},
 					{label: 'Issue Details', icon: 'pi pi-fw pi-file', to: '/app/issuedetails'},
                 ]
-            },       
+            },    
+            {
+                label: 'Tickets', icon: 'pi pi-fw pi-desktop', 
+                items:  [
+					{label: 'Ticket Maintenance', icon: 'pi pi-fw pi-file', to: '/app/ticketmaintenance'},
+					{label: 'Ticket Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
+                ]
+            },      
            
             {
                 label: 'Tasks', icon: 'pi pi-fw pi-desktop', 
@@ -281,7 +293,7 @@ class App extends Component {
                 <div className="layout-main">
                
                 <Switch>
-                    <Route path="/app/" exact component={Dashboard} />
+                    <JimRoute path="/app/" exact component={Dashboard} checkName='Dashboard'/>
                     <Route path="/app/supportdashboard" component={SupportDashboard} />
                     <Route path="/app/forms" component={FormsDemo} />
                     <Route path="/app/sample" component={SampleDemo} />
@@ -294,12 +306,16 @@ class App extends Component {
                     <Route path="/app/misc" component={MiscDemo} />
                     <Route path="/app/empty" component={EmptyPage} />
                     <Route path="/app/documentation" component={Documentation} />
-                    <Route path="/app/issuemaintenance" component={IssueMaintenancePage} />
-                    <Route path="/app/issuedetails" component={IssueDetailsPage} />
-                    <Route path="/app/usermaintenance" component={UserMaintenancePage} />
+                    <JimRoute path="/app/issuemaintenance" component={IssueMaintenancePage} checkName='IssueMaintenance'/>
+                    <JimRoute path="/app/issuedetails" component={IssueDetailsPage} checkName='IssueDetails' />
+                    <Route path="/app/usermaintenance" component={UserMaintenancePage}  />
                     <Route path="/app/testdatatable" component={DataTableDemo} />
                     <Route path="/app/accountprofile" component={AccountProfile} />
-                    <Route path="/app/taskmaintenance" component={TaskMaintenance} />                
+                    <Route path="/app/ticketmaintenance" component={TicketMaintenancePage} />   
+                    <Route path="/app/taskmaintenance" component={TaskMaintenancePage} /> 
+                    <Route path="/app/unauthorized401" component={UnauthorizedPage} />     
+                    <Route path="/app/notfound" component={NotFoundPage} />   
+                    <Redirect from="/app/*" to="/app/notfound" />               
                 </Switch>
                 </div>
 

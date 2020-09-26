@@ -12,10 +12,12 @@ import LoginPage from './components/modules/public/LoginPage';
 import PasswordResetPage from './components/modules/public/PasswordResetPage';
 
 class System extends Component {  
+
     render() { 
         return ( 
+            //* <PrivateRoute path="/app/" component={App} authenticated={this.props.authentication}/>     */
             <Switch>              
-              <PrivateRoute path="/app/" component={App} authenticated={this.props.authentication}/>     
+              <PrivateRoute path="/app/" component={App} />     
               <Route path="/login" component={LoginPage} />
               <Route path="/reportissue" component={ReportIssuePage} />       
               <Route path="/signup" component={SignupPage} />          

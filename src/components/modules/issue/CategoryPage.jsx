@@ -7,16 +7,7 @@ import {connect} from 'react-redux';
 import {getAllCategories} from '../../../redux/actions/CategoriesActions';
 import _ from 'lodash';
 import AddNewCategory from './AddNewCategory';
-
-import ReduxBlockUi from 'react-block-ui/redux';
-import { css } from "@emotion/core";
-import ClockLoader from "react-spinners/ClockLoader";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: black;
-`;
+import UILoader from '../tools/UILoader';
 
 const MyStyle = {
     HeaderDiv: {width: '80px'},
@@ -59,14 +50,8 @@ class CategoryPage extends Component {
 
     render() {
         const paginatorLeft = <Button icon="pi pi-refresh" onClick={this.refreshTable} />;       
-        return (
-            <ReduxBlockUi block="CATEGORY_LOADING" unblock="CATEGORY_GET_ALL"  
-            loader={<ClockLoader
-                css={override}
-                size={100}
-                color={"#000066"}
-                loading={true}
-              />} >   
+        return (           
+            <UILoader blockui="CATEGORY_LOADING" unblockui={["CATEGORY_GET_ALL","CATEGORY_ERROR"]}>             
             <div className="content-section implementation">               
                 <DataTable
                     value={this.props.CATEGORIES}
@@ -92,7 +77,7 @@ class CategoryPage extends Component {
                     <AddNewCategory/>                   
                 </Dialog>
             </div>
-            </ReduxBlockUi>
+            </UILoader>
         );
     }
 }
