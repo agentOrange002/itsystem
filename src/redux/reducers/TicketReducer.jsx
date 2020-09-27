@@ -1,5 +1,6 @@
 import {
     TICKET_GET_ALL_BY_ISSUEID,
+    TICKET_GET_ALL,
     TICKET_GET_BY_ID,
     TICKET_SAVE,
     TICKET_UPDATE,
@@ -10,7 +11,7 @@ import {
 import _ from 'lodash';
 
 const TicketsState = {
-    ticketResponse: [],
+    ticketsResponse: [],
     fetchError: false,
     fetchErrorMessage: null
 };
@@ -20,49 +21,56 @@ export const TICKETS = (state = TicketsState, action) => {
         case TICKET_RESET:
             return {
                 ...state,
-                ticketResponse: [],
+                ticketsResponse: [],
+                fetchError: false,
+                fetchErrorMessage: null
+            };
+        case TICKET_GET_ALL:
+            return {
+                ...state,
+                ticketsResponse: _.mapKeys(action.payload, 'ticketId'),
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_GET_ALL_BY_ISSUEID:
             return {
                 ...state,
-                ticketResponse: _.mapKeys(action.payload, 'ticketId'),
+                ticketsResponse: _.mapKeys(action.payload, 'ticketId'),
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_GET_BY_ID:
             return {
                 ...state,
-                ticketResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_SAVE:
             return {
                 ...state,
-                ticketResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_UPDATE:
             return {
                 ...state,
-                ticketResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_DELETE:
             return {
                 ...state,
-                ticketResponse: _.omit(state.ticketResponse, action.payload.ticketId),
+                ticketsResponse: _.omit(state.ticketResponse, action.payload.ticketId),
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_ERROR:
             return {
                 ...state,
-                ticketResponse: { ...state.ticketResponse },
+                ticketsResponse: { ...state.ticketResponse },
                 fetchError: true,
                 fetchErrorMessage: action.error
             };

@@ -335,7 +335,7 @@ class IssueDetailsPage extends Component {
 const mapStateToProps = state => {
     return {
       authlogin: state.LOGIN_AUTHENTICATION,
-      tickets: Object.values(state.TICKETS.ticketResponse)
+      tickets: Object.values(state.TICKETS.ticketsResponse)
     };
 };
 

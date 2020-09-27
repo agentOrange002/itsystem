@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-import {Switch, Route} from 'react-router-dom';
+import {Switch,Route} from 'react-router-dom';
 import history from "../../../routes/history";
 import IssueMaintenanceDataTable from './IssueMaintenanceDataTable';
 import AddNewIssue from './AddNewIssue';
@@ -134,11 +134,10 @@ class IssueMaintenancePage extends Component {
                     </div>
                     <div style={MyStyle.paddingT}>
                         <Switch>
-                            <Route path="/app/issuemaintenance/"                           
-                                exact render={(props) => <IssueMaintenanceDataTable {...props} issueChoose={this.chooseIssue} checkName='IssueMaintenance'/>}
+                            <Route path="/app/issuemaintenance/" exact render={(props) => <IssueMaintenanceDataTable {...props} issueChoose={this.chooseIssue} />}
                             />
                             <JimRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />
-                            <JimRoute path="/app/issuemaintenance/assignedsupport" 
+                            <Route path="/app/issuemaintenance/assignedsupport" 
                                 render={(props) => <AssignedSupport {...props} issueChooseId={id} />} checkName='IssueMaintenance'/>
                             <JimRoute path="/app/issuemaintenance/categories"  component={CategoryPage} checkName='IssueMaintenance'/>
                         </Switch>

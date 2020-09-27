@@ -80,7 +80,7 @@ const categoriesPC = {
 }
 
 const ticketsPC = {
-  key: 'categories',
+  key: 'tickets',
   storage: storageSession,
   blacklist: ['TICKETS'],
   transforms: [encryptor],

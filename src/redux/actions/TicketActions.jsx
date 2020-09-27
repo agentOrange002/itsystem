@@ -1,21 +1,44 @@
 import apiURL from '../config/ticketAPIURL';
-import {
-    TicketGetAllByIssueId,
+import {    
     TicketError,
     TicketSave,
     TicketLoading,
-    //TicketReset
+    TicketReset,
+    TicketGetAll,
+    TicketGetAllByIssueId,
     // TicketGetByID
 } from '../constants/TicketConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-//import {reset} from 'redux-form';
-
 import {
     AllTicketsToastInfo,
     AllTicketsToastError,
     SaveTicketToastSuccess,
     SaveTicketToastError,
 } from '../../components/toasts/ticketToasts';
+
+export const getAllTickets = () => async (dispatch, getState) => {
+    dispatch(showLoading('LOADINGBAR'));
+    dispatch(TicketReset());
+    dispatch(TicketLoading());
+    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;    
+    await apiURL.get('/all', {
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': token
+        }
+    })
+        .then(function (response) {
+            let data = response.data;
+            dispatch(TicketGetAll(data));
+            dispatch(hideLoading('LOADINGBAR'));
+            dispatch(AllTicketsToastInfo);
+        })
+        .catch(function (error) {
+            dispatch(TicketError(error));
+            dispatch(hideLoading('LOADINGBAR'));
+            dispatch(AllTicketsToastError);
+        })
+};
 
 export const getAllTicketsByIssueId = (issueId) => async (dispatch, getState) => {
     dispatch(TicketLoading());

@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from "react-redux";
 import _ from 'lodash';
 
-const atype = ['IssueMaintenance','IssueDetails','Dashboard'];
+const atype = ['IssueMaintenance','IssueDetails','Dashboard','TicketMaintenance'];
 
 const checkComponentName = (name, atype,auth) => {
     let result = false;

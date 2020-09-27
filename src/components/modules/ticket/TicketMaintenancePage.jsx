@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-import {Panel} from 'primereact/panel';
+import {Switch} from 'react-router-dom';
 import history from "../../../routes/history";
+import TicketMaintenanceDatatable from './TicketMaintenanceDatatable';
+import TicketInfo from './TicketInfo';
+import JimRoute from '../../../routes/jimroute';
 
 const urlparam = `${window.location.origin}/#/app/ticketmaintenance/`;
 
@@ -39,25 +42,7 @@ class TicketMaintenancePage extends Component {
                         url: `${urlparam}`
                     }
                 ]
-            },
-            {
-                label: 'Supports',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'Assigned Support',
-                        icon: 'pi pi-fw pi-user-plus',
-                        url: `${urlparam}`
-
-                    },
-                    {
-                        label: 'Removed Support',
-                        icon: 'pi pi-fw pi-user-minus',
-
-                    },
-
-                ]
-            },           
+            },            
             {
                 label: 'Print',
                 icon: 'pi pi-fw pi-print'
@@ -77,13 +62,11 @@ class TicketMaintenancePage extends Component {
                            {/* // <Button label="Assigned Support" icon="pi pi-user-plus" style={{marginLeft:4}}/> */}
                         </Menubar>
                     </div>
-                    <div style={MyStyle.paddingT}>
-                        <Panel header="Godfather I" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
-                        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                         </Panel>
+                    <div style={MyStyle.paddingT}>                        
+                        <Switch>
+                            <JimRoute path="/app/ticketmaintenance/" exact component={TicketMaintenanceDatatable} checkName='TicketMaintenance'/>
+                            <JimRoute path="/app/ticketmaintenance/view/:ticketid" component={TicketInfo} checkName='TicketMaintenance' />                           
+                        </Switch>
                     </div>
                 </div>
             </div>            

@@ -16,8 +16,7 @@ const MyStyle = {
     DialogStyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
     OTIDialogStyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
     ButtonDivStyle : {paddingTop: '10px', paddingBottom: "35px"},
-    LoginButtonStyle : {marginRight: ".25em", float: "right"},
-    jimloader: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }
+    LoginButtonStyle : {marginRight: ".25em", float: "right"}    
 }
 
 class IssueMaintenanceDataTable extends Component {
@@ -101,8 +100,9 @@ class IssueMaintenanceDataTable extends Component {
         this.setState({selectedIssue: null});
     }
 
-    refreshTable = (event) => {
-        event.preventDefault(); this.props.getAllIssues();
+    refreshTable = async(event) => {
+        event.preventDefault(); 
+        await this.props.getAllIssues();
     }
 
     hideASDialog = () => {
