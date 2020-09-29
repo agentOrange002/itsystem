@@ -153,8 +153,7 @@ export const deleteIssue = (formValues, id) => async (dispatch, getState) => {
 };
 
 export const assignedSupport = (values) => async (dispatch, getState) => {
-    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
-    dispatch(IssuesLoading());
+    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;  
     dispatch(showLoading('LOADINGBAR'));
     await apiURL.put(`/assignedsupport`, values, {
         headers: {

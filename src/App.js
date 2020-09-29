@@ -5,7 +5,7 @@ import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import AppProfile from './AppProfile';
 import {Route,Switch,Redirect} from 'react-router-dom';
-import {Dashboard} from './components/js/Dashboard';
+//import {Dashboard} from './components/js/Dashboard';
 import {FormsDemo} from './components/js/FormsDemo';
 import {SampleDemo} from './components/js/SampleDemo';
 import {DataDemo} from './components/js/DataDemo';
@@ -104,7 +104,7 @@ class App extends Component {
     createMenu() {
         this.menu = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {history.push('/app/');}},
-            {label: 'Support Dashboard', icon: 'pi pi-fw pi-home', command: () => {history.push('/app/supportdashboard');}},
+            // {label: 'Support Dashboard', icon: 'pi pi-fw pi-home', command: () => {history.push('/app/supportdashboard');}},
             // {
             //     label: 'Menu Modes', icon: 'pi pi-fw pi-cog',
             //     items: [
@@ -130,29 +130,16 @@ class App extends Component {
                 ]
             },   
             {
-                label: 'Issues', icon: 'pi pi-fw pi-desktop', 
+                label: 'Maintenance', icon: 'pi pi-fw pi-cog', 
                 items:  [
 					{label: 'Issue Maintenance', icon: 'pi pi-fw pi-file', to: '/app/issuemaintenance'},
-					{label: 'Issue Details', icon: 'pi pi-fw pi-file', to: '/app/issuedetails'},
+                    {label: 'Issue Details', icon: 'pi pi-fw pi-file', to: '/app/issuedetails'},
+                    {label: 'Ticket Maintenance', icon: 'pi pi-fw pi-file', to: '/app/ticketmaintenance'},
+                    {label: 'Tasks Maintenance', icon: 'pi pi-fw pi-file', to: '/app/taskmaintenance'},
                 ]
-            },    
+            },             
             {
-                label: 'Tickets', icon: 'pi pi-fw pi-desktop', 
-                items:  [
-					{label: 'Ticket Maintenance', icon: 'pi pi-fw pi-file', to: '/app/ticketmaintenance'},
-					{label: 'Ticket Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
-                ]
-            },      
-           
-            {
-                label: 'Tasks', icon: 'pi pi-fw pi-desktop', 
-                items:  [
-					{label: 'Tasks Maintenance', icon: 'pi pi-fw pi-file', to: '/app/taskmaintenance'},
-					{label: 'Tasks Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
-                ]
-            },
-            {
-                label: 'Reports', icon: 'pi pi-fw pi-folder', 
+                label: 'Reports', icon: 'pi pi-fw pi-file', 
                 items:  
                 [
                     {label: 'Issue List Report', icon: 'pi pi-fw pi-file-pdf', to: '/app/#'},
@@ -163,21 +150,15 @@ class App extends Component {
                 ]
             },
             {
-                label: 'Users Administration', icon: 'pi pi-fw pi-id-card', 
+                label: 'Administration', icon: 'pi pi-fw pi-id-card', 
                 items:  [
 					{label: 'User Maintenance', icon: 'pi pi-fw pi-file', to: '/app/usermaintenance'},
-					{label: 'User Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
-                ]
-            },
-            {
-                label: 'Roles Administration', 
-                icon: 'pi pi-fw pi-users', 
-                items:  [
+                    {label: 'User Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
                     {label: 'Roles Maintenance', icon: 'pi pi-fw pi-file', to: '/app/#'},
                     {label: 'Authority Maintenance', icon: 'pi pi-fw pi-file', to: '/app/#'},
 					{label: 'Roles Details', icon: 'pi pi-fw pi-file', to: '/app/#'},
                 ]
-            },
+            },           
             {
                 label: 'Test Pages', 
                 icon: 'pi pi-fw pi-play', 
@@ -275,13 +256,9 @@ class App extends Component {
             'layout-sidebar-light': this.state.layoutColorMode === 'light'
         });
 
-        return (
-           
-           
+        return (         
             <div className={wrapperClass} onClick={this.onWrapperClick}>
-                
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
-               
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
                     <div className="layout-logo">
                         <img alt="Logo" src={logo} />
@@ -289,12 +266,10 @@ class App extends Component {
                     <AppProfile />
                     <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
                 </div>
-
-                <div className="layout-main">
-               
+                <div className="layout-main">               
                 <Switch>
-                    <JimRoute path="/app/" exact component={Dashboard} checkName='Dashboard'/>
-                    <Route path="/app/supportdashboard" component={SupportDashboard} />
+                    <JimRoute path="/app/" exact component={SupportDashboard} checkName='Dashboard'/>
+                    {/* <Route path="/app/supportdashboard" component={SupportDashboard} /> */}
                     <Route path="/app/forms" component={FormsDemo} />
                     <Route path="/app/sample" component={SampleDemo} />
                     <Route path="/app/data" component={DataDemo} />
@@ -318,12 +293,9 @@ class App extends Component {
                     <Redirect from="/app/*" to="/app/notfound" />               
                 </Switch>
                 </div>
-
                 <AppFooter />
-
                 <div className="layout-mask"></div>
             </div>
-        
         );
     }
 }

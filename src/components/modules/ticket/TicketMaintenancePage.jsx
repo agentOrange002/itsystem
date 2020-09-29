@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-import {Switch} from 'react-router-dom';
+import {Switch,Redirect} from 'react-router-dom';
 import history from "../../../routes/history";
 import TicketMaintenanceDatatable from './TicketMaintenanceDatatable';
 import TicketInfo from './TicketInfo';
@@ -66,6 +66,7 @@ class TicketMaintenancePage extends Component {
                         <Switch>
                             <JimRoute path="/app/ticketmaintenance/" exact component={TicketMaintenanceDatatable} checkName='TicketMaintenance'/>
                             <JimRoute path="/app/ticketmaintenance/view/:ticketid" component={TicketInfo} checkName='TicketMaintenance' />                           
+                            <Redirect from="/app/ticketmaintenance/*" to="/app/notfound" /> 
                         </Switch>
                     </div>
                 </div>

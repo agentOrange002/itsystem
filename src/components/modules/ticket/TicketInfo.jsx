@@ -8,9 +8,7 @@ import { Fieldset } from 'primereact/fieldset';
 import _ from 'lodash';
 
 class TicketInfo extends Component {
-
     state = { } 
-
     render() {
         return (
             <div className="p-grid p-fluid">
@@ -85,7 +83,5 @@ const mapStateToProps = (state, ownProps) => {
         TICKET: state.TICKETS.ticketsResponse[ticketid]
     };
 };
-
-// const mapDispatchProps = {};
 
 export default connect(mapStateToProps, null)(TicketInfo);

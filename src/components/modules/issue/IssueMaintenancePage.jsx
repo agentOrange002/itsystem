@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
-import {Switch,Route} from 'react-router-dom';
+import {Switch,Redirect} from 'react-router-dom';
 import history from "../../../routes/history";
 import IssueMaintenanceDataTable from './IssueMaintenanceDataTable';
 import AddNewIssue from './AddNewIssue';
-import AssignedSupport from './AssignedSupport';
 import CategoryPage from './CategoryPage';
-import _ from 'lodash';
+import IssueInfo from './IssueInfo';
 import JimRoute from '../../../routes/jimroute';
 
 const urlparam = `${window.location.origin}/#/app/issuemaintenance/`;
@@ -24,12 +23,10 @@ const MyStyle = {
 class IssueMaintenancePage extends Component {
 
     state = {
-        selectedIssue: null,
+      
         breadcrumdItems: [
             {label: 'Issues'},
-            {label: 'Issue Maintenance'},
-            // {label:'Issue Details'},           
-            // {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
+            {label: 'Issue Maintenance'},          
         ],
         home: {
             icon: 'pi pi-home', command: () => {history.push('/app/');}
@@ -37,60 +34,15 @@ class IssueMaintenancePage extends Component {
 
         tieredItems: [
             {
-                label: 'Issue',
-                icon: 'pi pi-fw pi-file',
-                items: [
-                    {
-                        label: 'New Issue',
-                        icon: 'pi pi-fw pi-plus',
-                        url: `${urlparam}newissue`
-                    },
-                    {
-                        separator: true
-                    },
-                    {
-                        label: 'All Issues',
-                        icon: 'pi pi-fw pi-table',
-                        url: `${urlparam}`
-                    }
-                ]
+                label: 'All Issues',
+                icon: 'pi pi-fw pi-table',
+                url: `${urlparam}`
             },
             {
-                label: 'Supports',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'Assigned Support',
-                        icon: 'pi pi-fw pi-user-plus',
-                        url: `${urlparam}assignedsupport`
-
-                    },
-                    {
-                        label: 'Removed Support',
-                        icon: 'pi pi-fw pi-user-minus',
-
-                    },
-
-                ]
-            },
-            {
-                label: 'Tickets',
-                icon: 'pi pi-fw pi-ticket',
-                items: [
-                    {
-                        label: 'Open Ticket',
-                        icon: 'pi pi-fw pi-plus',
-                        url: `${urlparam}`
-
-                    },
-                    {
-                        label: 'Close Ticket',
-                        icon: 'pi pi-fw pi-times',
-                        url: `${urlparam}`
-                    },
-
-                ]
-            },
+                label: 'Add New Issue',
+                icon: 'pi pi-fw pi-plus',
+                url: `${urlparam}newissue`
+            },             
             {
                 label: 'Category',
                 icon: 'pi pi-fw pi-folder',
@@ -103,24 +55,7 @@ class IssueMaintenancePage extends Component {
         ]
 
     };
-
-    // componentDidMount(){
-    //     console.log("location :"+window.location.origin);
-    // }
-
-    chooseIssue = (issue) => {
-        if (!_.isEmpty(issue)) {
-            this.setState({selectedIssue: issue});
-        }
-    };
-
-    render() {
-        let id;
-        if(!_.isEmpty(this.state.selectedIssue)) {
-           // console.log('selected Issue ID :' + JSON.stringify(this.state.selectedIssue.issueId));
-            id = this.state.selectedIssue.issueId;
-        }
-        //console.log(id);
+    render() {   
         return (
             <div className="p-grid p-fluid">
                 <div className="p-col-12" >
@@ -128,18 +63,15 @@ class IssueMaintenancePage extends Component {
                         <BreadCrumb model={this.state.breadcrumdItems} home={this.state.home} />
                     </div>
                     <div>
-                        <Menubar model={this.state.tieredItems}>                            
-                           {/* // <Button label="Assigned Support" icon="pi pi-user-plus" style={{marginLeft:4}}/> */}
-                        </Menubar>
+                        <Menubar model={this.state.tieredItems} /> 
                     </div>
                     <div style={MyStyle.paddingT}>
-                        <Switch>
-                            <Route path="/app/issuemaintenance/" exact render={(props) => <IssueMaintenanceDataTable {...props} issueChoose={this.chooseIssue} />}
-                            />
-                            <JimRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />
-                            <Route path="/app/issuemaintenance/assignedsupport" 
-                                render={(props) => <AssignedSupport {...props} issueChooseId={id} />} checkName='IssueMaintenance'/>
+                        <Switch>                           
+                            <JimRoute path="/app/issuemaintenance/" exact component={IssueMaintenanceDataTable} checkName='IssueMaintenance'/>
+                            <JimRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />                         
                             <JimRoute path="/app/issuemaintenance/categories"  component={CategoryPage} checkName='IssueMaintenance'/>
+                            <JimRoute path="/app/issuemaintenance/view/:issueid"  component={IssueInfo} checkName='IssueMaintenance'/>
+                            <Redirect from="/app/issuemaintenance/**" to="/app/notfound" />                             
                         </Switch>
                     </div>
                 </div>

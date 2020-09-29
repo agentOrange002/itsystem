@@ -14,7 +14,6 @@ import _ from 'lodash';
 
 const IssuesState = {
   issuesResponse: [],
-  fetchLoading: false,
   fetchError: false,
   fetchErrorMessage: null
 };

@@ -9,8 +9,9 @@ import {Dialog} from 'primereact/dialog';
 import AssignedSupportDialog from './AssignedSupportDialog';
 import _ from 'lodash';
 import {Fieldset} from 'primereact/fieldset';
-
+import history from "../../../routes/history";
 import UILoader from '../tools/UILoader';
+import {Messages} from "primereact/messages";
 
 const MyStyle = {
     DialogStyle: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
@@ -28,6 +29,11 @@ class IssueMaintenanceDataTable extends Component {
         otiVisible: false,
         dialogState: null,
         menu: [
+            {
+                label: 'View This Issue', 
+                icon: 'pi pi-fw pi-user', 
+                command: (event) => this.viewIssue(this.state.selectedIssue)
+            },
             {
                 label: 'Owned This Issue', 
                 icon: 'pi pi-fw pi-user', 
@@ -47,12 +53,7 @@ class IssueMaintenanceDataTable extends Component {
                 label: 'Close Ticket', 
                 icon: 'pi pi-fw pi-times', 
                 command: (event) => this.ownedThisIssue(this.state.selectedIssue)
-            },
-            {
-                label: 'Delete', 
-                icon: 'pi pi-fw pi-times', 
-                command: (event) => this.deleteIssue(this.state.selectedIssue)
-            }
+            }          
         ]
     }
 
@@ -62,24 +63,33 @@ class IssueMaintenanceDataTable extends Component {
         }        
     }
 
+    viewIssue(issue) {
+        if(_.isEmpty(issue)) {
+            this.pleaseselectissue();
+        }
+        else {
+            history.push(`/app/issuemaintenance/view/${issue.issueId}`);
+        }       
+    }
+
     ownedThisIssue(issue) {
-        this.setState({otiVisible: true});       
-        this.setState({dialogState: issue});       
+        if(_.isEmpty(issue)) {
+            this.pleaseselectissue();
+        }
+        else {
+            this.setState({otiVisible: true});       
+            this.setState({dialogState: issue});       
+        }       
     }
 
     assignSupport(issue) {
-        this.setState({asVisible: true});       
-        this.setState({dialogState: issue});
-    }
-
-    deleteIssue(issue) {
-        // let carsList = [...this.state.cars];
-        // carsList = carsList.filter((c) => c.vin !== car.vin);
-
-       
-        //this.setState({
-        //cars: carsList
-        // });
+        if(_.isEmpty(issue)) {
+            this.pleaseselectissue();
+        }
+        else {
+            this.setState({asVisible: true});       
+            this.setState({dialogState: issue});
+        }        
     }
 
     displaySelection(data) {
@@ -87,13 +97,11 @@ class IssueMaintenanceDataTable extends Component {
             return <div style={{textAlign: 'left'}}>No Selection</div>;
         }
         else {
-
             if (data instanceof Array)
                 return <ul style={{textAlign: 'left', margin: 0}}>{data.map((issue, i) => <li key={issue.issueId}>{issue.issueId + ' - ' + issue.id + ' - ' + issue.subject + ' - ' + issue.issueStatus + ' - ' + issue.description}</li>)}</ul>;
             else
                 return <div style={{textAlign: 'left'}}>Selected Issue: {data.issueId + ' - ' + data.id + ' - ' + data.subject + ' - ' + data.issueStatus + ' - ' + data.description}</div>
-
-        }
+             }
     }    
 
     hideContext = () => {
@@ -142,23 +150,28 @@ class IssueMaintenanceDataTable extends Component {
         );
     }
 
+    pleaseselectissue = () => {
+        this.messages.show({severity: 'error', summary: 'Error Message', detail: 'Please Select Issue First!'});
+    }
+
     render() {
         const paginatorLeft = <Button icon="pi pi-refresh" onClick={this.refreshTable}/>;          
         return (            
-            <UILoader blockui="ISSUES_LOADING" unblockui={["ISSUES_GET_ALL","ISSUES_ERROR"]}>       
+            <UILoader blockui="ISSUES_LOADING" unblockui={["ISSUES_GET_ALL","ISSUES_ERROR"]}>   
+            <Messages ref={(el) => this.messages = el}></Messages>    
             <div className="content-section implementation">             
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={this.hideContext} />
                 <DataTable
                     value={this.props.ISSUES}
                     scrollable={true}
                     selectionMode="single"
-                    header="Issues Maintenance DataTable"
+                    header="Issues Maintenance Data"
                     footer={this.displaySelection(this.state.selectedIssue)}
                     selection={this.state.selectedIssue}
                     // onSelectionChange={e => this.setState({selectedIssue: e.value})}
                     onSelectionChange={e => {
                         this.setState({selectedIssue: e.value});
-                        this.props.issueChoose(e.value);
+                        // this.props.issueChoose(e.value);
                     }}
                     paginator={true}
                     paginatorLeft={paginatorLeft}
@@ -185,7 +198,7 @@ class IssueMaintenanceDataTable extends Component {
                     style={MyStyle.DialogStyle}
                     modal={true} 
                     onHide={this.hideASDialog}>                        
-                   <AssignedSupportDialog onselectedIssue={this.state.dialogState} />
+                   <AssignedSupportDialog onselectedIssue={this.state.dialogState} hidethis={this.hideASDialog}/>
                 </Dialog>
                 <Dialog 
                     header="Issue Owning " 

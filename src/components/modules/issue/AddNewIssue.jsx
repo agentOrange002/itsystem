@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {saveIssue} from "../../../redux/actions/IssuesActions";
 import {Field, reduxForm} from 'redux-form';
 import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
+import UILoader from '../tools/UILoader';
 
 class AddNewIssue extends Component {
 
@@ -81,6 +82,7 @@ class AddNewIssue extends Component {
     const userId = this.props.LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
     return (
       <>       
+      <UILoader blockui="ISSUE_LOADING" unblockui={["ISSUE_ERROR","ISSUES_SAVE"]}>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Panel header='New Issue'>           
             <Fieldset legend={`User ID : ${userId}`}>
@@ -101,6 +103,7 @@ class AddNewIssue extends Component {
             </div>
           </Panel>
         </form>
+        </UILoader>
       </>
     );
   }
