@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {Menubar} from 'primereact/menubar';
 import history from "../../../routes/history";
+import TaskMaintenanceDatatable from './TaskMaintenanceDatatable';
+import TaskInfo from './TaskInfo';
+import {Switch,Redirect} from 'react-router-dom';
+import AuthorizedRoute from '../../../routes/AuthorizedRoute';
 
 const urlparam = `${window.location.origin}/#/app/taskmaintenance/`;
 
@@ -44,7 +48,11 @@ class TaskMaintenancePage extends Component {
                         <Menubar model={this.state.tieredItems} /> 
                     </div>
                     <div style={MyStyle.paddingT}>
-                       
+                        <Switch>
+                            <AuthorizedRoute path="/app/taskmaintenance/" exact component={TaskMaintenanceDatatable} checkName='TaskMaintenance'/>
+                            <AuthorizedRoute path="/app/taskmaintenance/view/:taskid" component={TaskInfo} checkName='TaskMaintenance' />                           
+                            <Redirect from="/app/taskmaintenance/*" to="/app/notfound" /> 
+                        </Switch>
                     </div>
                 </div>
             </div>            

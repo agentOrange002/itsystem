@@ -26,7 +26,7 @@ import { connect } from "react-redux";
 //   )} /> 
 // )
 
-const _PrivateRoute = props => {
+const PrivateRoute = props => {
   const { component: Component, LOGIN_AUTHENTICATION, ...rest } = props ;
   return <Route
    {...rest}
@@ -36,9 +36,14 @@ const _PrivateRoute = props => {
   }/> 
 }    
 
-const PrivateRoute = connect(state => ({
-  LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION  
-}))(_PrivateRoute);
+// const PrivateRoute = connect(state => ({
+//   LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION  
+// }))(_PrivateRoute);
+const mapStateToProps = state => {
+  return {
+      LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION
+  };
+};
 
 
-export default PrivateRoute;
+export default connect(mapStateToProps,null)(PrivateRoute);

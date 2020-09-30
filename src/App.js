@@ -29,7 +29,7 @@ import TicketMaintenancePage from './components/modules/ticket/TicketMaintenance
 import TaskMaintenancePage from './components/modules/task/TaskMaintenancePage';
 import SupportDashboard from './components/modules/dashboard';
 
-import JimRoute from './routes/jimroute';
+import AuthorizedRoute from './routes/AuthorizedRoute';
 import UnauthorizedPage from './components/modules/error/UnauthorizedPage';
 import NotFoundPage from './components/modules/error/NotFoundPage';
 
@@ -268,7 +268,7 @@ class App extends Component {
                 </div>
                 <div className="layout-main">               
                 <Switch>
-                    <JimRoute path="/app/" exact component={SupportDashboard} checkName='Dashboard'/>
+                    <AuthorizedRoute path="/app/" exact component={SupportDashboard} checkName='Dashboard'/>
                     {/* <Route path="/app/supportdashboard" component={SupportDashboard} /> */}
                     <Route path="/app/forms" component={FormsDemo} />
                     <Route path="/app/sample" component={SampleDemo} />
@@ -281,8 +281,8 @@ class App extends Component {
                     <Route path="/app/misc" component={MiscDemo} />
                     <Route path="/app/empty" component={EmptyPage} />
                     <Route path="/app/documentation" component={Documentation} />
-                    <JimRoute path="/app/issuemaintenance" component={IssueMaintenancePage} checkName='IssueMaintenance'/>
-                    <JimRoute path="/app/issuedetails" component={IssueDetailsPage} checkName='IssueDetails' />
+                    <AuthorizedRoute path="/app/issuemaintenance" component={IssueMaintenancePage} checkName='IssueMaintenance'/>
+                    <AuthorizedRoute path="/app/issuedetails" component={IssueDetailsPage} checkName='IssueDetails' />
                     <Route path="/app/usermaintenance" component={UserMaintenancePage}  />
                     <Route path="/app/testdatatable" component={DataTableDemo} />
                     <Route path="/app/accountprofile" component={AccountProfile} />

@@ -4,7 +4,6 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { connect } from 'react-redux';
 import { ContextMenu } from 'primereact/contextmenu';
-//import { Dialog } from 'primereact/dialog';
 import _ from 'lodash';
 import {getAllTickets} from '../../../redux/actions/TicketActions';
 import UILoader from '../tools/UILoader';
@@ -51,7 +50,7 @@ class TicketMaintenanceDatatable extends Component {
     }
 
     hideContext = () => {
-        this.setState({ selectedIssue: null });
+        this.setState({ selectedTicket: null });
     }
 
     displaySelection(data) {

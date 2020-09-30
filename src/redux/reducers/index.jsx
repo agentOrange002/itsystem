@@ -16,6 +16,7 @@ import { ISSUES } from './IssuesReducer';
 import { ISSUELOGS } from './IssueLogsReducer';
 import { CATEGORIES } from './CategoryReducer';
 import { TICKETS } from './TicketReducer';
+import { TASKS } from './TaskReducer';
 import { DASHBOARD } from './DashboardReducer';
 
 const encryptor = createEncryptor({
@@ -86,6 +87,13 @@ const ticketsPC = {
   transforms: [encryptor],
 }
 
+const tasksPC = {
+  key: 'tasks',
+  storage: storageSession,
+  blacklist: ['TASKS'],
+  transforms: [encryptor],
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
   loadingBar: loadingBarReducer,
@@ -96,6 +104,7 @@ const rootReducer = combineReducers({
   ISSUELOGS: persistReducer(issuelogsPC, ISSUELOGS),
   CATEGORIES: persistReducer(categoriesPC, CATEGORIES),
   TICKETS: persistReducer(ticketsPC, TICKETS),
+  TASKS: persistReducer(tasksPC, TASKS),
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 

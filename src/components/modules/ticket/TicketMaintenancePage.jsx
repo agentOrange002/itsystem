@@ -5,7 +5,7 @@ import {Switch,Redirect} from 'react-router-dom';
 import history from "../../../routes/history";
 import TicketMaintenanceDatatable from './TicketMaintenanceDatatable';
 import TicketInfo from './TicketInfo';
-import JimRoute from '../../../routes/jimroute';
+import AuthorizedRoute from '../../../routes/AuthorizedRoute';
 
 const urlparam = `${window.location.origin}/#/app/ticketmaintenance/`;
 
@@ -58,14 +58,12 @@ class TicketMaintenancePage extends Component {
                         <BreadCrumb model={this.state.breadcrumdItems} home={this.state.home} />
                     </div>
                     <div>
-                        <Menubar model={this.state.tieredItems}>                            
-                           {/* // <Button label="Assigned Support" icon="pi pi-user-plus" style={{marginLeft:4}}/> */}
-                        </Menubar>
+                        <Menubar model={this.state.tieredItems} />
                     </div>
                     <div style={MyStyle.paddingT}>                        
                         <Switch>
-                            <JimRoute path="/app/ticketmaintenance/" exact component={TicketMaintenanceDatatable} checkName='TicketMaintenance'/>
-                            <JimRoute path="/app/ticketmaintenance/view/:ticketid" component={TicketInfo} checkName='TicketMaintenance' />                           
+                            <AuthorizedRoute path="/app/ticketmaintenance/" exact component={TicketMaintenanceDatatable} checkName='TicketMaintenance'/>
+                            <AuthorizedRoute path="/app/ticketmaintenance/view/:ticketid" component={TicketInfo} checkName='TicketMaintenance' />                           
                             <Redirect from="/app/ticketmaintenance/*" to="/app/notfound" /> 
                         </Switch>
                     </div>

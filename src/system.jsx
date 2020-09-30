@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 // import ScrollToTop from './ScrollToTop';
 import App from './App';
-import PrivateRoute from './routes/privateroute';
+import PrivateRoute from './routes/PrivateRoute';
 import ReportIssuePage from './components/modules/public/ReportIssuePage';
 import SignupPage from './components/modules/public/SignupPage';
 import UserImagePage from './components/modules/public/userimage';

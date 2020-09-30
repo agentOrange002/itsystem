@@ -7,7 +7,7 @@ import IssueMaintenanceDataTable from './IssueMaintenanceDataTable';
 import AddNewIssue from './AddNewIssue';
 import CategoryPage from './CategoryPage';
 import IssueInfo from './IssueInfo';
-import JimRoute from '../../../routes/jimroute';
+import AuthorizedRoute from '../../../routes/AuthorizedRoute';
 
 const urlparam = `${window.location.origin}/#/app/issuemaintenance/`;
 
@@ -67,10 +67,10 @@ class IssueMaintenancePage extends Component {
                     </div>
                     <div style={MyStyle.paddingT}>
                         <Switch>                           
-                            <JimRoute path="/app/issuemaintenance/" exact component={IssueMaintenanceDataTable} checkName='IssueMaintenance'/>
-                            <JimRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />                         
-                            <JimRoute path="/app/issuemaintenance/categories"  component={CategoryPage} checkName='IssueMaintenance'/>
-                            <JimRoute path="/app/issuemaintenance/view/:issueid"  component={IssueInfo} checkName='IssueMaintenance'/>
+                            <AuthorizedRoute path="/app/issuemaintenance/" exact component={IssueMaintenanceDataTable} checkName='IssueMaintenance'/>
+                            <AuthorizedRoute path="/app/issuemaintenance/newissue" component={AddNewIssue} checkName='IssueMaintenance' />                         
+                            <AuthorizedRoute path="/app/issuemaintenance/categories"  component={CategoryPage} checkName='IssueMaintenance'/>
+                            <AuthorizedRoute path="/app/issuemaintenance/view/:issueid"  component={IssueInfo} checkName='IssueMaintenance'/>
                             <Redirect from="/app/issuemaintenance/**" to="/app/notfound" />                             
                         </Switch>
                     </div>

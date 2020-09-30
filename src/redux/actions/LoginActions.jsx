@@ -29,12 +29,13 @@ export const LoginAuthentication = (formValues) => async dispatch => {
       dispatch(LoginLogin(data));
       dispatch(hideLoading('loginBar'));
       dispatch(LoginToast);
+      history.push("/app/");
     })
     .catch(function (error) {
       dispatch(LoginError(error));
       dispatch(hideLoading('loginBar'));
     });
-  history.push("/app/");
+ 
 };
 
 export const LoginProfile = () => async (dispatch, getState) => { 

@@ -93,13 +93,8 @@ class LoginPage extends Component {
         if (this.props.LOGIN_AUTHENTICATION.loginState.isAuthenticated) {
             history.push("/app/");
         }
-        else {
-            if (this.props.LOGIN_AUTHENTICATION.loginState.fetchError) {
-                this.showError();
-            }
-            else {
+        else {      
                 this.showWelcome();
-            }
         }
     }
 
@@ -112,17 +107,25 @@ class LoginPage extends Component {
         });
     }
 
-    showError() {
+    showError(message) {
         this.messages.show({
             sticky: true,
             severity: "error",
             summary: "Error Message",
-            detail: "Login failed"
+            detail: message
         });
     }
 
-    onSubmit = (formValues) => {       
-        this.props.LoginAuthentication(formValues);
+    onSubmit = async (formValues) => {       
+        await this.props.LoginAuthentication(formValues);
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        if(this.props.ERROR_MESSAGE !== prevProps.ERROR_MESSAGE)  { 
+            if (this.props.ERROR){
+                this.showError(this.props.ERROR_MESSAGE.message);
+            }          
+      }
     }
 
     render() {
@@ -171,13 +174,12 @@ const LoginForm = reduxForm({
 
 const mapStateToProps = state => {
     return {
-        LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION
+        LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION,
+        ERROR: state.LOGIN_AUTHENTICATION.loginState.fetchError,
+        ERROR_MESSAGE: state.LOGIN_AUTHENTICATION.loginState.fetchErrorMessage
     };
 };
 
-// const mapDispatchToProps = dispatch => ({
-//     LoginAuthentication: (formValues) => dispatch(LoginAuthentication(formValues))
-// });
 const mapDispatchToProps = {LoginAuthentication};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
