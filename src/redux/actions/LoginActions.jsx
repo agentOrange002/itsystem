@@ -41,9 +41,7 @@ export const LoginAuthentication = (formValues) => async dispatch => {
 export const LoginProfile = () => async (dispatch, getState) => { 
   dispatch(LoginProfileLoading());
   let userid = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
-  let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
-  
-  //console.log('user :'+userid);
+  let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization; 
   await urlProfile.get(`/${userid}`, {
     headers: {
       'Content-Type': 'application/json',

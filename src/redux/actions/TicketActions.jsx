@@ -63,12 +63,15 @@ export const getAllTicketsByIssueId = (issueId) => async (dispatch, getState) =>
         })
 };
 
-export const saveTicket = (issueId) => async (dispatch, getState) => {
+export const saveTicket = (issueid) => async (dispatch, getState) => {
     dispatch(TicketLoading());
-    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
     dispatch(showLoading('LOADINGBAR'));
-    await apiURL.post(`/${issueId}`, {
+    let id = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
+    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;   
+    //http://localhost:8080/itsystem/api/tickets/create/IIDGQuGSG1omH/d3jPjh8XVfqBAjEVuY1Kxgv8Aahkph/
+    await apiURL.post(`/create/${issueid}/${id}`, null, {
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': token
         }

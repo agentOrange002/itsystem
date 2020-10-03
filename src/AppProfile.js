@@ -8,6 +8,7 @@ import _ from 'lodash';
 import history from "./routes/history";
 
 import {LogOut} from './components/commands/Logout';
+//import { LOGIN_PROFILE_RESET } from './redux/constants/LoginConstants';
 
 const MyStyle={
     fonts: {fontSize:'13px'}
@@ -18,9 +19,11 @@ class AppProfile extends Component {
     constructor() {
         super();
         this.state = {
-            expanded: false
+            expanded: false,
+            profileimg: "assets/layout/images/profile.png"
         };
         this.onClick = this.onClick.bind(this);
+
     }
 
     onClick(event) {
@@ -48,20 +51,21 @@ class AppProfile extends Component {
       }
     }
 
-    render() {
-        let picture;
-      
-        if(_.isEmpty(this.props.LOGIN_PROFILE.profileState.profileResponse)) {
-            picture=null;           
-        }
-        else{
-            picture=this.props.LOGIN_PROFILE.profileState.profileResponse.userImage.image;
-        }
+    render() {     
+        let profilepicture = null;
+        if(!_.isEmpty(this.props.LOGIN_PROFILE.profileState.profileResponse)) {
+            if(_.isEmpty(this.props.LOGIN_PROFILE.profileState.profileResponse.userImage)){
+                profilepicture = null;
+            }   
+            else{
+                profilepicture=this.props.LOGIN_PROFILE.profileState.profileResponse.userImage.image;
+            }              
+        } 
 
         return  (
             <div className="layout-profile">             
                 <div>
-                    <img src={_.isEmpty(picture) ? "assets/layout/images/profile.png" :`data:image/png;charset=utf-8;base64,${picture}` } alt="LoginProfile" />
+                    <img src={_.isEmpty(profilepicture) ? this.state.profileimg :`data:image/png;charset=utf-8;base64,${profilepicture}` } alt="LoginProfile" />
                     {/* {`data:image/png;charset=utf-8;base64,${picture}`}  */}
                     {/* // <img src="assets/layout/images/profile.png" alt="User Image" /> */}
                 </div>
@@ -81,7 +85,7 @@ class AppProfile extends Component {
 
 const mapStateToProps = state => {
     return {
-      LOGIN_PROFILE: state.LOGIN_PROFILE,      
+      LOGIN_PROFILE: state.LOGIN_PROFILE,           
     };
   };
   

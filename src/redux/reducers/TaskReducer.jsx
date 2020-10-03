@@ -1,5 +1,6 @@
 import {
     TASK_GET_ALL_BY_ISSUEID,
+    TASK_GET_ALL_BY_TICKETID,
     TASK_GET_ALL,
     TASK_GET_BY_ID,
     TASK_SAVE,
@@ -26,6 +27,13 @@ export const TASKS = (state = TasksState, action) => {
                 fetchErrorMessage: null
             };
         case TASK_GET_ALL:
+            return {
+                ...state,
+                tasksResponse: _.mapKeys(action.payload, 'taskId'),
+                fetchError: false,
+                fetchErrorMessage: null
+            };
+        case TASK_GET_ALL_BY_TICKETID:
             return {
                 ...state,
                 tasksResponse: _.mapKeys(action.payload, 'taskId'),

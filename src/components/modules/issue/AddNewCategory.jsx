@@ -7,6 +7,11 @@ import {saveCategory} from '../../../redux/actions/CategoriesActions';
 import {Field, reduxForm} from 'redux-form';
 import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
 
+const MyStyle = {
+    ButtonStyle: {paddingTop: "10px", paddingBottom: "35px"},
+    Button:{marginRight: ".25em", float: "right", width: '150px'}
+}
+
 class AddNewCategory extends Component {
     
     state = {  }
@@ -43,8 +48,9 @@ class AddNewCategory extends Component {
 
    
 
-    onSubmit = (formValues) => {
-       this.props.saveCategory(formValues);
+    onSubmit = async (formValues) => {
+       await this.props.saveCategory(formValues);
+       this.props.hideThis();
     }
 
     render() {      
@@ -55,12 +61,12 @@ class AddNewCategory extends Component {
                     <Field name="name" label="Category Name" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                 </Fieldset>
                 <div className='button'
-                    style={{paddingTop: "10px", paddingBottom: "35px"}}>
+                    style={MyStyle.ButtonStyle}>
                     <span>
                         <Button
                             icon='pi pi-save'
                             label='Add Category'
-                            style={{marginRight: ".25em", float: "right", width: '150px'}}
+                            style={MyStyle.Button}
                         />
                     </span>
                 </div>

@@ -74,7 +74,7 @@ class CategoryPage extends Component {
                     style={MyStyle.DialogStyle}
                     modal={true}
                     onHide={() => this.setState({addDialog: false})}>
-                    <AddNewCategory/>                   
+                    <AddNewCategory hideThis={() => this.setState({addDialog: false})}/>                   
                 </Dialog>
             </div>
             </UILoader>

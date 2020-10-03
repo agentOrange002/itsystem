@@ -1,43 +1,43 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {LoginAuthentication} from "../../../redux/actions/LoginActions";
-import {Field, reduxForm} from 'redux-form';
-import {errorEmail, warningAol, minLength10} from '../../messages/errorFieldNotification';
-import {Link} from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { LoginAuthentication } from "../../../redux/actions/LoginActions";
+import { Field, reduxForm } from 'redux-form';
+import { errorEmail, warningAol, minLength10 } from '../../messages/errorFieldNotification';
+import { Link } from "react-router-dom";
 import history from "../../../routes/history";
-import {Fieldset} from "primereact/fieldset";
-import {Panel} from "primereact/panel";
-import {InputText} from "primereact/inputtext";
-import {Password} from "primereact/password";
-import {Button} from "primereact/button";
-import {Messages} from "primereact/messages";
+import { Fieldset } from "primereact/fieldset";
+import { Panel } from "primereact/panel";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { Button } from "primereact/button";
+import { Messages } from "primereact/messages";
 import logo from "../../../images/Logo.png";
 import HeaderProgressBar from '../tools/HeaderProgressBar';
-
+import { motion } from 'framer-motion';
 
 const MyStyle = {
-    LoginSpanStyle : {width:'100%'},
-    DivStyle : {paddingTop: "15px"},
-    ButtonDivStyle : {paddingTop: '10px', paddingBottom: "35px"},
-    LoginButtonStyle : {marginRight: ".25em", float: "right"},
-    BoxDivStyle : {paddingTop: "1em"},
-    LinkStyleLeft : {display: 'block', marginLeft: '.25em', float: 'left'},
-    LinkStyleRight : {display: 'block', marginRight: '.25em', float: 'right'},
-    LogoStyle : {display: 'block', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2em', width: '30%'}
+    LoginSpanStyle: { width: '100%' },
+    DivStyle: { paddingTop: "15px" },
+    ButtonDivStyle: { paddingTop: '10px', paddingBottom: "35px" },
+    loginButton: { float: "right" },
+    BoxDivStyle: { paddingTop: "1em" },
+    LinkStyleLeft: { display: 'block', marginLeft: '.25em', float: 'left' },
+    LinkStyleRight: { display: 'block', marginRight: '.25em', float: 'right' },
+    LogoStyle: { display: 'block', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2em', width: '30%' }
 }
 
-const renderPassword = ({input, label, meta: {touched, error, warning}}) => {
+const renderPassword = ({ input, label, meta: { touched, error, warning } }) => {
     return (
-        <div className='p-col-12 p-md-12' style={MyStyle.DivStyle}>       
+        <div className='p-col-12 p-md-12' style={MyStyle.DivStyle}>
             <div className='p-inputgroup'>
                 <span className="p-inputgroup-addon">
                     <i className="pi pi-lock"></i>
                 </span>
                 <span className='p-float-label' style={MyStyle.LoginSpanStyle}>
-                    <Password {...input} className={error ? `p-error` : undefined} feedback={false}/>
+                    <Password {...input} className={error ? `p-error` : undefined} feedback={false} />
                     <label htmlFor='in'>{label}</label>
                 </span>
-            </div>    
+            </div>
             {touched && ((error &&
                 <span>
                     <div className="isa_error">
@@ -57,10 +57,10 @@ const renderPassword = ({input, label, meta: {touched, error, warning}}) => {
     );
 }
 
-const renderEmail = ({input, label, meta: {touched, error, warning}}) => {
+const renderEmail = ({ input, label, meta: { touched, error, warning } }) => {
     return (
-        <div className='p-col-12 p-md-12' style={MyStyle.DivStyle}>   
-            <div className='p-inputgroup'>     
+        <div className='p-col-12 p-md-12' style={MyStyle.DivStyle}>
+            <div className='p-inputgroup'>
                 <span className="p-inputgroup-addon">
                     <i className="pi pi-user"></i>
                 </span>
@@ -68,7 +68,7 @@ const renderEmail = ({input, label, meta: {touched, error, warning}}) => {
                     <InputText {...input} className={error ? `p-error` : undefined} />
                     <label htmlFor='in'>{label}</label>
                 </span>
-            </div>          
+            </div>
             {touched && ((error &&
                 <span>
                     <div className="isa_error">
@@ -93,8 +93,8 @@ class LoginPage extends Component {
         if (this.props.LOGIN_AUTHENTICATION.loginState.isAuthenticated) {
             history.push("/app/");
         }
-        else {      
-                this.showWelcome();
+        else {
+            this.showWelcome();
         }
     }
 
@@ -116,16 +116,16 @@ class LoginPage extends Component {
         });
     }
 
-    onSubmit = async (formValues) => {       
+    onSubmit = async (formValues) => {
         await this.props.LoginAuthentication(formValues);
     }
 
-    componentDidUpdate(prevProps,prevState){
-        if(this.props.ERROR_MESSAGE !== prevProps.ERROR_MESSAGE)  { 
-            if (this.props.ERROR){
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.ERROR_MESSAGE !== prevProps.ERROR_MESSAGE) {
+            if (this.props.ERROR) {
                 this.showError(this.props.ERROR_MESSAGE.message);
-            }          
-      }
+            }
+        }
     }
 
     render() {
@@ -133,13 +133,23 @@ class LoginPage extends Component {
             <>
                 <HeaderProgressBar nameofbar={"loginBar"} />
                 <div className='p-grid p-dir-col'>
-                    <div className="p-col-12 p-lg-4 p-col-align-center" >
+                    <motion.div
+                        initial={{ y: -250 }}
+                        animate={{ y: 0 }}
+                        transition={{ delay: .10, type: "spring" }}
+                        className="p-col-12 p-lg-4 p-col-align-center" >
                         <img src={logo} alt='Logo' style={MyStyle.LogoStyle} />
-                    </div>
-                    <div className="p-col-12 p-md-3 p-lg-4 p-col-align-center">
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: .80, duration: 1 }}
+                        className="p-col-12 p-md-3 p-lg-4 p-col-align-center">
                         <div className="box">
-                           
-                            <Panel header='Infomation Technology Support System'>
+
+                            <Panel
+
+                                header='Infomation Technology Support System'>
                                 <Messages ref={el => (this.messages = el)}></Messages>
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <Fieldset legend='Login Form'>
@@ -149,19 +159,26 @@ class LoginPage extends Component {
                                         </div>
                                     </Fieldset>
                                     <div className='button' style={MyStyle.ButtonDivStyle}>
-                                        <span>
-                                            <Button label='Login' icon='pi pi-sign-in' style={MyStyle.LoginButtonStyle} />
-                                        </span>
+                                        <div style={MyStyle.loginButton}>
+                                            <motion.div
+                                                whileHover={{
+                                                    scale: 1.1,
+                                                    textShadow: "0px 0px 8px rgb(255,255,255)",
+                                                    boxShadow: "0px 0px 8px rgb(255,255,255)"
+                                                }}>
+                                                <Button label='Login' icon='pi pi-sign-in' />
+                                            </motion.div>
+                                        </div>
                                     </div>
                                 </form>
                             </Panel>
-                            
+
                         </div>
                         <div className="box" style={MyStyle.BoxDivStyle}>
                             <Link to="#" style={MyStyle.LinkStyleLeft}><u>Forgot Password?</u></Link>
                             <Link to="/signup" style={MyStyle.LinkStyleRight}><u>Sign Up</u></Link>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </>
         );
@@ -180,6 +197,6 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = {LoginAuthentication};
+const mapDispatchToProps = { LoginAuthentication };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

@@ -18,6 +18,7 @@ import { CATEGORIES } from './CategoryReducer';
 import { TICKETS } from './TicketReducer';
 import { TASKS } from './TaskReducer';
 import { DASHBOARD } from './DashboardReducer';
+import { USERIMAGE } from './UserImageReducer';
 
 const encryptor = createEncryptor({
   secretKey: "mydirtylittlesecret",
@@ -94,6 +95,13 @@ const tasksPC = {
   transforms: [encryptor],
 }
 
+const userimagePC = {
+  key: 'userimage',
+  storage: storageSession,
+  blacklist: ['USERIMAGE'],
+  transforms: [encryptor],
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
   loadingBar: loadingBarReducer,
@@ -105,6 +113,7 @@ const rootReducer = combineReducers({
   CATEGORIES: persistReducer(categoriesPC, CATEGORIES),
   TICKETS: persistReducer(ticketsPC, TICKETS),
   TASKS: persistReducer(tasksPC, TASKS),
+  USERIMAGE: persistReducer(userimagePC, USERIMAGE),
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 

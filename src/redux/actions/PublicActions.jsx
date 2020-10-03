@@ -1,10 +1,5 @@
 import apiURL from '../config/publicAPIURL';
-import {
-    UserImageGet,
-    UserImageSubmit,
-    UserImageError,
-    UserImageLoading,
-    UserImageReset,
+import {  
     ReportIssueError,
     ReportIssueSubmit,
     ReportIssueLoading,
@@ -14,6 +9,12 @@ import {
     UserSignupLoading,
     UserSignupReset
 } from '../constants/PublicConstants';
+
+import {  UserImageGet,
+    UserImageSubmit,
+    UserImageError,
+    UserImageLoading,
+    UserImageReset, } from '../constants/UsersConstants';
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { PublicReportIssueToastError, PublicReportIssueToastSuccess } from '../../components/toasts/publicToasts';
@@ -40,7 +41,7 @@ export const getUserImage = () => async dispatch => {
     dispatch(UserImageReset());
     dispatch(UserImageLoading());
     dispatch(showLoading('userimagesubmitBar'));
-    await apiURL.get('/test/JHivcNsy7HLTexVlszCbRwfVNYEjCp')
+    await apiURL.get('/test/d3jPjh8XVfqBAjEVuY1Kxgv8Aahkph')
         .then(function (response) {
             let data = response.data;
             dispatch(UserImageGet(data));

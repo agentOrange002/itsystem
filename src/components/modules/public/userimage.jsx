@@ -73,7 +73,7 @@ class UserImagePage extends Component {
                       </div>               
                       <div className='p-col-12 p-md-12 p-col-align-center'style={{ paddingTop: "20px" }}>
                         { _.isEmpty(this.state.image) ? undefined : <img alt='Upload' src={this.state.image} style={{display:'block',marginLeft:'auto',marginRight:'auto'}}/> }
-                        { _.isEmpty(this.props.getuserimage.getuserimageState.userimageResponse.image) ? undefined : <img alt='GetImage' label="getImage" src={`data:image/png;charset=utf-8;base64,${this.props.getuserimage.getuserimageState.userimageResponse.image}`} style={{display:'block',marginLeft:'auto',marginRight:'auto'}}/> }
+                        {/* { _.isEmpty(this.props.getuserimage.getuserimageState.userimageResponse.image) ? undefined : <img alt='GetImage' label="getImage" src={`data:image/png;charset=utf-8;base64,${this.props.getuserimage.getuserimageState.userimageResponse.image}`} style={{display:'block',marginLeft:'auto',marginRight:'auto'}}/> } */}
                                        
                       </div> 
                     </div>

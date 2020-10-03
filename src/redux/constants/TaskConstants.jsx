@@ -1,5 +1,6 @@
 export const TASK_ERROR = 'TASK_ERROR';
 export const TASK_GET_ALL_BY_ISSUEID = 'TASK_GET_ALL_BY_ISSUEID';
+export const TASK_GET_ALL_BY_TICKETID = 'TASK_GET_ALL_BY_TICKETID';
 export const TASK_GET_ALL = 'TASK_GET_ALL';
 export const TASK_GET_BY_ID = 'TASK_GET_BY_ID';
 export const TASK_SAVE = 'TASK_SAVE';
@@ -32,6 +33,11 @@ export const TaskGetAll = data => {
     } );
 }
 
+export const TaskGetAllByTicketId  = data => {
+    return ( {
+        type: TASK_GET_ALL_BY_TICKETID, payload:data
+    } );
+}
 
 export const TaskGetAllByIssueId  = data => {
     return ( {

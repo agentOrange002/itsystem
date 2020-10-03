@@ -143,7 +143,7 @@ class IssueMaintenanceDataTable extends Component {
         return (
             <div className='button' style={MyStyle.ButtonDivStyle}>
             <span>               
-                <Button label='No' onClick={this.NoOOTIDialogButton} className="p-button-danger" icon='pi pi-time' style={MyStyle.LoginButtonStyle} />
+                <Button label='No' onClick={this.NoOOTIDialogButton} className="p-button-danger" icon='pi pi-times' style={MyStyle.LoginButtonStyle} />
                 <Button label='Yes' onClick={this.YesOTIDialogButton} className="p-button-success" icon='pi pi-check' style={MyStyle.LoginButtonStyle} />
             </span>
         </div>

@@ -25,7 +25,7 @@ class TaskMaintenanceDatatable extends Component {
             {
                 label: 'View Task', 
                 icon: 'pi pi-fw pi-task', 
-                command: (event) => this.viewTicket(this.state.selectedTask)
+                command: (event) => this.viewTask(this.state.selectedTask)
             }            
         ]
     }
@@ -45,7 +45,7 @@ class TaskMaintenanceDatatable extends Component {
 
     refreshTable = async (event) => {
         event.preventDefault(); 
-        await this.props.getAllTickets();
+        await this.props.getAllTasks();
     }
 
     hideContext = () => {

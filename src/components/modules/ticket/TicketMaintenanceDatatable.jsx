@@ -84,7 +84,7 @@ class TicketMaintenanceDatatable extends Component {
             <div className="content-section implementation" >
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={this.hideContext} />
                 <UILoader blockui="TICKET_LOADING" unblockui={["TICKET_GET_ALL","TICKET_ERROR"]}>
-                <DataTable style={{textAlign:'left'}}
+                <DataTable 
                     value={this.props.TICKETS}
                     scrollable={true}
                     selectionMode="single"

@@ -42,35 +42,35 @@ export const TICKETS = (state = TicketsState, action) => {
         case TICKET_GET_BY_ID:
             return {
                 ...state,
-                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketsResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_SAVE:
             return {
                 ...state,
-                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketsResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_UPDATE:
             return {
                 ...state,
-                ticketsResponse: { ...state.ticketResponse, [action.payload.ticketId]: action.payload },
+                ticketsResponse: { ...state.ticketsResponse, [action.payload.ticketId]: action.payload },
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_DELETE:
             return {
                 ...state,
-                ticketsResponse: _.omit(state.ticketResponse, action.payload.ticketId),
+                ticketsResponse: _.omit(state.ticketsResponse, action.payload.ticketId),
                 fetchError: false,
                 fetchErrorMessage: null
             };
         case TICKET_ERROR:
             return {
                 ...state,
-                ticketsResponse: { ...state.ticketResponse },
+                ticketsResponse: { ...state.ticketsResponse },
                 fetchError: true,
                 fetchErrorMessage: action.error
             };

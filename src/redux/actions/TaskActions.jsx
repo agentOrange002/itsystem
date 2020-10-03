@@ -6,6 +6,7 @@ import {
     TaskReset,
     TaskGetAll,
     TaskGetAllByIssueId,
+    TaskGetAllByTicketId
     // TaskGetByID
 } from '../constants/TaskConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
@@ -53,6 +54,30 @@ export const getAllTasksByIssueId = (issueId) => async (dispatch, getState) => {
         .then(function (response) {
             let data = response.data;
             dispatch(TaskGetAllByIssueId(data));
+            dispatch(hideLoading('LOADINGBAR'));
+            dispatch(AllTasksToastInfo);
+        })
+        .catch(function (error) {
+            dispatch(TaskError(error));
+            dispatch(hideLoading('LOADINGBAR'));
+            dispatch(AllTasksToastError);
+        })
+};
+
+export const getAllTasksByTicketId = (ticketid) => async (dispatch, getState) => {
+    dispatch(TaskLoading());
+    dispatch(TaskReset());
+    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
+    dispatch(showLoading('LOADINGBAR'));
+    await apiURL.get(`/all/ticket/${ticketid}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+        .then(function (response) {
+            let data = response.data;
+            dispatch(TaskGetAllByTicketId(data));
             dispatch(hideLoading('LOADINGBAR'));
             dispatch(AllTasksToastInfo);
         })
