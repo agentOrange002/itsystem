@@ -1,4 +1,4 @@
-import apiURL from '../config/dashboardAPIURL';
+import {dashboardURL as apiURL} from '../config/ConfigURL';
 import {
     DashboardError,
     DashboardGetAll,

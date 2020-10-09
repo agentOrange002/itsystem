@@ -1,5 +1,4 @@
-import apiURL from '../config/usersAPIURL';
-import userimages_apiURL from '../config/userimagesAPIURL';
+import {userURL as apiURL,userimageURL as userimages_apiURL } from '../config/ConfigURL';
 import {
     UserError,
     UserGetByID,

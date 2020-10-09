@@ -1,4 +1,4 @@
-import apiURL from '../config/issueLogsAPIURL';
+import {issuelogURL as apiURL} from '../config/ConfigURL';
 import {
     IssueLogsError,
     IssueLogsSave,

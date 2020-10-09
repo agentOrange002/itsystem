@@ -1,4 +1,4 @@
-import apiURL from '../config/taskAPIURL';
+import {taskURL as apiURL} from '../config/ConfigURL';
 import {    
     TaskError,
     TaskSave,

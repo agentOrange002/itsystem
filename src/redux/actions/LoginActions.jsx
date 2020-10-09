@@ -1,5 +1,4 @@
-import url from "../config/loginAPIURL";
-import urlProfile from "../config/usersAPIURL";
+import {loginURL as url, userURL as urlProfile } from '../config/ConfigURL';
 import {
   LoginLogin,
   LoginError,

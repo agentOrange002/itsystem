@@ -1,4 +1,4 @@
-import apiURL from '../config/ticketAPIURL';
+import {ticketURL as apiURL} from '../config/ConfigURL';
 import {    
     TicketError,
     TicketSave,

@@ -1,4 +1,4 @@
-import apiURL from '../config/publicAPIURL';
+import {publicURL as apiURL} from '../config/ConfigURL';
 import {  
     ReportIssueError,
     ReportIssueSubmit,

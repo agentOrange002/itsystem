@@ -1,4 +1,4 @@
-import apiURL from '../config/issuesAPIURL';
+import {issueURL as apiURL} from '../config/ConfigURL';
 import {
     IssuesError,
     IssuesGetAll,

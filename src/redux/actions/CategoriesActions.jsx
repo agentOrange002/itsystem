@@ -1,4 +1,4 @@
-import apiURL from '../config/categoryAPIURL';
+import {categoryURL as apiURL} from '../config/ConfigURL';
 import {
     CategoryError,
     CategoryGetAll,

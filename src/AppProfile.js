@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import {connect} from 'react-redux';
 import {LoginProfile} from './redux/actions/LoginActions';
+import {getAllAuthoritiesByUserId} from './redux/actions/AuthorityActions';
 import _ from 'lodash';
 
 import history from "./routes/history";
@@ -92,5 +93,5 @@ const mapStateToProps = state => {
 //   const mapDispatchToProps = dispatch => ({
 //     LoginProfile: () => dispatch(LoginProfile())
 //   });
-const mapDispatchToProps = {LoginProfile};
+const mapDispatchToProps = {LoginProfile,getAllAuthoritiesByUserId};
 export default connect(mapStateToProps,mapDispatchToProps)(AppProfile);
