@@ -26,6 +26,7 @@ const MyStyle = {
     width: { width: "100%" },
     tooltip: { position: 'top' },
     dialogstyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
+    shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     ticketdialogstyle: { width: '350px', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
 }
 
@@ -110,15 +111,12 @@ class IssueDetailsPage extends Component {
 
     checkLastTicketClosed = () => {
         let result = false;
-        if(!_.isEmpty(this.state.ticketinfo)){
-            if(_.isEmpty(this.state.ticketinfo.dateClosed)){
-                result = false;
-            }
-            else{
+        if (!_.isEmpty(this.state.ticketinfo)) {
+            if (_.isEmpty(this.state.ticketinfo.dateClosed)) {
                 result = true;
-            }
+            }           
         }
-
+        console.log("checkLastTicketClosed :"+result);
         return result;
     }
 
@@ -132,12 +130,17 @@ class IssueDetailsPage extends Component {
             this.pleaseselectissue();
         }
         else {
-            if(this.checkLastTicketClosed()){
+            if (_.isEmpty(this.state.ticketinfo)) {
                 this.setState({ TicketVisible: true });
             }
             else {
-                this.messages.show({ severity: 'error', summary: 'Creating Ticket Error', detail: 'This issue has an opened ticket. Please review. ', sticky: true });
-            }   
+                if (this.checkLastTicketClosed()) {
+                    this.messages.show({ severity: 'error', summary: 'Creating Ticket Error', detail: 'This issue has an opened ticket. Please review. ', sticky: true });
+                }
+                else {
+                    this.messages.show({ severity: 'warn', summary: 'System Warning', detail: 'This issue has no ticket. Please create. ' });
+                }
+            }
         }
     }
 
@@ -343,7 +346,7 @@ class IssueDetailsPage extends Component {
                         <Dialog header="Create Ticket Message"
                             visible={this.state.TicketVisible}
                             footer={this.footerDialog()}
-                            style={MyStyle.dialogstyle}
+                            style={MyStyle.shortdialogstyle}
                             modal={true}
                             onHide={this.onHide}>
                             <Fieldset legend="Message">

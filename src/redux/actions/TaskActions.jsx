@@ -16,6 +16,7 @@ import {
     SaveTaskToastSuccess,
     SaveTaskToastError,
 } from '../../components/toasts/taskToasts';
+import { reset } from 'redux-form';
 
 export const getAllTasks = () => async (dispatch, getState) => {
     dispatch(showLoading('LOADINGBAR'));
@@ -88,11 +89,12 @@ export const getAllTasksByTicketId = (ticketid) => async (dispatch, getState) =>
         })
 };
 
-export const saveTask = (issueId) => async (dispatch, getState) => {
+export const saveTask = (formValues, tid) => async (dispatch, getState) => {
     dispatch(TaskLoading());
+    let uid = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
     dispatch(showLoading('LOADINGBAR'));
-    await apiURL.post(`/${issueId}`, {
+    await apiURL.post('/', {...formValues,ticketid:tid,userid:uid},{
         headers: {
             'Content-Type': 'application/json',
             'Authorization': token
@@ -103,6 +105,7 @@ export const saveTask = (issueId) => async (dispatch, getState) => {
             dispatch(TaskSave(data));
             dispatch(hideLoading('LOADINGBAR'));
             dispatch(SaveTaskToastSuccess);
+            dispatch(reset('addNewTask'));
         })
         .catch(function (error) {
             dispatch(TaskError(error));

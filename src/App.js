@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
 import AppTopbar from './AppTopbar';
-//import {AppFooter} from './AppFooter';
+import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import AppProfile from './AppProfile';
 import {Route,Switch,Redirect} from 'react-router-dom';
@@ -256,7 +256,8 @@ class App extends Component {
             'layout-sidebar-light': this.state.layoutColorMode === 'light'
         });
 
-        return (         
+        return (       
+            <>  
             <div className={wrapperClass} onClick={this.onWrapperClick}>
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
@@ -293,9 +294,11 @@ class App extends Component {
                     <Redirect from="/app/*" to="/app/notfound" />               
                 </Switch>
                 </div>
-                {/* <AppFooter /> */}
-                <div className="layout-mask"></div>
+              
+                {/* //<div className="layout-mask"></div> */}
             </div>
+            <AppFooter /> 
+            </>
         );
     }
 }

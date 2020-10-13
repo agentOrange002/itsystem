@@ -22,7 +22,7 @@ import {
 export const LoginAuthentication = (formValues) => async dispatch => {
   dispatch(LoginLoading());
   dispatch(showLoading('loginBar'));
-  await url.post("/users/login", formValues)
+  await url.post("/login", formValues)
     .then(function (response) {
       let data = response.headers;
       dispatch(LoginLogin(data));

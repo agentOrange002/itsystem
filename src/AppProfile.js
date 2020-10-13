@@ -15,18 +15,18 @@ const MyStyle={
     fonts: {fontSize:'13px'}
 }
 
+const profileimg = "assets/layout/images/profile.png";
+
 class AppProfile extends Component {
 
     constructor() {
         super();
         this.state = {
-            expanded: false,
-            profileimg: "assets/layout/images/profile.png"
+            expanded: false,           
         };
         this.onClick = this.onClick.bind(this);
-
     }
-
+   
     onClick(event) {
         this.setState({expanded: !this.state.expanded});
         event.preventDefault();
@@ -66,7 +66,7 @@ class AppProfile extends Component {
         return  (
             <div className="layout-profile">             
                 <div>
-                    <img src={_.isEmpty(profilepicture) ? this.state.profileimg :`data:image/png;charset=utf-8;base64,${profilepicture}` } alt="LoginProfile" />
+                    <img src={_.isEmpty(profilepicture) ? profileimg :`data:image/png;charset=utf-8;base64,${profilepicture}` } alt="LoginProfile" />
                     {/* {`data:image/png;charset=utf-8;base64,${picture}`}  */}
                     {/* // <img src="assets/layout/images/profile.png" alt="User Image" /> */}
                 </div>

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-export const urlBackEnd = 'http://localhost:8080/api';
+export const urlBackEnd = 'http://localhost:8080/itsystem/api';
+
+export const loginURL = axios.create({
+    baseURL: 'http://localhost:8080/itsystem'
+});
 
 export const authorityURL = axios.create({
     baseURL: `${urlBackEnd}/authorities`
@@ -20,10 +24,6 @@ export const issuelogURL = axios.create({
 
 export const issueURL = axios.create({
     baseURL: `${urlBackEnd}/issues`
-});
-
-export const loginURL = axios.create({
-    baseURL:`${urlBackEnd}`
 });
 
 export const publicURL = axios.create({

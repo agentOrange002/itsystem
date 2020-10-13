@@ -8,9 +8,6 @@ import System from './System';
 import 'primereact/resources/themes/luna-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-// import 'primereact/resources/themes/nova-light/theme.css';
-// import 'primereact/resources/primereact.min.css';
-// import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
@@ -34,20 +31,4 @@ ReactDOM.render(
     </PersistGate>          
 </Provider>, 
 document.getElementById('root'));
-
-// import 'react-app-polyfill/ie11';
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-// import { HashRouter } from 'react-router-dom'
-// import ScrollToTop from './ScrollToTop';
-
-// ReactDOM.render(
-//     <HashRouter>
-//         <ScrollToTop>
-//             <App />
-//         </ScrollToTop>
-//     </HashRouter>,
-//     document.getElementById('root')
-// );
 
