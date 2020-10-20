@@ -73,7 +73,7 @@ export const LOGIN_PROFILE = (state = { profileState }, action) => {
       return {
         ...state,
         profileState: {
-          profileResponse: action.payload,
+          profileResponse: { ...state.profileState.profileResponse, ...action.payload  },
           fetchError: false,
           fetchErrorMessage: null
         }
@@ -82,7 +82,7 @@ export const LOGIN_PROFILE = (state = { profileState }, action) => {
       return {
         ...state,
         profileState: {
-          profileResponse: action.payload,
+          profileResponse: { ...state.profileState.profileResponse, ...action.payload  },
           fetchError: false,
           fetchErrorMessage: null
         }

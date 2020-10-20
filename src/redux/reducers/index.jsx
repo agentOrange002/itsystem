@@ -20,6 +20,7 @@ import { TASKS } from './TaskReducer';
 import { DASHBOARD } from './DashboardReducer';
 import { USERIMAGE } from './UserImageReducer';
 import { AUTHORITIES } from './AuthorityReducer';
+import { ADDRESSES } from './AddressReducer';
 
 const encryptor = createEncryptor({
   secretKey: "mydirtylittlesecret",
@@ -59,7 +60,6 @@ const dashboardPC = {
   blacklist: ['DASHBOARD'],
   transforms: [encryptor],
 }
-
 
 const issuesPC = {
   key: 'issues',
@@ -110,6 +110,13 @@ const authorityPC = {
   transforms: [encryptor],
 }
 
+const addressPC = {
+  key: 'addresses',
+  storage: storageSession,
+  blacklist: ['ADDRESSES'],
+  transforms: [encryptor],
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
   loadingBar: loadingBarReducer,
@@ -123,6 +130,7 @@ const rootReducer = combineReducers({
   TASKS: persistReducer(tasksPC, TASKS),
   USERIMAGE: persistReducer(userimagePC, USERIMAGE),
   AUTHORITIES: persistReducer(authorityPC, AUTHORITIES),
+  ADDRESSES: persistReducer(addressPC, ADDRESSES),
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 

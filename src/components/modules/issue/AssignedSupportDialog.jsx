@@ -24,7 +24,7 @@ class AssignedSupportDialog extends Component {
         filteredCategories: null,
         filteredUsers: null,
         category: null,
-        user: null
+        user: null      
     }
 
     componentDidMount() {
@@ -41,11 +41,12 @@ class AssignedSupportDialog extends Component {
 
     onSubmit = async (event) => {
         event.preventDefault();
+        let userid = this.props.USERSELECTED[this.state.user].userId;
         const values = {
             issueId: this.props.onselectedIssue.issueId,
-            userId: this.state.user,
+            userId: userid,
             categoryName: this.state.category
-        }
+        }  
         await this.props.assignedSupport(values);
         await this.props.hidethis();
     }
@@ -75,7 +76,7 @@ class AssignedSupportDialog extends Component {
             else {
                 results = this.users.filter((user) => {
                     // return user.toLowerCase().startsWith(event.query.toLowerCase());
-                    return user.toLowerCase().startsWith(event.query.toLowerCase());
+                    return user;
                 });
             }
             this.setState({ filteredUsers: results });
@@ -90,16 +91,16 @@ class AssignedSupportDialog extends Component {
         );
     }
 
-    itemUserTemplate = (user) => {
-        let lastname = this.props.USERSELECTED[user].lastName;
-        let firstname = this.props.USERSELECTED[user].firstName;
+    // itemUserTemplate = (user) => {            
+    //     let userid = this.props.USERSELECTED[user].userId;
+    //     return (
 
-        return (
-            <div className="p-clearfix">
-                <div style={MyStyle.itemTemplateStyle}>{user} - {firstname} {lastname} </div>
-            </div>
-        );
-    }
+    //         this.setState({selectedUserId: userid});
+    //         <div className="p-clearfix">
+    //             <div style={MyStyle.itemTemplateStyle}>{user} - {userid} </div>
+    //         </div>
+    //     );
+    // }
 
     render() {
         return (
@@ -130,7 +131,7 @@ class AssignedSupportDialog extends Component {
                                 suggestions={this.state.filteredUsers}
                                 completeMethod={this.filterUsers} size={30} minLength={1}
                                 dropdown={true}
-                                itemTemplate={this.itemUserTemplate}
+                                //itemTemplate={this.itemUserTemplate}
                                 onChange={(e) => this.setState({ user: e.value })} />
                             <label htmlFor="user">User</label>
                         </span>
@@ -143,6 +144,7 @@ class AssignedSupportDialog extends Component {
                             label='Assigned Support'
                             style={MyStyle.ButtonStyle}
                             onClick={this.onSubmit}
+                            disabled={!this.state.user||this.state.category === null ? true : false}
                         />
                     </span>
                 </div>
@@ -154,9 +156,9 @@ class AssignedSupportDialog extends Component {
 const mapStateToProps = state => {
     return {
         LOGIN_AUTHENTICATION: state.LOGIN_AUTHENTICATION,
-        CATEGORIES: _.map(Object.values(state.CATEGORIES.categoriesResponse), "name"),
-        USERS: _.map(Object.values(state.USERS.usersResponse), "userId"),
-        USERSELECTED: _.mapKeys(Object.values(state.USERS.usersResponse), "userId")
+        CATEGORIES: _.map(Object.values(state.CATEGORIES.categoriesResponse), "name"),      
+        USERS: _.map(Object.values(state.USERS.usersResponse), "fullName"),
+        USERSELECTED: _.mapKeys(Object.values(state.USERS.usersResponse), "fullName")
     };
 };
 

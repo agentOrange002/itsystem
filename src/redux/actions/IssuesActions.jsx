@@ -162,8 +162,7 @@ export const assignedSupport = (values) => async (dispatch, getState) => {
         }
     })
         .then(function (response) {
-            let data = response.data;
-            console.log(response);
+            let data = response.data;           
             dispatch(IssuesAssignedSupport(data));
             dispatch(hideLoading('LOADINGBAR'));
             dispatch(AssignSupportToastSuccess);
@@ -186,8 +185,7 @@ export const ownedThisIssue = (issueid, userId) => async (dispatch, getState) =>
         }
     })
         .then(function (response) {
-            let data = response.data;
-            console.log(response);
+            let data = response.data;          
             dispatch(IssuesOwnedThisIssue(data));
             dispatch(hideLoading('LOADINGBAR'));
             dispatch(OwnedThisIssueToastSuccess);

@@ -7,7 +7,7 @@ import {
   LoginProfileError,
   LoginProfileUpdate,
   LoginProfileLoading,
-  LoginProfileReset
+  //LoginProfileReset
 } from "../constants/LoginConstants";
 import history from "../../routes/history";
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
@@ -57,8 +57,7 @@ export const LoginProfile = () => async (dispatch, getState) => {
     });
 };
 
-export const ProfileUpdate = (values) => async (dispatch, getState) => {
-  dispatch(LoginProfileReset());
+export const ProfileUpdate = (values) => async (dispatch, getState) => { 
   dispatch(LoginProfileLoading());
   dispatch(showLoading('LOADINGBAR'));
   let userid = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;

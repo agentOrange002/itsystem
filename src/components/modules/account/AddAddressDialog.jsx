@@ -3,19 +3,18 @@ import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {Fieldset} from 'primereact/fieldset';
 import {connect} from 'react-redux';
-import {saveCategory} from '../../../redux/actions/CategoriesActions';
+import {saveAddress} from '../../../redux/actions/AddressActions';
 import {Field, reduxForm} from 'redux-form';
 import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
+import {LoginProfile } from '../../../redux/actions/LoginActions';
 
 const MyStyle = {
     ButtonStyle: {paddingTop: "10px", paddingBottom: "35px"},
     Button:{marginRight: ".25em", float: "right", width: '150px'}
 }
 
-class AddNewCategory extends Component {
+class AddAddressDialog extends Component {
     
-    state = {  }
-
     renderTextInput=({input, label, meta: {touched, error, warning}})=>{
         return (
             <div className='p-col-12 p-md-12'>
@@ -47,23 +46,24 @@ class AddNewCategory extends Component {
     }   
 
     onSubmit = async (formValues) => {
-       await this.props.saveCategory(formValues);
-       this.props.hideThis();
+       await this.props.saveAddress(formValues);
+       await this.props.LoginProfile();
+       this.props.hidethis();
     }
 
     render() {      
         return ( 
             <div>            
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Fieldset legend='Category Form'>
-                    <Field name="name" label="Category Name" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
+                <Fieldset legend='Add New Address Form'>
+                    <Field name="name" label="Address" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                 </Fieldset>
                 <div className='button'
                     style={MyStyle.ButtonStyle}>
                     <span>
                         <Button
                             icon='pi pi-save'
-                            label='Add Category'
+                            label='Add Address'
                             style={MyStyle.Button}
                         />
                     </span>
@@ -74,16 +74,10 @@ class AddNewCategory extends Component {
     }
 }
 
-const newForm = reduxForm({
-    form: 'addNewCategory'
-})(AddNewCategory);
- 
-const mapStateToProps = state => {
-    return {
-        CATEGORIES: Object.values(state.CATEGORIES.categoriesResponse)
-    };
-};
+const AddAddressForm = reduxForm({
+    form: 'addAddressForm'
+})(AddAddressDialog);
 
-const mapDispatchToProps = {saveCategory};
+const mapDispatchToProps = {LoginProfile,saveAddress};
 
-export default connect(mapStateToProps, mapDispatchToProps)(newForm);
+export default connect(null,mapDispatchToProps)(AddAddressForm);

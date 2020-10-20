@@ -294,7 +294,7 @@ class App extends Component {
                     <Redirect from="/app/*" to="/app/notfound" />               
                 </Switch>
                 </div>
-              
+               
                 {/* //<div className="layout-mask"></div> */}
             </div>
             <AppFooter /> 

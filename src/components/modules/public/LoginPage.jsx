@@ -23,7 +23,7 @@ const MyStyle = {
     BoxDivStyle: { paddingTop: "1em" },
     LinkStyleLeft: { display: 'block', marginLeft: '.25em', float: 'left' },
     LinkStyleRight: { display: 'block', marginRight: '.25em', float: 'right' },
-    LogoStyle: { display: 'block', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2em', width: '30%' }
+    LogoStyle: { display: 'block', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2em',paddingBottom: '2em', width: '30%' }
 }
 
 const renderPassword = ({ input, label, meta: { touched, error, warning } }) => {
@@ -132,7 +132,7 @@ class LoginPage extends Component {
         return (
             <>
                 <HeaderProgressBar nameofbar={"loginBar"} />
-                <div className='p-grid p-dir-col'>
+                <div className='p-grid p-dir-col p-nogutter'>
                     <motion.div
                         initial={{ y: -250 }}
                         animate={{ y: 0 }}
@@ -147,9 +147,7 @@ class LoginPage extends Component {
                         className="p-col-12 p-md-3 p-lg-4 p-col-align-center">
                         <div className="box">
 
-                            <Panel
-
-                                header='Infomation Technology Support System'>
+                            <Panel header='Issue Tracker System'>
                                 <Messages ref={el => (this.messages = el)}></Messages>
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <Fieldset legend='Login Form'>

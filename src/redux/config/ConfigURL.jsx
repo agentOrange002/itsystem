@@ -6,6 +6,10 @@ export const loginURL = axios.create({
     baseURL: 'http://localhost:8080/itsystem'
 });
 
+export const addressURL = axios.create({
+    baseURL: `${urlBackEnd}/addresses`
+});
+
 export const authorityURL = axios.create({
     baseURL: `${urlBackEnd}/authorities`
 });

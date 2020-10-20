@@ -34,7 +34,7 @@ export const USERS = (state = UsersState, action) => {
     case USER_GET_BY_ID:
       return {
         ...state,
-        userssResponse: { [action.payload.userId]: action.payload },
+        userssResponse: { ...state.usersReponse, [action.payload.userId]: action.payload },
         fetchError: false,
         fetchErrorMessage: null
       };
@@ -48,7 +48,7 @@ export const USERS = (state = UsersState, action) => {
     case USER_UPDATE:
       return {
         ...state,
-        usersResponse: { [action.payload.userId]: action.payload },
+        usersResponse: {  ...state.usersReponse,[action.payload.userId]: action.payload },
         fetchError: false,
         fetchErrorMessage: null
 

@@ -28,6 +28,7 @@ const MyStyle = {
     dialogstyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     ticketdialogstyle: { width: '350px', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
+    breadcrumbBG:{background: '#191919'}
 }
 
 class IssueDetailsPage extends Component {
@@ -188,13 +189,12 @@ class IssueDetailsPage extends Component {
             <div className="p-grid p-fluid">
                 <div className="p-col-12" >
                     <div style={MyStyle.divPaddingTop}>
-                        <BreadCrumb model={this.state.breadcrumdItems} home={this.state.home} />
+                        <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
                     </div>
                     <div>
-                        <Menubar model={this.state.tieredItems} >
+                        <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} >
                             <Button label="Add Message" icon="pi pi-plus" onClick={this.addMessage}
-                                disabled={this.state.issueIDselected === null ? "disabled" : undefined} />
-
+                                disabled={this.state.issueIDselected === null ? true : false} />
                         </Menubar >
                     </div>
                     <div style={MyStyle.paddingTop}>

@@ -11,7 +11,8 @@ const urlparam = `${window.location.origin}/#/app/taskmaintenance/`;
 
 const MyStyle = {
     paddingB: {paddingBottom: '.5em'},
-    paddingT: {paddingTop: '.5em'} 
+    paddingT: {paddingTop: '.5em'},
+    breadcrumbBG:{background: '#191919'}
 }
 
 class TaskMaintenancePage extends Component {
@@ -42,10 +43,10 @@ class TaskMaintenancePage extends Component {
             <div className="p-grid p-fluid">
                 <div className="p-col-12" >
                     <div style={MyStyle.paddingB}>
-                        <BreadCrumb model={this.state.breadcrumdItems} home={this.state.home} />
+                        <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
                     </div>
                     <div>
-                        <Menubar model={this.state.tieredItems} /> 
+                        <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} /> 
                     </div>
                     <div style={MyStyle.paddingT}>
                         <Switch>

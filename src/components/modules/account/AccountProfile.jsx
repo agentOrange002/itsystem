@@ -9,12 +9,12 @@ import { FileUpload } from 'primereact/fileupload';
 import Resizer from "react-image-file-resizer";
 import { ProfileUpdate,LoginProfile } from '../../../redux/actions/LoginActions';
 import { submitUserImage,updateUserImage } from '../../../redux/actions/UsersActions';
-
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Fieldset } from 'primereact/fieldset';
+import { Dialog } from 'primereact/dialog';
+import AddAddressDialog from './AddAddressDialog';
 
-
-const MyStyle = {
+const MyStyle = {   
     Panel: { paddingBottom: '1em' },
     DivButton: { paddingTop: "10px", paddingBottom: "35px" },
     Button: { marginRight: ".25em", float: "right", width: '170px' },
@@ -23,17 +23,16 @@ const MyStyle = {
     h3: { textAlign: 'center' },
     width: { width: '170px' },
     fileupload: { display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '200px', paddingBottom: '1em' },
-    span: { textAlign: 'center', display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '200px', paddingBottom: '1em' }
+    span: { textAlign: 'center', display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '200px', paddingBottom: '1em' },
+    DialogStyle : {width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px'}
 }
 
 class AccountProfile extends Component {
-    constructor() {
-        super();
-        this.state = {
+  state = {
             profile: {},
             image: [],
-            profileimg: "assets/layout/images/profile.png"
-        };
+            profileimg: "assets/layout/images/profile.png" ,    
+            addressDialog: false
     }
 
     componentDidMount() {
@@ -42,7 +41,12 @@ class AccountProfile extends Component {
 
     onClickUpdateProfile = async (event) => {
         event.preventDefault();
-        await this.props.ProfileUpdate({ firstName: this.state.profile.firstName, lastName: this.state.profile.lastName });
+        await this.props.ProfileUpdate({ 
+            firstName: this.state.profile.firstName, 
+            middleName: this.state.profile.middleName, 
+            lastName: this.state.profile.lastName,
+            fullName: `${this.state.profile.firstName} ${this.state.profile.middleName} ${this.state.profile.lastName}`
+        });
     }
 
     updateImage = async (event) => {
@@ -58,36 +62,37 @@ class AccountProfile extends Component {
     }
 
     addAddress = async (event) => {
-        event.preventDefault();      
+        event.preventDefault();
+        this.setState({addressDialog: true});      
     }
-
-    renderProfile = () => {
+  
+    renderProfile = () => {          
         return (
             <>
                 <div className="p-fluid p-formgrid p-grid">
                     <div className="p-field p-col-12 p-md-6">
-                        <label htmlFor="userid">User ID</label>
+                        <label htmlFor="userid">User ID:</label>
                         <InputText id="userid" type="text" defaultValue={this.state.profile.userId} onChange={(e) => this.setState({ profile: { ...this.state.profile, userId: e.target.value } })} />
                     </div>
                     <div className="p-field p-col-12 p-md-6">
-                        <label htmlFor="email">E-mail Address</label>
+                        <label htmlFor="email">E-mail Address:</label>
                         <InputText id="email" type="email" defaultValue={this.state.profile.email} onChange={(e) => this.setState({ profile: { ...this.state.profile, email: e.target.value } })} />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
-                        <label htmlFor="firstname6">First Name</label>
+                        <label htmlFor="firstname6">First Name:</label>
                         <InputText id="firstname6" type="text" defaultValue={this.state.profile.firstName} onChange={(e) => this.setState({ profile: { ...this.state.profile, firstName: e.target.value } })} />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
-                        <label htmlFor="middlename6">Middle Name</label>
+                        <label htmlFor="middlename6">Middle Name:</label>
                         <InputText id="middlename6" type="text" defaultValue={this.state.profile.middleName} onChange={(e) => this.setState({ profile: { ...this.state.profile, middleName: e.target.value } })} />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
-                        <label htmlFor="lastname6">Last Name</label>
+                        <label htmlFor="lastname6">Last Name:</label>
                         <InputText id="lastname6" type="text" defaultValue={this.state.profile.lastName} onChange={(e) => this.setState({ profile: { ...this.state.profile, lastName: e.target.value } })} />
                     </div>
                     <div className="p-field p-col-12 p-md-12">
-                        <label htmlFor="fullname6">Full Name</label>
-                        <InputText id="fullname6" type="text" defaultValue={this.state.profile.fullName} onChange={(e) => this.setState({ profile: { ...this.state.profile, lastfullName: e.target.value } })} />
+                        <label htmlFor="fullname6">Full Name:</label>
+                        <InputText id="fullname6" type="text" value={this.state.profile.firstName+" "+this.state.profile.middleName+" "+this.state.profile.lastName} readOnly />
                     </div>
                 </div>
                 <div className='button' style={MyStyle.DivButton}>
@@ -219,11 +224,15 @@ class AccountProfile extends Component {
         );
     }
 
+    hideAddressDialog = () => {
+        this.setState({ addressDialog: false });
+    }
+
     render() {
         return (
             <div className="p-grid">
-                <div className="p-col-12">
-                    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
+                <div className="p-col-12">              
+                    <TabView style={{marginLeft:'0'}} activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
                         <TabPanel header="Profile" leftIcon='pi pi-fw pi-user'>
                             <Fieldset legend="Account Profile">
                                 {this.renderProfile()}
@@ -245,7 +254,14 @@ class AccountProfile extends Component {
                             </Fieldset>
                         </TabPanel>
                     </TabView>
-
+                    <Dialog
+                        header="Add New Address"
+                        visible={this.state.addressDialog}
+                        style={MyStyle.DialogStyle}
+                        modal={true}
+                        onHide={this.hideAddressDialog}>
+                        <AddAddressDialog hidethis={this.hideAddressDialog} />
+                    </Dialog>
                 </div>
             </div>
         );

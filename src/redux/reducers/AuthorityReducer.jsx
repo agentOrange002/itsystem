@@ -28,7 +28,7 @@ export const AUTHORITIES = (state = AuthoritiesState, action) => {
         case AUTHORITY_GET_ALL:
             return {
                 ...state,
-                authoritiesResponse: _.mapKeys(action.payload, 'authorityId'),
+                authoritiesResponse: _.mapKeys(action.payload, 'id'),
                 fetchError: false,
                 fetchErrorMessage: null
 
