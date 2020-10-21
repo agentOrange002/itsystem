@@ -256,8 +256,8 @@ class App extends Component {
             'layout-sidebar-light': this.state.layoutColorMode === 'light'
         });
 
-        return (       
-            <>  
+        return (    
+            <>                
             <div className={wrapperClass} onClick={this.onWrapperClick}>
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>

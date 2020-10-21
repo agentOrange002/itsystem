@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
-
+//import { Menu } from 'primereact/menu';
 import PropTypes from 'prop-types';
 
 import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
@@ -71,12 +71,8 @@ class AppTopbar extends Component {
 
     render() {
         return (
-            <>
-           
-            
+            <>        
             <div className="layout-topbar clearfix">      
-           
-
                 <ToastContainer position="top-right"
                     autoClose={5000}
                     hideProgressBar={false}
@@ -98,11 +94,11 @@ class AppTopbar extends Component {
                                 onClick={this.logout} />
                         </Menubar>
                     </span>
-                    {/* <span className="layout-topbar-search">
+                     {/* <span className="layout-topbar-search">
                        <InputText type="text" placeholder="Search " style={{width:'250px'}}/>
                         <span className="layout-topbar-search-icon pi pi-search"/>   
-                    </span>                     
-                    <Menu model={this.state.items} popup={true}  ref={el => this.menu=el} />
+                    </span>                      */}
+                    {/* <Menu model={this.state.items} popup={true}  ref={el => this.menu=el} />
                     <button className="p-link" onClick={(event)=>this.menu.show(event)}>
                         <span className="layout-topbar-item-text">Events</span>
                         <span className="layout-topbar-icon pi pi-calendar"/>
@@ -115,7 +111,7 @@ class AppTopbar extends Component {
                     <button className="p-link">
                         <span className="layout-topbar-item-text">User</span>
                         <span className="layout-topbar-icon pi pi-user"/>
-                    </button>  */}
+                    </button>   */}
                 </div>              
                 
                 <div style={MyStyle.paddingTop}>

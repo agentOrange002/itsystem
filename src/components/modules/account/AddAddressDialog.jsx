@@ -33,23 +33,23 @@ class AddAddressDialog extends Component {
         addressType: ''
     }
 
-    renderDropdown = ({ input, label, data, valueField, textField}) => {
+    renderDropdown = ({ input, label}) => {
         return (
             <div className='p-col-6 p-md-12' style={MyStyle.top}>
                 <Dropdown
                     id="dropdown"
                     {...input}
-                    optionLabel={textField}
+                    optionLabel="label"
                     tooltip={label}
                     tooltipOptions={{ position: 'top' }}
                     style={{ width: "100%" }}
-                    value={this.state.addressType}
-                    options={data}
+                    value={this.state.addressType}                 
+                    options={AddressType}                   
                     onChange={(e) => { this.setState({ addressType: e.value }) }}
                     placeholder="Select Address Type"
                 />
-            </div>
-        );
+            </div>               
+        );     
     }
 
     renderTextInput = ({ input, label, meta: { touched, error, warning } }) => {
@@ -86,7 +86,7 @@ class AddAddressDialog extends Component {
     onSubmit = async (formValues) => {
         await this.props.saveAddress({ ...formValues, type: this.state.addressType });
         await this.props.LoginProfile();
-        this.props.hidethis();       
+        this.props.hidethis();    
     }
 
     render() {
@@ -99,9 +99,8 @@ class AddAddressDialog extends Component {
                             <Field type="text" name="country" label="Country:" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                             <Field type="text" name="streetName" label="Street Name:" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                             <Field type="text" name="postalCode" label="Postal Code:" component={this.renderTextInput} validate={number} />
-                            <Field name="type" component={this.renderDropdown} data={AddressType}
-                                valueField="value"
-                                textField="label" />
+                            <Field name="type" component={this.renderDropdown} 
+                                />
                         </div>
                     </Fieldset>
                     <div className='button'

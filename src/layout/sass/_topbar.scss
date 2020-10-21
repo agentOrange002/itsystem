@@ -7,8 +7,8 @@
     right: 0;
     @include clearfix();
     @include linear-gradient-left($topbarLeftBgColor,$topbarRightBgColor);
-    @include transition(left $transitionDuration);
-
+    @include transition(left $transitionDuration);   
+   // width: 100vw;
     .layout-topbar-icons {
         float: right;
         display: block;
@@ -105,7 +105,10 @@
         }
     }
 
-    .layout-menu-button {
+    .layout-menu-button {    
+        // @media (min-width: 1024px) {
+        //     margin-left: 18em;
+        // }   
         cursor: pointer;
         display: inline-block;
         text-decoration: none;
