@@ -5,8 +5,12 @@ import {
 } from '../constants/AddressConstants';
 import { reset } from 'redux-form';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import {   
+    SaveAddressToastSuccess,
+    SaveAddressToastError,
+} from '../../components/toasts/addressToasts';
 
-export const saveAddress = (formValues) => async (dispatch, getState) => {
+export const saveAddress = (formValues) => async (dispatch, getState) => {    
     let id = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;   
     dispatch(showLoading('LOADINGBAR'));
@@ -22,10 +26,12 @@ export const saveAddress = (formValues) => async (dispatch, getState) => {
             dispatch(AddressSave(data));    
             dispatch(reset('addAddressForm'));
             dispatch(hideLoading('LOADINGBAR'));
+            dispatch(SaveAddressToastSuccess);
         })
         .catch(function (error) {
             dispatch(AddressError(error));    
             dispatch(hideLoading('LOADINGBAR'));
+            dispatch(SaveAddressToastError);
         })
 };
 

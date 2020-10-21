@@ -12,11 +12,14 @@ import { Dropdown } from 'primereact/dropdown';
 const MyStyle = {
     ButtonStyle: { paddingTop: "10px", paddingBottom: "35px" },
     Button: { marginRight: ".25em", float: "right", width: '150px' },
-    top: {paddingTop: "20px"}
+    top: { paddingTop: "20px" },
+    ttop: { position: 'top' },
+    twidth: { width: "100%" }
 }
 
 const AddressType = [
     { label: 'RESIDENCE', value: 'RESIDENCE' },
+    { label: 'HOME', value: 'HOME' },
     { label: 'CURRENT', value: 'CURRENT' },
 ];
 
@@ -28,28 +31,34 @@ const AddressType = [
 // "postalCode":"6130",		
 // "type":"RESIDENCE"
 
+
 class AddAddressDialog extends Component {
     state = {
         addressType: ''
     }
 
-    renderDropdown = ({ input, label}) => {
+    renderDropdown = ({ input, label, data, textField}) => {
         return (
             <div className='p-col-6 p-md-12' style={MyStyle.top}>
                 <Dropdown
-                    id="dropdown"
                     {...input}
-                    optionLabel="label"
+                    optionLabel={textField}
                     tooltip={label}
-                    tooltipOptions={{ position: 'top' }}
-                    style={{ width: "100%" }}
-                    value={this.state.addressType}                 
-                    options={AddressType}                   
-                    onChange={(e) => { this.setState({ addressType: e.value }) }}
+                    tooltipOptions={MyStyle.ttop}
+                    style={MyStyle.twidth}
+                    value={this.value}
+                    options={data}
+                    onChange={(e) => {
+                        this.value = e.value;
+                        input.onChange(input.value = e.value);
+                    }}
+                    onBlur={() => {
+                        input.onBlur(input.value);
+                    }}
                     placeholder="Select Address Type"
                 />
-            </div>               
-        );     
+            </div>
+        );
     }
 
     renderTextInput = ({ input, label, meta: { touched, error, warning } }) => {
@@ -58,9 +67,9 @@ class AddAddressDialog extends Component {
                 <span className="p-float-label">
                     <InputText id="textinput"
                         {...input}
-                        style={{ width: "100%" }}
+                        style={MyStyle.twidth}
                         tooltip={label}
-                        tooltipOptions={{ position: 'top' }}
+                        tooltipOptions={MyStyle.ttop}
                     />
                     <label htmlFor="textinput">{label}</label>
                 </span>
@@ -83,10 +92,10 @@ class AddAddressDialog extends Component {
         );
     }
 
-    onSubmit = async (formValues) => {
-        await this.props.saveAddress({ ...formValues, type: this.state.addressType });
-        await this.props.LoginProfile();
-        this.props.hidethis();    
+    onSubmit = async (formValues) => {      
+        await this.props.saveAddress(formValues);
+        await this.props.hidethis();
+        this.props.LoginProfile();
     }
 
     render() {
@@ -99,20 +108,19 @@ class AddAddressDialog extends Component {
                             <Field type="text" name="country" label="Country:" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                             <Field type="text" name="streetName" label="Street Name:" component={this.renderTextInput} validate={[minLength10, maxLength150]} />
                             <Field type="text" name="postalCode" label="Postal Code:" component={this.renderTextInput} validate={number} />
-                            <Field name="type" component={this.renderDropdown} 
-                                />
+                            <Field type="text" name="type" data={AddressType} valueField="value" textField="label" component={this.renderDropdown} />
                         </div>
                     </Fieldset>
-                    <div className='button'
-                        style={MyStyle.ButtonStyle}>
-                        <span>
-                            <Button
-                                icon='pi pi-save'
-                                label='Add Address'
-                                style={MyStyle.Button}
-                            />
-                        </span>
-                    </div>
+                        <div className='button'
+                            style={MyStyle.ButtonStyle}>
+                            <span>
+                                <Button
+                                    icon='pi pi-save'
+                                    label='Add Address'
+                                    style={MyStyle.Button}
+                                />
+                            </span>
+                        </div>
                 </form>
             </div>
         );
@@ -120,9 +128,9 @@ class AddAddressDialog extends Component {
 }
 
 const AddAddressForm = reduxForm({
-    form: 'addAddressForm'
+                    form: 'addAddressForm'
 })(AddAddressDialog);
 
-const mapDispatchToProps = { LoginProfile, saveAddress };
+const mapDispatchToProps = { LoginProfile, saveAddress};
 
 export default connect(null, mapDispatchToProps)(AddAddressForm);
