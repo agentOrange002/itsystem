@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
-import { Menubar } from 'primereact/menubar';
-import { Button } from 'primereact/button';
+import { Menu } from 'primereact/menu';
+//import { Button } from 'primereact/button';
 //import { Menu } from 'primereact/menu';
 import PropTypes from 'prop-types';
 
@@ -21,7 +21,8 @@ const MyStyle = {
         },
     width:{ width: '200px' },
     bc: { backgroundColor: '#191919' },
-    Button: { marginLeft: 4, backgroundColor: '#191919' }
+    Button: { marginLeft: 4, backgroundColor: '#191919' },
+    searchWidth:{width:'250px'}
 }
 
 class AppTopbar extends Component {
@@ -48,7 +49,8 @@ class AppTopbar extends Component {
                         },
                         {
                             label: 'Logout',
-                            icon: 'pi pi-fw pi-power-off'
+                            icon: 'pi pi-fw pi-power-off',
+                            command: ()=>{LogOut();}
                         }
                     ]
                 }
@@ -86,39 +88,30 @@ class AppTopbar extends Component {
                 <button className="p-link layout-menu-button" onClick={this.props.onToggleMenu}>
                     <span className="pi pi-bars" />
                 </button>
-                <div className="layout-topbar-icons" >
-                    <span className="layout-topbar-search">
-                        <Menubar model={this.state.items} style={MyStyle.bc}>
-                            <InputText style={MyStyle.width} placeholder="Search" type="text" />
-                            <Button label="Logout" icon="pi pi-power-off" style={MyStyle.Button}
-                                onClick={this.logout} />
-                        </Menubar>
-                    </span>
-                     {/* <span className="layout-topbar-search">
-                       <InputText type="text" placeholder="Search " style={{width:'250px'}}/>
+                <div className="layout-topbar-icons" >                
+                     <span className="layout-topbar-search">
+                       <InputText type="text" placeholder="Search " style={MyStyle.searchWidth}/>
                         <span className="layout-topbar-search-icon pi pi-search"/>   
-                    </span>                      */}
-                    {/* <Menu model={this.state.items} popup={true}  ref={el => this.menu=el} />
-                    <button className="p-link" onClick={(event)=>this.menu.show(event)}>
+                    </span>  
+                    <button className="p-link" >
                         <span className="layout-topbar-item-text">Events</span>
-                        <span className="layout-topbar-icon pi pi-calendar"/>
+                        <span className="layout-topbar-icon pi pi-calendar"/ >
                         <span className="layout-topbar-badge">5</span>
-                    </button>      
-                    <button className="p-link">
-                        <span className="layout-topbar-item-text">Settings</span>
-                        <span className="layout-topbar-icon pi pi-cog"/>
-                    </button>
+                    </button>                       
                     <button className="p-link">
                         <span className="layout-topbar-item-text">User</span>
                         <span className="layout-topbar-icon pi pi-user"/>
-                    </button>   */}
-                </div>              
-                
+                    </button>   
+                    <button className="p-link" onClick={(event)=>this.menu.show(event)}>
+                        <span className="layout-topbar-item-text">Settings</span>
+                        <span className="layout-topbar-icon pi pi-cog"/>
+                    </button>
+                </div>   
                 <div style={MyStyle.paddingTop}>
                     <HeaderProgressBar nameofbar={"LOADINGBAR"} />
-                </div>
-       
+                </div>               
             </div>
+            <Menu model={this.state.items} popup={true}  ref={el => this.menu=el}  />
             </>
         );   
     }

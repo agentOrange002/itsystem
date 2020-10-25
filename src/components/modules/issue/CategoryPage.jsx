@@ -10,7 +10,7 @@ import AddNewCategory from './AddNewCategory';
 import UILoader from '../tools/UILoader';
 
 const MyStyle = {
-    HeaderDiv: {width: '80px'},
+    HeaderDiv: {width: '100px'},
     HeaderButton: {float: 'left'},
     DialogStyle : {width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px'}
 }
@@ -32,9 +32,14 @@ class CategoryPage extends Component {
     
     showHeader = () => {
         return (
-            <div className="p-clearfix" style={MyStyle.HeaderDiv}>
-                <Button style={MyStyle.HeaderButton} label="Add" icon="pi pi-plus" onClick={this.addNew} />
-            </div>
+            // <div className="p-clearfix" s>
+               
+            // </div>
+             <div className="p-grid p-fluid">
+                <div className="p-col-12 p-md-6" style={MyStyle.HeaderDiv}>
+                    <Button style={MyStyle.HeaderButton} label="Add" icon="pi pi-plus" onClick={this.addNew} />
+                </div>            
+             </div>
         );
     }
 

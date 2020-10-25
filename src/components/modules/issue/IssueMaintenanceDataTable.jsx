@@ -210,24 +210,6 @@ class IssueMaintenanceDataTable extends Component {
         this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Please Select Issue First!' });
     }
 
-    header = () => {
-        return (
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-6" >
-                    <h1 style={MyStyle.h1Style1}>Issue Maintenance</h1>
-                </div>
-                <div className="p-col-12 p-md-6" >
-                    {/* <div style={MyStyle.ButtonStyle}>
-                        <Button label='No' ></Button> 
-                    </div>       */}
-                    {/* <div style={MyStyle.ButtonStyle}>
-                        <Button label='Add Task' icon='pi-plus' /> 
-                    </div>                    */}
-                </div>
-            </div>
-        );
-    }
-
     render() {
         const paginatorLeft = <Button icon="pi pi-refresh" onClick={this.refreshTable} />;
         return (
@@ -239,7 +221,7 @@ class IssueMaintenanceDataTable extends Component {
                         value={this.props.ISSUES}
                         scrollable={true}
                         selectionMode="single"
-                        header={this.header()}
+                        header="Issue Maintenance Data"
                         footer={this.displaySelection(this.state.selectedIssue)}
                         selection={this.state.selectedIssue}
                         // onSelectionChange={e => this.setState({selectedIssue: e.value})}

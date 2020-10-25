@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Messages} from 'primereact/messages';
-import {Growl} from 'primereact/growl';
+
 import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import {InputText} from 'primereact/inputtext';
@@ -16,38 +16,17 @@ export class MessagesDemo extends Component {
         this.showError = this.showError.bind(this);
     }
 
-    showSuccess() {
-        let msg = {severity: 'success', summary: 'Success Message', detail: 'Order submitted'};
-        this.growl.show(msg);
-        this.messages.show(msg);
-    }
-
-    showInfo() {
-        let msg = {severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'};
-        this.growl.show(msg);
-        this.messages.show(msg);
-    }
-
-    showWarn() {
-        let msg = {severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'};
-        this.growl.show(msg);
-        this.messages.show(msg);
-    }
-
-    showError() {
-        let msg = {severity: 'error', summary: 'Error Message', detail: 'Validation failed'};
-        this.growl.show(msg);
-        this.messages.show(msg);
-    }
+  
+    
     
     render() {
         return (
             <div className="p-grid">
                 <div className="p-col-12">
                     <div className="card">
-                        <h1>Messages and Growl</h1>
+                        
                         <Messages ref={(el) => this.messages = el} />
-                        <Growl ref={(el) => this.growl = el} style={{marginTop: '75px'}} />
+                      
             
                         <Button onClick={this.showInfo} label="Info" className="p-button-info" style={{width:'10em', marginRight:'.25em'}} />
                         <Button onClick={this.showSuccess} label="Success" className="p-button-success" style={{width:'10em', marginRight:'.25em'}} />

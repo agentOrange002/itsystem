@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const checkPageAccess = (path, permittedPages) => {  
   let isUserAuthorised = false;  
   let url = path.replace(/\//g, "");  
-  let allowedActions = [];
+  //let allowedActions = [];
   let allowedActionsName = [];
 
   // If permittedPages exists
@@ -38,7 +38,7 @@ const _ProtectedRoute = props => {
   return <Route
     {...rest}
     render={props =>
-      ((checkAccess.isUserAuthorised == false || typeof checkAccess.isUserAuthorised == 'undefined') &&  stateOfuser.loginSuccess )  ? 
+      ((checkAccess.isUserAuthorised === false || typeof checkAccess.isUserAuthorised === 'undefined') &&  stateOfuser.loginSuccess )  ? 
       (<Redirect to={{pathname: "/un-authorised"}}/>)  : 
       (<Component {...props} actions={checkAccess.allowedActionsName} />)
     }

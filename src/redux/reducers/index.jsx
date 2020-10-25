@@ -4,7 +4,8 @@ import { reducer as formReducer } from 'redux-form';
 //import storage from 'redux-persist/lib/storage';
 import storageSession from 'redux-persist/lib/storage/session';
 
-import createEncryptor from "redux-persist-transform-encrypt";
+//import createEncryptor from "redux-persist-transform-encrypt";
+import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { CookieStorage } from 'redux-persist-cookie-storage';
 import Cookies from 'cookies-js';
 
@@ -22,12 +23,18 @@ import { USERIMAGE } from './UserImageReducer';
 import { AUTHORITIES } from './AuthorityReducer';
 import { ADDRESSES } from './AddressReducer';
 
-const encryptor = createEncryptor({
-  secretKey: "mydirtylittlesecret",
-  onError(error) {
-    // Handle the error.    
-  },
-})
+// const encryptor = createEncryptor({
+//   secretKey: "mydirtylittlesecret",
+//   onError(error) {
+//     // Handle the error.    
+//   }});
+
+  const encryptor = encryptTransform({
+    secretKey: 'mydirtylittlesecret',
+    onError: function (error) {
+      // Handle the error.
+    },
+  });
 
 const cookieAuthPersistConfig = {
   key: "root-auth",
@@ -134,4 +141,4 @@ const rootReducer = combineReducers({
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 
-export default persistReducer(cookieAuthPersistConfig, rootReducer);
+export default persistReducer(cookieAuthPersistConfig,rootReducer);

@@ -22,7 +22,7 @@ class UserImagePage extends Component {
     }    
 
     onUpload = (event) => {
-        this.growl.show({ sticky:'true', severity: 'success', summary: 'Success', detail: 'File Uploaded'});
+       
     }
 
     setImageName = (event) => {

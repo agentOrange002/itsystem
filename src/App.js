@@ -23,7 +23,7 @@ import IssueDetailsPage from './components/modules/issue/IssueDetailsPage';
 import UserMaintenancePage from './components/modules/user/UserMaintenancePage';
 import history from "./routes/history";
 
-import DataTableDemo from './components/modules/public/Test';
+import Test from './components/modules/public/Test';
 import AccountProfile from './components/modules/account/AccountProfile';
 import TicketMaintenancePage from './components/modules/ticket/TicketMaintenancePage'
 import TaskMaintenancePage from './components/modules/task/TaskMaintenancePage';
@@ -285,7 +285,7 @@ class App extends Component {
                     <AuthorizedRoute path="/app/issuemaintenance" component={IssueMaintenancePage} checkName='IssueMaintenance'/>
                     <AuthorizedRoute path="/app/issuedetails" component={IssueDetailsPage} checkName='IssueDetails' />
                     <Route path="/app/usermaintenance" component={UserMaintenancePage}  />
-                    <Route path="/app/testdatatable" component={DataTableDemo} />
+                    <Route path="/app/testdatatable" component={Test} />
                     <Route path="/app/accountprofile" component={AccountProfile} />
                     <Route path="/app/ticketmaintenance" component={TicketMaintenancePage} />   
                     <Route path="/app/taskmaintenance" component={TaskMaintenancePage} /> 
