@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { LogOut } from './components/commands/Logout';
 
+import history from './routes/history';
+
 const MyStyle = {
     paddingTop: {       
         position:"fixed",
@@ -38,11 +40,12 @@ class AppTopbar extends Component {
                         {
                             label: 'User Profile',
                             icon: 'pi pi-fw pi-user',
-
+                            command: () => { history.push('/app/accountprofile'); }
                         },
                         {
                             label: 'Dashboard',
-                            icon: 'pi pi-fw pi-home'
+                            icon: 'pi pi-fw pi-home',
+                            command: () => { history.push('/app/'); }
                         },
                         {
                             separator: true

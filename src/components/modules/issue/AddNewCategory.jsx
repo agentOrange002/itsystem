@@ -9,7 +9,7 @@ import {maxLength150, minLength10} from '../../messages/errorFieldNotification';
 
 const MyStyle = {
     ButtonStyle: {paddingTop: "10px", paddingBottom: "35px"},
-    Button:{marginRight: ".25em", float: "right", width: '150px'}
+    Button:{marginRight: ".25em", float: "right", width: '170px'}
 }
 
 class AddNewCategory extends Component {

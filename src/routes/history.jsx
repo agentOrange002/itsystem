@@ -1,5 +1,5 @@
 import { createHashHistory } from 'history';
 
 export default createHashHistory({
-    basename: 'its'
+    basename: ''
 });

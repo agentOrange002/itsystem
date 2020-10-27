@@ -32,7 +32,7 @@ export const getAllCategories = () => async (dispatch, getState) => {
         .catch(function (error) {
             dispatch(CategoryError(error));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllCategoriesToastError);
+            dispatch(AllCategoriesToastError(error));            
         })
 };
 
@@ -52,9 +52,10 @@ export const saveCategory = (formValues) => async (dispatch, getState) => {
             dispatch(SaveCategoryToastSuccess);
         })
         .catch(function (error) {
+            let data = error.message;
             dispatch(CategoryError(error));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveCategoryToastError);
+            SaveCategoryToastError(data);     //invoke inside actions for error prompting      
         })
 };
 

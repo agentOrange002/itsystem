@@ -55,8 +55,8 @@ class Test extends Component {
             <div className='p-col-12 p-md-6 p-lg-6 p-col-align-center '>
               <div className='box'>
                 <iframe
-                  id="Report"
-                  title="Issue Report"
+                  title="Issue Report2"
+                  id="Report2"                
                   type="application/pdf"
                   src={`data:application/pdf;charset=utf-8;base64,${this.state.result}#toolbar=1`}
                   height='600px'
@@ -68,8 +68,8 @@ class Test extends Component {
             <div className='p-col-12 p-md-6 p-lg-6 p-col-align-center '>
               <div className='box'>
               <iframe
-                  id="Report"
-                  title="Issue Report"
+                title="Issue Report1" 
+                  id="Report1"                  
                   type="application/pdf"
                   src= {_.isEmpty(this.state.reportBlob) ? null :this.state.reportBlob }
                   height='600px'

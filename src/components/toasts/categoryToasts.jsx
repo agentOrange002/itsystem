@@ -20,11 +20,11 @@ const AllCategories = () => (
     </div>
 );
 
-const SaveCategoryError = () => (
+const SaveCategoryError = ({errorMessage}) => (   
     <div>
         <span>
-            <i className="pi pi-times" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
-            Error In Saving New Category.
+            <i className="pi pi-times" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>           
+            {JSON.stringify(errorMessage)}
         </span>
     </div>
 );
@@ -68,7 +68,7 @@ export const SaveCategoryToastSuccess = () => toast.success(<SaveCategory />, {
     progress: undefined,
 });
 
-export const SaveCategoryToastError = () => toast.error(<SaveCategoryError />, {
+export const SaveCategoryToastError = (errorMessage) => toast.error(<SaveCategoryError errorMessage={errorMessage}/>, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -77,3 +77,4 @@ export const SaveCategoryToastError = () => toast.error(<SaveCategoryError />, {
     draggable: true,
     progress: undefined,
 });
+
