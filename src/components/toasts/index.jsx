@@ -2,43 +2,43 @@ import React from 'react';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AllTasksError = () => (
+const Error = ({message}) => (
     <div>
         <span>
             <i className="pi pi-times" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
-            Loading All Tasks Has Failed.
+                {message}
         </span>
     </div>
 );
 
-const AllTasks = () => (
+const Success = ({message}) => (
     <div>
         <span>
             <i className="pi pi-desktop" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
-            All Tasks Has Been Loaded.
+                {message}
             </span>
     </div>
 );
 
-const SaveTaskError = () => (
-    <div>
-        <span>
-            <i className="pi pi-times" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
-            Error In Saving New Task.
-        </span>
-    </div>
-);
-
-const SaveTask = () => (
+const Info = ({message}) => (
     <div>
         <span>
             <i className="pi pi-desktop" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
-            The New Task Has Been Successfully Saved.
+                {message}
             </span>
     </div>
 );
 
-export const AllTasksToastInfo = () => toast.info(<AllTasks />, {
+const Dark = ({message}) => (
+    <div>
+        <span>
+            <i className="pi pi-desktop" style={{paddingLeft: '5px', paddingRight: '5px'}}></i>
+                {message}
+            </span>
+    </div>
+);
+
+export const ToastInfo = (message) => toast.info(<Info message={message} />, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -48,7 +48,7 @@ export const AllTasksToastInfo = () => toast.info(<AllTasks />, {
     progress: undefined,
 });
 
-export const AllTasksToastError = () => toast.error(<AllTasksError />, {
+export const ToastSuccess = (message) => toast.success(<Success message={message} />, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -58,7 +58,7 @@ export const AllTasksToastError = () => toast.error(<AllTasksError />, {
     progress: undefined,
 });
 
-export const SaveTaskToastSuccess = () => toast.success(<SaveTask />, {
+export const ToastError = (message) => toast.error(<Error message={message} />, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -68,7 +68,7 @@ export const SaveTaskToastSuccess = () => toast.success(<SaveTask />, {
     progress: undefined,
 });
 
-export const SaveTaskToastError = () => toast.error(<SaveTaskError />, {
+export const ToastDark = (message) => toast.dark(<Dark message={message}/>, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -77,3 +77,6 @@ export const SaveTaskToastError = () => toast.error(<SaveTaskError />, {
     draggable: true,
     progress: undefined,
 });
+
+
+

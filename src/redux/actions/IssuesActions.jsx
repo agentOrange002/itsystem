@@ -13,23 +13,8 @@ import {
 } from '../constants/IssuesConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { reset } from 'redux-form';
-import {
-    AllIssuesToastInfo,
-    AllIssuesToastError,
-    GetIssueToastSuccess,
-    GetIssueToastError,
-    SaveIssueToastSuccess,
-    SaveIssueToastError,
-    UpdateIssueToastSuccess,
-    UpdateIssueToastError,
-    DeleteIssueToastSuccess,
-    DeleteIssueToastError,
-    AssignSupportToastSuccess,
-    AssignSupportToastError,
-    OwnedThisIssueToastSuccess,
-    OwnedThisIssueToastError
-} from '../../components/toasts/issueToasts';
-//import history from "../../routes/history";
+import { ToastInfo,ToastSuccess,ToastError } from '../../components/toasts';
+import _ from 'lodash';
 
 export const getAllIssues = () => async (dispatch, getState) => {
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
@@ -46,12 +31,19 @@ export const getAllIssues = () => async (dispatch, getState) => {
             let data = response.data;
             dispatch(IssuesGetAll(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllIssuesToastInfo);
+            ToastInfo('Issues has been loaded.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllIssuesToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -69,13 +61,20 @@ export const getIssuesById = (id) => async (dispatch, getState) => {
             let data = response.data;
             dispatch(IssuesGetById(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(GetIssueToastSuccess);
+            ToastSuccess('Successfully get issue by id');
 
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(GetIssueToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -94,13 +93,21 @@ export const saveIssue = (formValues, userId) => async (dispatch, getState) => {
             console.log(response);
             dispatch(IssuesSave(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveIssueToastSuccess);
+           
             dispatch(reset('addNewIssue'));
+           ToastSuccess('Successfully save new issue.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveIssueToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -119,12 +126,19 @@ export const updateIssue = (formValues, id) => async (dispatch, getState) => {
             console.log(response);
             dispatch(IssuesUpdate(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(UpdateIssueToastSuccess);
+            ToastSuccess('Successfully update the issue.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(UpdateIssueToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -143,12 +157,19 @@ export const deleteIssue = (formValues, id) => async (dispatch, getState) => {
             console.log(response);
             dispatch(IssuesDelete(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(DeleteIssueToastSuccess);
+            ToastSuccess('Successfully delete the issue.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(DeleteIssueToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -165,12 +186,19 @@ export const assignedSupport = (values) => async (dispatch, getState) => {
             let data = response.data;           
             dispatch(IssuesAssignedSupport(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AssignSupportToastSuccess);
+            ToastSuccess('Successfully assigned a support to this issue.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AssignSupportToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -188,12 +216,19 @@ export const ownedThisIssue = (issueid, userId) => async (dispatch, getState) =>
             let data = response.data;          
             dispatch(IssuesOwnedThisIssue(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(OwnedThisIssueToastSuccess);
+            ToastSuccess('Successfully owned this issue.');
         })
         .catch(function (error) {
-            dispatch(IssuesError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssuesError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(OwnedThisIssueToastError);
+            ToastError(errorMessage);
         })
 };
 

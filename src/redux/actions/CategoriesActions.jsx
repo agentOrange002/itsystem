@@ -7,11 +7,9 @@ import {
 } from '../constants/CategoryConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import {
-    AllCategoriesToastInfo,
-    AllCategoriesToastError,
-    SaveCategoryToastSuccess,
-    SaveCategoryToastError,
-} from '../../components/toasts/categoryToasts';
+ToastInfo,ToastSuccess,ToastError
+} from '../../components/toasts';
+import _ from 'lodash';
 
 export const getAllCategories = () => async (dispatch, getState) => {
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
@@ -27,12 +25,20 @@ export const getAllCategories = () => async (dispatch, getState) => {
             let data = response.data;
             dispatch(CategoryGetAll(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllCategoriesToastInfo);
+            ToastInfo('All category has been loaded!');
         })
         .catch(function (error) {
-            dispatch(CategoryError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            
+            dispatch(CategoryError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllCategoriesToastError(error));            
+            ToastError(errorMessage);            
         })
 };
 
@@ -49,13 +55,33 @@ export const saveCategory = (formValues) => async (dispatch, getState) => {
             let data = response.data;
             dispatch(CategorySave(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveCategoryToastSuccess);
+           ToastSuccess('Successfully save new category!');
         })
         .catch(function (error) {
-            let data = error.message;
-            dispatch(CategoryError(error));
+            // let errorResponse = null;
+            // let errorMessage = null;
+         
+            // if(_.isEmpty(error.response)){
+            //     errorResponse = error;
+            //     errorMessage = error.message;               
+            // }
+            // else{
+            //     errorResponse = error.response.data;
+            //     errorMessage = error.response.data.message;
+                
+            // }
+           
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            
+            dispatch(CategoryError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            SaveCategoryToastError(data);     //invoke inside actions for error prompting      
+            ToastError(errorMessage);     //invoke inside actions for error prompting      
         })
 };
 

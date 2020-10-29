@@ -9,12 +9,8 @@ import {
     // TicketGetByID
 } from '../constants/TicketConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import {
-    AllTicketsToastInfo,
-    AllTicketsToastError,
-    SaveTicketToastSuccess,
-    SaveTicketToastError,
-} from '../../components/toasts/ticketToasts';
+import { ToastInfo,ToastSuccess,ToastError } from '../../components/toasts';
+import _ from 'lodash';
 
 export const getAllTickets = () => async (dispatch, getState) => {
     dispatch(showLoading('LOADINGBAR'));
@@ -31,12 +27,18 @@ export const getAllTickets = () => async (dispatch, getState) => {
             let data = response.data;
             dispatch(TicketGetAll(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTicketsToastInfo);
+            ToastInfo('All Ticket has been loaded.');
         })
         .catch(function (error) {
-            dispatch(TicketError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TicketError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTicketsToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -54,12 +56,19 @@ export const getAllTicketsByIssueId = (issueId) => async (dispatch, getState) =>
             let data = response.data;
             dispatch(TicketGetAllByIssueId(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTicketsToastInfo);
+            ToastInfo('All Ticket has been loaded.');
         })
         .catch(function (error) {
-            dispatch(TicketError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TicketError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTicketsToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -80,12 +89,18 @@ export const saveTicket = (issueid) => async (dispatch, getState) => {
             let data = response.data;
             dispatch(TicketSave(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveTicketToastSuccess);
+            ToastSuccess('Successfully save new ticket.');
         })
         .catch(function (error) {
-            dispatch(TicketError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TicketError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveTicketToastError);
+            ToastError(errorMessage);
         })
 };
 

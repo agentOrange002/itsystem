@@ -4,6 +4,7 @@ import {
     DashboardGetAll,
     DashboardLoading
 } from '../constants/DashboardConstants';
+import _ from 'lodash';
 
 export const getDashboard = () => async (dispatch, getState) => {
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
@@ -19,7 +20,14 @@ export const getDashboard = () => async (dispatch, getState) => {
             dispatch(DashboardGetAll(data));
         })
         .catch(function (error) {
-            dispatch(DashboardError(error));
+            let errorResponse = error;
+            //let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+               // errorMessage = error.response.data.message;
+            }
+            dispatch(DashboardError(errorResponse));
         })
 };
 

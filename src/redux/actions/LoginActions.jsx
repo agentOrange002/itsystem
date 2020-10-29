@@ -6,18 +6,12 @@ import {
   LoginProfileGet,
   LoginProfileError,
   LoginProfileUpdate,
-  LoginProfileLoading,
-  //LoginProfileReset
+  LoginProfileLoading,  
 } from "../constants/LoginConstants";
 import history from "../../routes/history";
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-
-import {
-  LoginToast,
-  ProfileToast,
-  ProfileUpdateToast,
-  ProfileErrorToast
-} from '../../components/toasts/loginToasts';
+import { ToastSuccess,ToastError, ToastInfo,ToastDark} from '../../components/toasts';
+import _ from 'lodash';
 
 export const LoginAuthentication = (formValues) => async dispatch => {
   dispatch(LoginLoading());
@@ -27,11 +21,17 @@ export const LoginAuthentication = (formValues) => async dispatch => {
       let data = response.headers;
       dispatch(LoginLogin(data));
       dispatch(hideLoading('loginBar'));
-      dispatch(LoginToast);
+      ToastDark('Welcome to Issue Tracker!');
       history.push("/app/");
     })
     .catch(function (error) {
-      dispatch(LoginError(error));
+      let errorResponse = error;   
+   
+      if(!_.isEmpty(error.response)){
+          errorResponse = error.response.data;
+         
+      }
+      dispatch(LoginError(errorResponse));
       dispatch(hideLoading('loginBar'));
     });
  
@@ -50,10 +50,15 @@ export const LoginProfile = () => async (dispatch, getState) => {
     .then(function (response) {
       let data = response.data;
       dispatch(LoginProfileGet(data));
-      dispatch(ProfileToast);
+      ToastInfo('Account Profile has been loaded.');
     })
     .catch(function (error) {
-      dispatch(LoginProfileError(error));
+      let errorResponse = error;   
+      if(!_.isEmpty(error.response)){
+          errorResponse = error.response.data;
+         
+      }
+      dispatch(LoginProfileError(errorResponse));
     });
 };
 
@@ -72,11 +77,18 @@ export const ProfileUpdate = (values) => async (dispatch, getState) => {
       let data = response.data;
       dispatch(LoginProfileUpdate(data));
       dispatch(hideLoading('LOADINGBAR'));
-      dispatch(ProfileUpdateToast);
+      ToastSuccess('Successfully update the profile');
     })
     .catch(function (error) {
-      dispatch(LoginProfileError(error));
+      let errorResponse = error;
+      let errorMessage = error.message;    
+   
+      if(!_.isEmpty(error.response)){
+          errorResponse = error.response.data;
+          errorMessage = error.response.data.message;
+      }
+      dispatch(LoginProfileError(errorResponse));
       dispatch(hideLoading('LOADINGBAR'));
-      dispatch(ProfileErrorToast);
+      ToastError(errorMessage);
     });
 };

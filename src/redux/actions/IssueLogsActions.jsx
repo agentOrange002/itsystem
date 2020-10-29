@@ -8,12 +8,8 @@ import {
 } from '../constants/IssueLogsConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { reset } from 'redux-form';
-import {
-    SaveIssueLogToastSuccess,
-    SaveIssueLogToastError,
-    GetIssueLogToastSuccess,
-    GetIssueLogToastError,
-} from '../../components/toasts/issuelogToasts';
+import { ToastInfo,ToastSuccess,ToastError } from '../../components/toasts';
+import _ from 'lodash';
 
 export const saveIssueLog = (formValues, issueId, userId) => async (dispatch, getState) => {
     let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
@@ -28,15 +24,22 @@ export const saveIssueLog = (formValues, issueId, userId) => async (dispatch, ge
         .then(function (response) {
             let data = response.data;
             dispatch(IssueLogsSave(data));
-            dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveIssueLogToastSuccess);
+            dispatch(hideLoading('LOADINGBAR'));            
             dispatch(reset('addNewIssueLog'));
+            ToastSuccess('Successfully save new log!');
 
         })
         .catch(function (error) {
-            dispatch(IssueLogsError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssueLogsError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveIssueLogToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -55,12 +58,19 @@ export const getIssueLogByIssueID = (issueId) => async (dispatch, getState) => {
             let data = response.data;
             dispatch(IssueLogsGetByIssueID(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(GetIssueLogToastSuccess);
+           ToastInfo('Issue log has been loaded.');
         })
         .catch(function (error) {
-            dispatch(IssueLogsError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(IssueLogsError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(GetIssueLogToastError);
+            ToastError(errorMessage);
         })
 };
 

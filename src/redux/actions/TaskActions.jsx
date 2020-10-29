@@ -10,13 +10,9 @@ import {
     // TaskGetByID
 } from '../constants/TaskConstants';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import {
-    AllTasksToastInfo,
-    AllTasksToastError,
-    SaveTaskToastSuccess,
-    SaveTaskToastError,
-} from '../../components/toasts/taskToasts';
+import { ToastInfo,ToastSuccess,ToastError } from '../../components/toasts';
 import { reset } from 'redux-form';
+import _ from 'lodash';
 
 export const getAllTasks = () => async (dispatch, getState) => {
     dispatch(showLoading('LOADINGBAR'));
@@ -33,12 +29,18 @@ export const getAllTasks = () => async (dispatch, getState) => {
             let data = response.data;
             dispatch(TaskGetAll(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastInfo);
+            ToastInfo('All Task has been loaded.');
         })
         .catch(function (error) {
-            dispatch(TaskError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TaskError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -56,12 +58,19 @@ export const getAllTasksByIssueId = (issueId) => async (dispatch, getState) => {
             let data = response.data;
             dispatch(TaskGetAllByIssueId(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastInfo);
+            ToastInfo('All Task has been loaded.');
         })
         .catch(function (error) {
-            dispatch(TaskError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TaskError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -80,12 +89,18 @@ export const getAllTasksByTicketId = (ticketid) => async (dispatch, getState) =>
             let data = response.data;
             dispatch(TaskGetAllByTicketId(data));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastInfo);
+            ToastInfo('All Task has been loaded.');
         })
         .catch(function (error) {
-            dispatch(TaskError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TaskError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(AllTasksToastError);
+            ToastError(errorMessage);
         })
 };
 
@@ -103,14 +118,21 @@ export const saveTask = (formValues, tid) => async (dispatch, getState) => {
         .then(function (response) {
             let data = response.data;
             dispatch(TaskSave(data));
-            dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveTaskToastSuccess);
+            dispatch(hideLoading('LOADINGBAR'));           
             dispatch(reset('addNewTask'));
+            ToastSuccess('Successfully save new task.');
         })
         .catch(function (error) {
-            dispatch(TaskError(error));
+            let errorResponse = error;
+            let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(TaskError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
-            dispatch(SaveTaskToastError);
+            ToastError(errorMessage);
         })
 };
 

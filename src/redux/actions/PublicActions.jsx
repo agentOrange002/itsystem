@@ -19,6 +19,7 @@ import {  UserImageGet,
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { PublicReportIssueToastError, PublicReportIssueToastSuccess } from '../../components/toasts/publicToasts';
 import { reset } from 'redux-form';
+//import _ from 'lodash';
 
 export const signupUser = (formValues) => async dispatch => {
     dispatch(UserSignupReset());

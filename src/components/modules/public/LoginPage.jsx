@@ -111,7 +111,7 @@ class LoginPage extends Component {
         this.messages.show({
             sticky: true,
             severity: "error",
-            summary: "Error Message",
+            summary: "Error Message :",
             detail: message
         });
     }

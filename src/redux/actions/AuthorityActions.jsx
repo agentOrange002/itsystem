@@ -4,6 +4,7 @@ import {
     AuthorityGetAll,   
     AuthorityLoading
 } from '../constants/AuthorityConstants';
+import _ from 'lodash';
 
 export const getAllAuthoritiesByUserId = () => async (dispatch, getState) => {
     let id = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.userid;
@@ -20,7 +21,14 @@ export const getAllAuthoritiesByUserId = () => async (dispatch, getState) => {
             dispatch(AuthorityGetAll(data));    
         })
         .catch(function (error) {
-            dispatch(AuthorityError(error));    
+            let errorResponse = error;
+           // let errorMessage = error.message;    
+         
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                //errorMessage = error.response.data.message;
+            }
+            dispatch(AuthorityError(errorResponse));    
         })
 };
 

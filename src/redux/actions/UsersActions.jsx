@@ -10,10 +10,8 @@ import {
     UserImageUpdate
 } from '../constants/UsersConstants';
 import {showLoading,hideLoading} from 'react-redux-loading-bar';
-import {
-    GetAllUsersToastSuccess,
-    GetAllUsersToastError,
-} from '../../components/toasts/userToasts';
+import { ToastError, ToastInfo } from '../../components/toasts';
+import _ from 'lodash';
 
 export const getUserByID = (id) => async (dispatch, getState) => {
     dispatch(UserLoading());
@@ -30,7 +28,11 @@ export const getUserByID = (id) => async (dispatch, getState) => {
             dispatch(UserGetByID(data));
         })
         .catch(function (error) {
-            dispatch(UserError(error));
+            let errorResponse = error;                 
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;               
+            }
+            dispatch(UserError(errorResponse));
         })
 };
 
@@ -46,11 +48,17 @@ export const getAllUsers = () => async (dispatch, getState) => {
         .then(function (response) {
             let data = response.data;
             dispatch(UserGetAll(data));
-            dispatch(GetAllUsersToastSuccess);
+            ToastInfo('All User has been loaded.');
         })
         .catch(function (error) {
-            dispatch(UserError(error));
-            dispatch(GetAllUsersToastError);
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
+            dispatch(UserError(errorResponse));
+            ToastError(errorMessage);
         })
 };
 
@@ -72,7 +80,11 @@ export const submitUserImage = (param) => async (dispatch,getState) => {
             dispatch(hideLoading('LOADINGBAR'));
         })
         .catch(function (error) {
-            dispatch(UserImageError(error));
+            let errorResponse = error;       
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+            }
+            dispatch(UserImageError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
         })
 };
@@ -95,7 +107,11 @@ export const updateUserImage = (param) => async (dispatch,getState) => {
             dispatch(hideLoading('LOADINGBAR'));
         })
         .catch(function (error) {
-            dispatch(UserImageError(error));
+            let errorResponse = error;    
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+            }
+            dispatch(UserImageError(errorResponse));
             dispatch(hideLoading('LOADINGBAR'));
         })
 };
