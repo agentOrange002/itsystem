@@ -13,7 +13,7 @@ const MyStyle = {
     width: {width: "100%"},
     position: {position: 'top'},
     DivButton:{paddingTop: "10px", paddingBottom: "35px"} ,
-    Button:{marginRight: ".25em", float: "right", width: '150px'},
+    Button:{marginRight: ".25em", float: "right", width: '160px'},
 }
 
 class IssueLogMessage extends Component {

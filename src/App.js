@@ -29,6 +29,8 @@ import TicketMaintenancePage from './components/modules/ticket/TicketMaintenance
 import TaskMaintenancePage from './components/modules/task/TaskMaintenancePage';
 import SupportDashboard from './components/modules/dashboard';
 
+import MyDocuments from './components/modules/mydocuments';
+
 import AuthorizedRoute from './routes/AuthorizedRoute';
 import UnauthorizedPage from './components/modules/error/UnauthorizedPage';
 import NotFoundPage from './components/modules/error/NotFoundPage';
@@ -121,10 +123,10 @@ class App extends Component {
             //     ]
             // },
             {
-                label: 'My Documents', 
+                label: 'User Files', 
                 icon: 'pi pi-fw pi-folder', 
                 items:  [
-                    {label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'},
+                    {label: 'My Documents', icon: 'pi pi-fw pi-file', to: '/app/mydocuments'},
                     {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
 					{label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'},
                 ]
@@ -289,6 +291,7 @@ class App extends Component {
                     <Route path="/app/accountprofile" component={AccountProfile} />
                     <Route path="/app/ticketmaintenance" component={TicketMaintenancePage} />   
                     <Route path="/app/taskmaintenance" component={TaskMaintenancePage} /> 
+                    <Route path="/app/mydocuments" component={MyDocuments} />
                     <Route path="/app/unauthorized401" component={UnauthorizedPage} />     
                     <Route path="/app/notfound" component={NotFoundPage} />   
                     <Redirect from="/app/*" to="/app/notfound" />               

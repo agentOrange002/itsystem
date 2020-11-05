@@ -192,10 +192,12 @@ class IssueDetailsPage extends Component {
                         <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
                     </div>
                     <div>
-                        <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} >
-                            <Button label="Add Message" icon="pi pi-plus" onClick={this.addMessage}
-                                disabled={this.state.issueIDselected === null ? true : false} />
-                        </Menubar >
+                        <Menubar
+                            style={MyStyle.breadcrumbBG} 
+                            model={this.state.tieredItems} 
+                            //  start={<InputText placeholder="Search" type="text"/>}
+                            end={<Button label="Add Message" icon="pi pi-plus" onClick={this.addMessage} disabled={this.state.issueIDselected === null ? true : false} /> }
+                        />
                     </div>
                     <div style={MyStyle.paddingTop}>
                         <Messages ref={(el) => this.messages = el}></Messages>

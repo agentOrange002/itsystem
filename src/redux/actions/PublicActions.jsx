@@ -17,9 +17,9 @@ import {  UserImageGet,
     UserImageReset, } from '../constants/UsersConstants';
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import { PublicReportIssueToastError, PublicReportIssueToastSuccess } from '../../components/toasts/publicToasts';
+import { ToastError,ToastSuccess } from '../../components/toasts';
 import { reset } from 'redux-form';
-//import _ from 'lodash';
+import _ from 'lodash';
 
 export const signupUser = (formValues) => async dispatch => {
     dispatch(UserSignupReset());
@@ -62,14 +62,20 @@ export const submitReportIssue = (formValues) => async dispatch => {
         .then(function (response) {
             let data = response.data;
             dispatch(ReportIssueSubmit(data));
-            dispatch(hideLoading('reportissueBar'));
-            dispatch(PublicReportIssueToastSuccess);
+            dispatch(hideLoading('reportissueBar'));           
             dispatch(reset('reportIssue'));
+            ToastSuccess("Successfully submit the report issue!");
         })
-        .catch(function (error) {
-            dispatch(ReportIssueError(error));
+        .catch(function (error) {      
+            let errorResponse = error;
+            let errorMessage = error.message;             
+            if(!_.isEmpty(error.response)){
+                errorResponse = error.response.data;
+                errorMessage = error.response.data.message;
+            }
             dispatch(hideLoading('reportissueBar'));
-            dispatch(PublicReportIssueToastError);
+            dispatch(ReportIssueError(errorResponse));
+            ToastError(errorMessage);
         })
 };
 
