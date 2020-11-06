@@ -3,6 +3,7 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import history from "../../../routes/history";
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
+import MyIssuesPage from './MyIssuesPage';
 
 const MyStyle = {
     divPaddingTop: { paddingBottom: '.5em' },
@@ -16,6 +17,8 @@ const MyStyle = {
     breadcrumbBG:{background: '#191919'}
 }
 
+const urlparam = `${window.location.origin}/#/app/mydocuments/`;
+
 class MyDocuments extends Component {
     state = {
         breadcrumdItems: [
@@ -28,19 +31,19 @@ class MyDocuments extends Component {
 
         tieredItems: [
             {
-                label: 'Find Issue',
-                icon: 'pi pi-fw pi-search',
-                command: () => this.setState({ visible: true })
+                label: 'Issues',
+                icon: 'pi pi-fw pi-folder',
+                // command: () => { }
             },
             {
-                label: 'Print',
-                icon: 'pi pi-fw pi-print',
-                command: () => { this.printIssue(); }
+                label: 'Tickets',
+                icon: 'pi pi-fw pi-folder',
+                // command: () => { }
             },
             {
-                label: 'Create Ticket',
-                icon: 'pi pi-fw pi-plus',
-                command: (event) => this.createTicket()
+                label: 'Tasks',
+                icon: 'pi pi-fw pi-folder',
+                // command: () => { }
             },
 
         ]
@@ -61,7 +64,7 @@ class MyDocuments extends Component {
                         </div>
                         <div>
                             <Switch>                           
-                                <Route path="/app/mydocuments/" exact component={IssueMaintenanceDataTable} />                               
+                                <Route path="/app/mydocuments/" exact component={MyIssuesPage} />                               
                                 <Redirect from="/app/mydocuments/**" to="/app/notfound" />                             
                             </Switch>
                         </div>                        
