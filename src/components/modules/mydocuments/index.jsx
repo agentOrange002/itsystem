@@ -4,26 +4,25 @@ import history from "../../../routes/history";
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import MyIssuesPage from './MyIssuesPage';
+import {Route,Switch,Redirect} from 'react-router-dom';
 
-const MyStyle = {
-    divPaddingTop: { paddingBottom: '.5em' },
-    paddingTop: { paddingTop: '.5em' },
-    divTopPx: { paddingTop: "20px" },
-    width: { width: "100%" },
-    tooltip: { position: 'top' },
-    dialogstyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
-    shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
-    ticketdialogstyle: { width: '350px', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
+const MyStyle = { 
+    paddingB : {
+        paddingBottom: '.5em'
+    } ,
+    paddingT : {
+        paddingTop: '.5em'
+    } ,
     breadcrumbBG:{background: '#191919'}
 }
+
 
 const urlparam = `${window.location.origin}/#/app/mydocuments/`;
 
 class MyDocuments extends Component {
     state = {
         breadcrumdItems: [
-            { label: 'My Documents' },
-            { label: 'User' },
+            { label: 'My Documents',url: `${urlparam}`},            
         ],
         home: {
             icon: 'pi pi-home', command: () => { history.push('/app/'); }
@@ -32,17 +31,17 @@ class MyDocuments extends Component {
         tieredItems: [
             {
                 label: 'Issues',
-                icon: 'pi pi-fw pi-folder',
+                icon: 'pi pi-fw pi-file',
                 // command: () => { }
             },
             {
                 label: 'Tickets',
-                icon: 'pi pi-fw pi-folder',
+                icon: 'pi pi-fw pi-file',
                 // command: () => { }
             },
             {
                 label: 'Tasks',
-                icon: 'pi pi-fw pi-folder',
+                icon: 'pi pi-fw pi-file',
                 // command: () => { }
             },
 
@@ -53,7 +52,7 @@ class MyDocuments extends Component {
             <>
               <div className="p-grid p-fluid">
                     <div className="p-col-12" >
-                        <div style={MyStyle.divPaddingTop}>
+                        <div style={MyStyle.paddingB}>
                             <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
                         </div>
                         <div>
@@ -62,7 +61,7 @@ class MyDocuments extends Component {
                                     disabled/>
                             </Menubar >
                         </div>
-                        <div>
+                        <div style={MyStyle.paddingT}>
                             <Switch>                           
                                 <Route path="/app/mydocuments/" exact component={MyIssuesPage} />                               
                                 <Redirect from="/app/mydocuments/**" to="/app/notfound" />                             

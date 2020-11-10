@@ -123,13 +123,9 @@ class App extends Component {
             //     ]
             // },
             {
-                label: 'User Files', 
+                label: 'My Documents', 
                 icon: 'pi pi-fw pi-folder', 
-                items:  [
-                    {label: 'My Documents', icon: 'pi pi-fw pi-file', to: '/app/mydocuments'},
-                    {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
-					{label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'},
-                ]
+                command: () => {history.push('/app/mydocuments');}
             },   
             {
                 label: 'Maintenance', icon: 'pi pi-fw pi-cog', 

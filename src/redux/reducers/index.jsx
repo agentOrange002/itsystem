@@ -22,6 +22,7 @@ import { DASHBOARD } from './DashboardReducer';
 import { USERIMAGE } from './UserImageReducer';
 import { AUTHORITIES } from './AuthorityReducer';
 import { ADDRESSES } from './AddressReducer';
+import { MYDOCUMENTS } from './MyDocumentReducer';
 
 // const encryptor = createEncryptor({
 //   secretKey: "mydirtylittlesecret",
@@ -124,6 +125,13 @@ const addressPC = {
   transforms: [encryptor],
 }
 
+const mdPC = {
+  key: 'mydocuments',
+  storage: storageSession,
+  blacklist: ['MYDOCUMENTS'],
+  transforms: [encryptor],
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
   loadingBar: loadingBarReducer,
@@ -138,6 +146,7 @@ const rootReducer = combineReducers({
   USERIMAGE: persistReducer(userimagePC, USERIMAGE),
   AUTHORITIES: persistReducer(authorityPC, AUTHORITIES),
   ADDRESSES: persistReducer(addressPC, ADDRESSES),
+  MYDOCUMENTS: persistReducer(mdPC, MYDOCUMENTS),
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 
