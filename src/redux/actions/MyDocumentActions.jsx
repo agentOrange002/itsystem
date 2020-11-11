@@ -1,4 +1,4 @@
-import {issueURL as apiURL} from '../config/ConfigURL';
+import {documentURL as apiURL} from '../config/ConfigURL';
 import {
     MyDocumentError,
     MyDocumentGetAll,  
@@ -15,7 +15,7 @@ export const getIssueDocuments = () => async (dispatch, getState) => {
     let email = getState().LOGIN_PROFILE.profileState.profileResponse.email;  
     dispatch(MyDocumentLoading());
     dispatch(showLoading('LOADINGBAR'));
-    await apiURL.get(`/mydocuments/user?email=${email}`,{      
+    await apiURL.get(`/issues?email=${email}`,{      
         headers: {            
             'Accept': 'application/json',
             'Authorization': token,

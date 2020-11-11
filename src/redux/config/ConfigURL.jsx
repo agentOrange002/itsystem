@@ -50,6 +50,9 @@ export const userURL = axios.create({
     baseURL: `${urlBackEnd}/users`
 });
 
+export const documentURL = axios.create({
+    baseURL: `${urlBackEnd}/documents`
+});
 
 
 
