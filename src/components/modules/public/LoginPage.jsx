@@ -102,8 +102,8 @@ class LoginPage extends Component {
         this.messages.show({
             sticky: false,
             severity: 'info',
-            summary: 'Welcome to ITS System',
-            detail: 'Login Page!'
+            summary: 'Welcome to ITS',
+            detail: '_Login Page!'
         });
     }
 
@@ -147,7 +147,7 @@ class LoginPage extends Component {
                         className="p-col-12 p-md-3 p-lg-4 p-col-align-center">
                         <div className="box">
 
-                            <Panel header='Issue Tracker System'>
+                            <Panel header='Issue Tracking System'>
                                 <Messages ref={el => (this.messages = el)}></Messages>
                                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <Fieldset legend='Login Form'>

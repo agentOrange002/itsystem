@@ -33,9 +33,8 @@ class TaskMaintenanceDatatable extends Component {
     async componentDidMount(){
         if(_.isEmpty(this.props.TASKS))
         {
-            // await this.props.getAllTasks();
-        }
-        
+            await this.props.getAllTasks();
+        }        
     }
 
     viewTask(task) {
@@ -101,7 +100,7 @@ class TaskMaintenanceDatatable extends Component {
                     onContextMenu={e => this.cm.show(e.originalEvent)}
                 >
 
-                    <Column field="id" header="ID" style={{ width: '100px' }} />
+                    <Column field="id" header="ID" style={{ width: '150px' }} />
                     <Column field="taskId" header="Ticket ID" style={{ width: '150px' }} />
                     <Column field="dateOpened" header="Date Opened" style={{ width: '200px' }} />
                     <Column field="dateClosed" header="Date Closed" style={{ width: '200px' }} />

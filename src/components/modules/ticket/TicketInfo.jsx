@@ -22,15 +22,16 @@ const MyStyle = {
     h1Style: { textAlign: "left" },
     paddingTop: { paddingTop: '0px' },
     ShortDialogStyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
-    columnId:{ width: '100px' },
+    columnId:{ width: '150px' },
     columnTaskId:{width: '150px' },
     columnDO:{width: '200px' },
     columnDC:{width: '200px' },
     fieldDivButton:{ paddingTop: "10px", paddingBottom: "35px" },
-    fieldButton: { marginRight: ".25em", float: "right", width: '120px' },
+    fieldButton: { marginRight: ".25em", float: "right", width: '130px' },
     divform: {paddingTop: "20px"},
     divfield: { width: "100%" },
-    tooltipField: { position: 'top' }
+    tooltipField: { position: 'top' },
+    fieldset: {marginBottom: '10px'}
 }
 
 class TicketInfo extends Component {
@@ -180,7 +181,7 @@ class TicketInfo extends Component {
             <div className="p-grid p-fluid">
                 <div className="p-col-12" >
                     <Panel header="Ticket Information" toggleable={true}>
-                        <Fieldset legend='Ticket'>
+                        <Fieldset legend='Ticket' style={MyStyle.fieldset}>
                             <div className="p-fluid p-formgrid p-grid">
                                 <div className="p-field p-col-12 p-md-6 p-lg-3">
                                     <label htmlFor="id">ID</label>
@@ -200,9 +201,9 @@ class TicketInfo extends Component {
                                 </div>
                             </div>
                         </Fieldset>
-                        <Fieldset legend='Issue'>
-                            <div className="p-fluid p-formgrid p-grid">
-                                <div className="p-field p-col-12 p-md-6 p-lg-3">
+                        <Fieldset legend='Issue' >
+                            <div className="p-fluid p-formgrid p-grid" >
+                                <div className="p-field p-col-12 p-md-6 p-lg-3" >
                                     <label htmlFor="issueid">Issue ID</label>
                                     <InputText id="issueid" type="text" defaultValue={this.props.TICKET.issueTickets.id} readOnly />
                                 </div>
@@ -247,7 +248,7 @@ class TicketInfo extends Component {
                         header={this.header()}
                         footer={this.displaySelection(this.state.selectedTicket)}
                         selection={this.state.selectedTicket}
-                        onSelectionChange={e => { this.setState({ selectedTicket: e.value }); }}
+                        onSelectionChange={e => { this.setState({ selectedTask: e.value }); }}
                         paginator={true}
                         paginatorLeft={paginatorLeft}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -258,11 +259,12 @@ class TicketInfo extends Component {
                         onContextMenu={e => this.cm.show(e.originalEvent)}
                     >
 
-                        <Column field="id" header="ID" style={MyStyle.columnId} />
-                        <Column field="taskId" header="Task ID" style={MyStyle.columnTaskId} />
-                        <Column field="dateOpened" header="Date Opened" style={MyStyle.columnDO} />
-                        <Column field="dateClosed" header="Date Closed" style={MyStyle.columnDC} />
-
+                        <Column field="id" header="ID" style={{width:'150px'}} />
+                        <Column field="taskId" header="Task ID" style={{width:'250px'}} />
+                        <Column field="subject" header="Subject" style={{width:'350px'}} />
+                        <Column field="description" header="Description" style={{width:'650px'}} />
+                        <Column field="dateOpened" header="Date Opened" style={{width:'250px'}} />
+                        <Column field="dateClosed" header="Date Closed" style={{width:'250px'}} />
                     </DataTable>
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                         <Dialog

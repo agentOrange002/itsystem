@@ -11,9 +11,9 @@ ToastInfo,ToastError
 import _ from 'lodash';
 
 export const getIssueDocuments = () => async (dispatch, getState) => {
-    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
-    let email = getState().LOGIN_PROFILE.profileState.profileResponse.email;  
     dispatch(MyDocumentLoading());
+    let token = getState().LOGIN_AUTHENTICATION.loginState.loginResponse.authorization;
+    let email = getState().LOGIN_PROFILE.profileState.profileResponse.email;   
     dispatch(showLoading('LOADINGBAR'));
     await apiURL.get(`/issues?email=${email}`,{      
         headers: {            
