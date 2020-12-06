@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import history from "../../../routes/history";
-import { Menubar } from 'primereact/menubar';
-import { Button } from 'primereact/button';
+//import { Menubar } from 'primereact/menubar';
+//import { Button } from 'primereact/button';
 import MyIssuesPage from './MyIssuesPage';
 import {Route,Switch,Redirect} from 'react-router-dom';
 
 const MyStyle = { 
-    paddingB : {
-        paddingBottom: '.5em'
-    } ,
-    paddingT : {
-        paddingTop: '.5em'
-    } ,
-    breadcrumbBG:{background: '#191919'}
+    breadcrumbBG:{
+        background: '#000066'}//'#191919'
 }
 
 
@@ -49,26 +44,27 @@ class MyDocuments extends Component {
     }
     render() {
         return (
-            <>
+            <>          
+            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
+            <div className='layout-main-inside'>
               <div className="p-grid p-fluid">
                     <div className="p-col-12" >
-                        <div style={MyStyle.paddingB}>
-                            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
-                        </div>
-                        <div>
+                      
+                        {/* <div>
                             <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} >
                                 <Button label="Add Message" icon="pi pi-plus" 
                                     disabled/>
                             </Menubar >
-                        </div>
-                        <div style={MyStyle.paddingT}>
+                        </div> */}
+                       
                             <Switch>                           
                                 <Route path="/app/mydocuments/" exact component={MyIssuesPage} />                               
                                 <Redirect from="/app/mydocuments/**" to="/app/notfound" />                             
                             </Switch>
-                        </div>                        
+                                            
                     </div>
                 </div>
+            </div>
             </>
         );
     }

@@ -5,7 +5,7 @@ import { Menu } from 'primereact/menu';
 //import { Menu } from 'primereact/menu';
 import PropTypes from 'prop-types';
 
-import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
+//import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -110,9 +110,9 @@ class AppTopbar extends Component {
                         <span className="layout-topbar-icon pi pi-cog"/>
                     </button>
                 </div>   
-                <div style={MyStyle.paddingTop}>
+                {/* <div style={MyStyle.paddingTop}>
                     <HeaderProgressBar nameofbar={"LOADINGBAR"} />
-                </div>               
+                </div>                */}
             </div>
             <Menu model={this.state.items} popup={true}  ref={el => this.menu=el}  />
             </>

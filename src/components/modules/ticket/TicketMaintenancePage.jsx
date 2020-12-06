@@ -9,10 +9,10 @@ import AuthorizedRoute from '../../../routes/AuthorizedRoute';
 
 const urlparam = `${window.location.origin}/#/app/ticketmaintenance/`;
 
-const MyStyle = {
-    paddingB: {paddingBottom: '.5em'},
+const MyStyle = {   
     paddingT: {paddingTop: '.5em'},
-    breadcrumbBG:{background: '#191919'}
+    breadcrumbBG:{background: '#000066'},
+    menubar:{background:'#191919'}
 }
 
 class TicketMaintenancePage extends Component {
@@ -53,14 +53,12 @@ class TicketMaintenancePage extends Component {
      }
     render() { 
         return ( 
+            <>            
+            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
+            <div className='layout-main-inside'>
             <div className="p-grid p-fluid">
-                <div className="p-col-12" >
-                    <div style={MyStyle.paddingB}>
-                        <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
-                    </div>
-                    <div>
-                        <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} />
-                    </div>
+                <div className="p-col-12" >  
+                    <Menubar style={MyStyle.menubar} model={this.state.tieredItems} />
                     <div style={MyStyle.paddingT}>                        
                         <Switch>
                             <AuthorizedRoute path="/app/ticketmaintenance/" exact component={TicketMaintenanceDatatable} checkName='TicketMaintenance'/>
@@ -69,7 +67,9 @@ class TicketMaintenancePage extends Component {
                         </Switch>
                     </div>
                 </div>
-            </div>            
+            </div>      
+            </div>   
+            </>   
          );
     }
 }

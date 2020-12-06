@@ -12,7 +12,8 @@ const urlparam = `${window.location.origin}/#/app/taskmaintenance/`;
 const MyStyle = {
     paddingB: {paddingBottom: '.5em'},
     paddingT: {paddingTop: '.5em'},
-    breadcrumbBG:{background: '#191919'}
+    breadcrumbBG:{background: '#000066'},
+    menubar:{background:'#191919'}
 }
 
 class TaskMaintenancePage extends Component {
@@ -40,14 +41,12 @@ class TaskMaintenancePage extends Component {
      }
     render() { 
         return ( 
+            <>
+            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
+            <div className='layout-main-inside'>           
             <div className="p-grid p-fluid">
-                <div className="p-col-12" >
-                    <div style={MyStyle.paddingB}>
-                        <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
-                    </div>
-                    <div>
-                        <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} /> 
-                    </div>
+                <div className="p-col-12" >                 
+                    <Menubar style={MyStyle.menubar} model={this.state.tieredItems} /> 
                     <div style={MyStyle.paddingT}>
                         <Switch>
                             <AuthorizedRoute path="/app/taskmaintenance/" exact component={TaskMaintenanceDatatable} checkName='TaskMaintenance'/>
@@ -56,7 +55,9 @@ class TaskMaintenancePage extends Component {
                         </Switch>
                     </div>
                 </div>
-            </div>            
+            </div>      
+            </div>    
+            </>  
          );
     }
 }

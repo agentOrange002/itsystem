@@ -31,9 +31,10 @@ import SupportDashboard from './components/modules/dashboard';
 
 import MyDocuments from './components/modules/mydocuments';
 
-import AuthorizedRoute from './routes/AuthorizedRoute';
+import AuthorizedRoute from './routes/AuthorizedRoute';                 
 import UnauthorizedPage from './components/modules/error/UnauthorizedPage';
-import NotFoundPage from './components/modules/error/NotFoundPage';
+import NotFoundPage from './components/modules/error/NotFoundPage';      
+import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
 
 class App extends Component {
 
@@ -258,14 +259,19 @@ class App extends Component {
             <>                
             <div className={wrapperClass} onClick={this.onWrapperClick}>
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
+                 
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
                     <div className="layout-logo">
                         <img alt="Logo" src={logo} />
                     </div>
+                  
                     <AppProfile />
                     <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
+                    
                 </div>
-                <div className="layout-main">               
+              
+                <div className="layout-main">          
+                <HeaderProgressBar nameofbar={"LOADINGBAR"} />
                 <Switch>
                     <AuthorizedRoute path="/app/" exact component={SupportDashboard} checkName='Dashboard'/>
                     {/* <Route path="/app/supportdashboard" component={SupportDashboard} /> */}

@@ -7,7 +7,7 @@ export const loginURL = axios.create({
 });
 
 export const addressURL = axios.create({
-    baseURL: `${urlBackEnd}/addresses`
+    baseURL: `${urlBackEnd}/useraddresses`
 });
 
 export const authorityURL = axios.create({
@@ -15,7 +15,7 @@ export const authorityURL = axios.create({
 });
 
 export const categoryURL = axios.create({
-    baseURL: `${urlBackEnd}/category`
+    baseURL: `${urlBackEnd}/issuecategories`
 });
 
 export const dashboardURL = axios.create({
@@ -23,7 +23,7 @@ export const dashboardURL = axios.create({
 });
 
 export const issuelogURL = axios.create({
-    baseURL: `${urlBackEnd}/issuelog`
+    baseURL: `${urlBackEnd}/issuelogs`
 });
 
 export const issueURL = axios.create({
@@ -51,7 +51,7 @@ export const userURL = axios.create({
 });
 
 export const documentURL = axios.create({
-    baseURL: `${urlBackEnd}/documents`
+    baseURL: `${urlBackEnd}/userdocuments`
 });
 
 

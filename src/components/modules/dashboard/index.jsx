@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import SupportDashboard from './SupportDashboard';
-// import UserDashboard from './UserDashboard';
 
-class Dashboard extends Component {
-    state = {  }
+class Dashboard extends Component {  
+
     render() { 
         return ( 
+          <div className='layout-main-inside'>
             <div className="p-grid p-fluid dashboard">
                 <SupportDashboard />
               {/* //  <UserDashboard />         */}
             </div>
+        </div>
         );
     }
 }

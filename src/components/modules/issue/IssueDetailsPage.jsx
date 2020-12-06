@@ -28,7 +28,8 @@ const MyStyle = {
     dialogstyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     ticketdialogstyle: { width: '350px', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
-    breadcrumbBG:{background: '#191919'}
+    breadcrumbBG:{background: '#000066'},
+    menubar:{background:'#191919'}    
 }
 
 class IssueDetailsPage extends Component {
@@ -186,19 +187,18 @@ class IssueDetailsPage extends Component {
 
     render() {
         return (
+            <>   
+            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
+               
+            <div className='layout-main-inside'>
             <div className="p-grid p-fluid">
-                <div className="p-col-12" >
-                    <div style={MyStyle.divPaddingTop}>
-                        <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
-                    </div>
-                    <div>
-                        <Menubar
-                            style={MyStyle.breadcrumbBG} 
+                <div className="p-col-12" >       
+                <Menubar style={MyStyle.menubar} 
                             model={this.state.tieredItems} 
                             //  start={<InputText placeholder="Search" type="text"/>}
                             end={<Button label="Add Message" icon="pi pi-plus" onClick={this.addMessage} disabled={this.state.issueIDselected === null ? true : false} /> }
                         />
-                    </div>
+                    
                     <div style={MyStyle.paddingTop}>
                         <Messages ref={(el) => this.messages = el}></Messages>
                         <Panel header='Issue Details' toggleable={true}>
@@ -368,6 +368,8 @@ class IssueDetailsPage extends Component {
                     </div>
                 </div>
             </div>
+            </div>
+            </>
         );
     }
 }
