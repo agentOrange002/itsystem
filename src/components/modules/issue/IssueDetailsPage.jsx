@@ -28,8 +28,16 @@ const MyStyle = {
     dialogstyle: { width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
     ticketdialogstyle: { width: '350px', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
-    breadcrumbBG:{background: '#000066'},
-    menubar:{background:'#191919'}    
+    menubar:{background: '#191919',height:'50px'},
+    breadcrumbBG:{     
+        borderStyle: 'solid',
+        backgroundColor:'#000066',
+        color:'#000066'
+    },
+    breadcrumb:{
+        background:'#000066',
+        borderColor:'#000066'    
+    }
 }
 
 class IssueDetailsPage extends Component {
@@ -188,8 +196,9 @@ class IssueDetailsPage extends Component {
     render() {
         return (
             <>   
-            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
-               
+            <div style={MyStyle.breadcrumbBG}>
+                <BreadCrumb style={MyStyle.breadcrumb} model={this.state.breadcrumdItems} home={this.state.home} />
+            </div>
             <div className='layout-main-inside'>
             <div className="p-grid p-fluid">
                 <div className="p-col-12" >       

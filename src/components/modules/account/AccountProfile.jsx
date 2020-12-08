@@ -13,6 +13,10 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { Fieldset } from 'primereact/fieldset';
 import { Dialog } from 'primereact/dialog';
 import AddAddressDialog from './AddAddressDialog';
+import { BreadCrumb } from 'primereact/breadcrumb';
+import history from "../../../routes/history";
+
+const urlparam = `${window.location.origin}/#/app/accountprofile`;
 
 const MyStyle = {   
     Panel: { paddingBottom: '1em' },
@@ -22,9 +26,18 @@ const MyStyle = {
     imageBorder: { borderStyle: 'solid', borderRadius: '150px', width: '50%' ,borderColor:'black'},
     h3: { textAlign: 'center' },
     width: { width: '170px' },
-    fileupload: { display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '200px', paddingBottom: '1em' },
+    fileupload: { display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '110px', paddingBottom: '1em' },
     span: { textAlign: 'center', display: 'block', marginRight: 'auto', marginLeft: 'auto', width: '200px', paddingBottom: '1em' },
-    DialogStyle : {width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px'}
+    DialogStyle : {width: '50vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px'},
+    breadcrumbBG:{     
+        borderStyle: 'solid',
+        backgroundColor:'#000066',
+        color:'#000066'
+    },
+    breadcrumb:{
+        background:'#000066',
+        borderColor:'#000066'    
+    }
 }
 
 class AccountProfile extends Component {
@@ -32,7 +45,13 @@ class AccountProfile extends Component {
             profile: {},
             image: [],
             profileimg: "assets/layout/images/profile.png" ,    
-            addressDialog: false
+            addressDialog: false,
+            breadcrumdItems: [
+                { label: 'Account Profile',url: `${urlparam}`},            
+            ],
+            home: {
+                icon: 'pi pi-home', command: () => { history.push('/app/'); }
+            },
     }
 
     componentDidMount() {
@@ -230,6 +249,11 @@ class AccountProfile extends Component {
 
     render() {
         return (
+            <>
+            <div style={MyStyle.breadcrumbBG}>
+                <BreadCrumb style={MyStyle.breadcrumb} model={this.state.breadcrumdItems} home={this.state.home} />
+            </div>
+            <div className='layout-main-inside'>            
             <div className="p-grid">
                 <div className="p-col-12">              
                     <TabView style={{marginLeft:'0'}} activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
@@ -264,6 +288,8 @@ class AccountProfile extends Component {
                     </Dialog>
                 </div>
             </div>
+            </div>
+            </>
         );
     }
 }

@@ -10,7 +10,6 @@ class IssueDataScroller extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             items: []
         };
@@ -34,9 +33,7 @@ class IssueDataScroller extends Component {
                 </div>
                 <div className="item-action">
                     <span className="item-price"></span>
-                    <Button icon="pi pi-search" label="View Tickets" disabled={'OUTOFSTOCK'}></Button>
-                    <Button icon="pi pi-search" label="View Tasks" disabled={'OUTOFSTOCK'}></Button>
-
+                    <Button icon="pi pi-search" label="View Logs"></Button>                    
                 </div>
             </div>
         );
@@ -44,7 +41,7 @@ class IssueDataScroller extends Component {
 
     header() {
         return (
-            <div style={{ textAlign: 'left' }}><h1>Users Issues</h1></div>
+            <div style={{ textAlign: 'left' }}><h1>User Document Issues</h1></div>
         );
     }
 

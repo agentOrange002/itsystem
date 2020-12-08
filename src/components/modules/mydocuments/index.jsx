@@ -7,10 +7,16 @@ import MyIssuesPage from './MyIssuesPage';
 import {Route,Switch,Redirect} from 'react-router-dom';
 
 const MyStyle = { 
-    breadcrumbBG:{
-        background: '#000066'}//'#191919'
+    breadcrumbBG:{     
+        borderStyle: 'solid',
+        backgroundColor:'#000066',
+        color:'#000066'
+    },
+    breadcrumb:{
+        background:'#000066',
+        borderColor:'#000066'    
+    }
 }
-
 
 const urlparam = `${window.location.origin}/#/app/mydocuments/`;
 
@@ -44,8 +50,10 @@ class MyDocuments extends Component {
     }
     render() {
         return (
-            <>          
-            <BreadCrumb style={MyStyle.breadcrumbBG} model={this.state.breadcrumdItems} home={this.state.home} />
+            <>       
+            <div style={MyStyle.breadcrumbBG} >            
+                <BreadCrumb style={MyStyle.breadcrumb} model={this.state.breadcrumdItems} home={this.state.home} />
+            </div>  
             <div className='layout-main-inside'>
               <div className="p-grid p-fluid">
                     <div className="p-col-12" >

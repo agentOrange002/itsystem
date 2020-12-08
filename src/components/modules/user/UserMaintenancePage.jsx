@@ -7,8 +7,23 @@ import UserDataTable from './UserDataTable';
 
 const urlparam = `${window.location.origin}/#/app/usermaintenance/`;
 
-class UserMaintenance extends Component
- {
+const MyStyle = {    
+    paddingT : {
+        paddingTop: '.5em'
+    } ,  
+    menubar:{background: '#191919',height:'50px'},
+    breadcrumbBG:{     
+        borderStyle: 'solid',
+        backgroundColor:'#000066',
+        color:'#000066'
+    },
+    breadcrumb:{
+        background:'#000066',
+        borderColor:'#000066'    
+    }
+}
+
+class UserMaintenance extends Component {
     state = {
         breadcrumdItems: [
             {label: 'Users'},
@@ -69,14 +84,14 @@ class UserMaintenance extends Component
 
     render() { 
         return ( 
+            <>
+             <div style={MyStyle.breadcrumbBG}> 
+                <BreadCrumb style={MyStyle.breadcrumb} model={this.state.breadcrumdItems} home={this.state.home} />
+            </div>  
+            <div className='layout-main-inside'>           
             <div className="p-grid p-fluid">
-                <div className="p-col-12" >
-                    <div style={{paddingBottom:'.5em'}}> 
-                        <BreadCrumb model={this.state.breadcrumdItems} home={this.state.home} />
-                    </div>  
-                    <div>
-                        <Menubar model={this.state.tieredItems} />    
-                    </div>
+                <div className="p-col-12" >   
+                    <Menubar style={MyStyle.menubar} model={this.state.tieredItems} />                       
                     <div style={{paddingTop: '.5em'}}>
                         <Switch>
                             <Route path="/app/usermaintenance/" exact component={UserDataTable} />                           
@@ -85,6 +100,8 @@ class UserMaintenance extends Component
                     </div>           
                 </div>                          
             </div>
+            </div>
+            </>
          );
     }
 }
