@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import history from "../../../routes/history";
-//import { Menubar } from 'primereact/menubar';
-//import { Button } from 'primereact/button';
+
 import MyIssuesPage from './MyIssuesPage';
 import {Route,Switch,Redirect} from 'react-router-dom';
+import IssueLogsPage from './IssueLogsPage';
 
 const MyStyle = { 
     breadcrumbBG:{     
@@ -27,53 +27,31 @@ class MyDocuments extends Component {
         ],
         home: {
             icon: 'pi pi-home', command: () => { history.push('/app/'); }
-        },
-
-        tieredItems: [
-            {
-                label: 'Issues',
-                icon: 'pi pi-fw pi-file',
-                // command: () => { }
-            },
-            {
-                label: 'Tickets',
-                icon: 'pi pi-fw pi-file',
-                // command: () => { }
-            },
-            {
-                label: 'Tasks',
-                icon: 'pi pi-fw pi-file',
-                // command: () => { }
-            },
-
-        ]
+        }      
     }
+
     render() {
         return (
-            <>       
-            <div style={MyStyle.breadcrumbBG} >            
-                <BreadCrumb style={MyStyle.breadcrumb} model={this.state.breadcrumdItems} home={this.state.home} />
-            </div>  
-            <div className='layout-main-inside'>
-              <div className="p-grid p-fluid">
-                    <div className="p-col-12" >
-                      
-                        {/* <div>
-                            <Menubar style={MyStyle.breadcrumbBG} model={this.state.tieredItems} >
-                                <Button label="Add Message" icon="pi pi-plus" 
-                                    disabled/>
-                            </Menubar >
-                        </div> */}
-                       
-                            <Switch>                           
-                                <Route path="/app/mydocuments/" exact component={MyIssuesPage} />                               
-                                <Redirect from="/app/mydocuments/**" to="/app/notfound" />                             
-                            </Switch>
-                                            
-                    </div>
-                </div>
+          <>
+            <div style={MyStyle.breadcrumbBG}>
+              <BreadCrumb
+                style={MyStyle.breadcrumb}
+                model={this.state.breadcrumdItems}
+                home={this.state.home}
+              />
             </div>
-            </>
+            <div className="layout-main-inside">
+              <div className="p-grid p-fluid">
+                <div className="p-col-12">
+                  <Switch>
+                    <Route path="/app/mydocuments/" exact component={MyIssuesPage}/>
+                    <Route path="/app/mydocuments/viewlogs/:issueid" component={IssueLogsPage}/>
+                    <Redirect from="/app/mydocuments/*" to="/app/notfound" />
+                  </Switch>
+                </div>
+              </div>
+            </div>
+          </>
         );
     }
 }

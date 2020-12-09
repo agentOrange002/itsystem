@@ -5,13 +5,15 @@ import { Button } from 'primereact/button';
 import { connect } from 'react-redux';
 import { getIssueDocuments } from '../../../redux/actions/MyDocumentActions';
 import _ from 'lodash';
+import history from "../../../routes/history";
 
 class IssueDataScroller extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
+            
         };
         this.itemTemplate = this.itemTemplate.bind(this);
     }
@@ -19,23 +21,30 @@ class IssueDataScroller extends Component {
     async componentDidMount() {
         await this.props.getIssueDocuments();
         await this.setState({ items: this.props.MYDOCUMENTS });
+    }   
+
+    onView = (id) => {      
+        history.push(`/app/mydocuments/viewlogs/${id}`);
     }
 
     itemTemplate(data) {
         return (
-            <div className="item-item">
-                {/* <img src={`showcase/demo/images/item/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} /> */}
-                <div className="item-detail">
-                    <span className="p-tag p-tag-success">{data.issueStatus}</span>
-                    <div className="item-name">{data.subject}</div>
-                    <div className="item-description">{data.description}</div>
-                    <i className="pi pi-calendar item-category-icon"></i>{data.dateReported}<span className="item-category"></span>
-                </div>
-                <div className="item-action">
-                    <span className="item-price"></span>
-                    <Button icon="pi pi-search" label="View Logs"></Button>                    
-                </div>
+          <div className="item-item">
+            {/* <img src={`showcase/demo/images/item/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} /> */}
+            <div className="item-detail">
+              <span className="p-tag p-tag-success">{data.issueStatus}</span>
+              <div className="item-name">{data.subject}</div>
+              <div className="item-description">{data.description}</div>
+              <i className="pi pi-calendar item-category-icon"></i>
+              {data.dateReported}
+              <span className="item-category"></span>
             </div>
+            <div className="item-action">
+              <span className="item-price"></span>
+              <Button icon="pi pi-search" label="View Logs" onClick={()=>this.onView(data.issueId)}></Button>
+            </div>
+           
+          </div>
         );
     }
 

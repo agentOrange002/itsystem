@@ -34,8 +34,7 @@ class Dashboard extends Component {
           </div>
           <div className='layout-main-inside'>
             <div className="p-grid p-fluid dashboard">
-                <SupportDashboard />
-              {/* //  <UserDashboard />         */}
+                <SupportDashboard />            
             </div>
           </div>
           </>

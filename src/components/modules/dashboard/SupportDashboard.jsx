@@ -10,7 +10,7 @@ const MyStyle = {
     issuesClosed: {backgroundColor:'#000066',color:'#ffffff'}
 };
 
-class SupportDashBoard extends Component {
+class SupportDashboard extends Component {
     
     state = { activeIndex: 0 }
 
@@ -115,4 +115,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {getDashboard};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SupportDashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(SupportDashboard);

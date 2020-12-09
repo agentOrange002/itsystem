@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MyIssuesDataView extends Component {
+class MyIssueLogsPage extends Component {
     state = {  }
     render() { 
         return ( 
@@ -10,4 +10,4 @@ class MyIssuesDataView extends Component {
     }
 }
  
-export default MyIssuesDataView;
+export default MyIssueLogsPage;

@@ -12,7 +12,7 @@ class Test extends Component {
     reportName: "IssueReport.pdf"
   };
   async componentDidMount() {
-    await Axios.get("http://localhost:8080/itsystem/api/reports/pdf/IID4YtVve8ger", {
+    await Axios.get("http://localhost:8080/itsystem/api/reports/pdf/IID3CMU4gdxEN", {
       responseType: "arraybuffer"
     })
       .then(response => {
@@ -24,7 +24,7 @@ class Test extends Component {
 
   getPDF = async (event) => {
       event.preventDefault();
-    await Axios.get("http://localhost:8080/itsystem/api/reports/issue/IID4YtVve8ger", {
+    await Axios.get("http://localhost:8080/itsystem/api/reports/issue/IID3CMU4gdxEN", {
       responseType: "blob",
       headers: {
         'Accept': 'application/pdf'
@@ -48,7 +48,7 @@ class Test extends Component {
   render() {
    
     return (
-      <div>
+      <div className='layout-main-inside'>
         <button onClick={this.getPDF}>Click</button>
         <div className='content-section implementation flexgrid-demo'>
           <div className='p-grid p-dir-col'>
