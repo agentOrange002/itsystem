@@ -82,7 +82,7 @@ class TaskMaintenanceDatatable extends Component {
             <div className="content-section implementation" >
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={this.hideContext} />
                 <UILoader blockui="TASK_LOADING" unblockui={["TASK_GET_ALL","TASK_ERROR"]}>
-                <DataTable style={{textAlign:'left'}}
+                <DataTable //style={{textAlign:'left'}}
                     value={this.props.TASKS}
                     scrollable={true}
                     selectionMode="single"

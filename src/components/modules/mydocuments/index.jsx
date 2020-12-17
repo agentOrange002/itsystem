@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import history from "../../../routes/history";
-
-import MyIssuesPage from './MyIssuesPage';
+import IssueDataScroller from './IssueDataScroller';
 import {Route,Switch,Redirect} from 'react-router-dom';
 import IssueLogsPage from './IssueLogsPage';
 
@@ -44,7 +43,7 @@ class MyDocuments extends Component {
               <div className="p-grid p-fluid">
                 <div className="p-col-12">
                   <Switch>
-                    <Route path="/app/mydocuments/" exact component={MyIssuesPage}/>
+                    <Route path="/app/mydocuments/" exact component={IssueDataScroller}/>
                     <Route path="/app/mydocuments/viewlogs/:issueid" component={IssueLogsPage}/>
                     <Redirect from="/app/mydocuments/*" to="/app/notfound" />
                   </Switch>
