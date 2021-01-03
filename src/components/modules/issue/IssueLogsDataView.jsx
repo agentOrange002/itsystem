@@ -80,7 +80,7 @@ class IssueLogsDataView extends Component {
                     <div className="p-col-12 p-md-9">
                         <div className="p-grid">
                             <div className="p-col-12">Issue Log ID: <b>{issuelog.issueLogId}</b></div>
-                            <div className="p-col-12">User: <b>{`${issuelog.userResponseModel.firstName} ${issuelog.userResponseModel.lastName}`}</b></div>
+                            <div className="p-col-12">User: <b>{`${issuelog.issueLogUserDetails.fullName}`}</b></div>
                             <div className="p-col-12">Log Date: <b>{issuelog.logDate}</b></div>
                             <div className="p-col-12">Issue Message: <b>{issuelog.issueMessage}</b></div>
                         </div>

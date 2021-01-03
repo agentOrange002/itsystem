@@ -15,7 +15,7 @@ const MyStyle={
     fonts: {fontSize:'13px'}
 }
 
-const profileimg = "assets/layout/images/profile.png";
+const profileimg = "../public/assets/layout/images/profile.png";
 
 class AppProfile extends Component {
 

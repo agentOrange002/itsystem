@@ -61,7 +61,7 @@ class Test extends Component {
                   src={`data:application/pdf;charset=utf-8;base64,${this.state.result}#toolbar=1`}
                   height='600px'
                   width='100%'
-                  loading='lazy'
+                  
                 />
               </div>
             </div>

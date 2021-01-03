@@ -1,0 +1,7 @@
+{
+    "editor.tabSize": 5,
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "editor.tabCompletion": "on",
+    "prettier.jsxBracketSameLine": true,
+    "prettier.singleQuote": true
+}

@@ -244,7 +244,7 @@ class IssueMaintenanceDataTable extends Component {
                         <Column field="issueId" header="Issue ID" style={{ width: '150px' }} />
                         <Column field="subject" header="Subject" style={{ width: '250px' }} />
                         {/* <Column field="description" header="Description" style={{width:'550px'}} /> */}
-                        <Column field="reportedBy" header="Reported By" style={{ width: '250px' }} />
+                        <Column field="reportedBy" header="Reported By" style={{ width: '300px' }} />
                         <Column field="emailProvided" header="E-mail" style={{ width: '250px' }} />
                         <Column field="dateReported" header="Date Reported" style={{ width: '250px' }} />
                     </DataTable>

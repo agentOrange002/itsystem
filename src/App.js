@@ -36,6 +36,9 @@ import UnauthorizedPage from './components/modules/error/UnauthorizedPage';
 import NotFoundPage from './components/modules/error/NotFoundPage';      
 import HeaderProgressBar from './components/modules/tools/HeaderProgressBar';
 
+import LogoWhite from '../public/assets/layout/images/logo-white.svg';
+import LogoBlack from '../public/assets/layout/images/logo.svg';
+
 class App extends Component {
 
     constructor() {
@@ -185,33 +188,6 @@ class App extends Component {
         ];
     }
 
-    // mdSideMenu(){
-    //     let mdresult =  {
-    //         label: 'My Documents', 
-    //         icon: 'pi pi-fw pi-folder', 
-    //         // items:  [
-    //         //     {label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'},
-    //         //     {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
-    //         //     {label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'},
-    //         // ]
-    //     }
-    //     let itemArray = [{label: 'My Issues', icon: 'pi pi-fw pi-file', to: '/app/#'}]     
-    //     let newItemArray = null;
-    //     if(true===true){
-    //         newItemArray = [...itemArray, 
-    //             {label: 'My Tickets', icon: 'pi pi-fw pi-file', to: '/app/#'},
-    //             {label: 'My Tasks', icon: 'pi pi-fw pi-file', to: '/app/#'}
-    //         ]
-    //     } 
-    //     else {
-    //         newItemArray = itemArray;
-    //     }
-
-
-    //     mdresult.items = newItemArray;
-    //     return mdresult; 
-    // }
-
     addClass(element, className) {
         if (element.classList)
             element.classList.add(className);
@@ -240,7 +216,7 @@ class App extends Component {
     }  
     
     render() {
-        const logo = this.state.layoutColorMode === 'dark' ? 'assets/layout/images/logo-white.svg': 'assets/layout/images/logo.svg';
+        const logo = this.state.layoutColorMode === 'dark' ? `${LogoWhite}`: `${LogoBlack}`;
 
         const wrapperClass = classNames('layout-wrapper', {
             'layout-overlay': this.state.layoutMode === 'overlay',
@@ -257,17 +233,15 @@ class App extends Component {
 
         return (    
             <>                
-            <div className={wrapperClass} onClick={this.onWrapperClick}>
+            <div className={wrapperClass} onClick={this.onWrapperClick} >
                 <AppTopbar onToggleMenu={this.onToggleMenu}/>
                  
-                <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
+                <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}  >
                     <div className="layout-logo">
                         <img alt="Logo" src={logo} />
-                    </div>
-                  
+                    </div>                  
                     <AppProfile />
-                    <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
-                    
+                    <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />                    
                 </div>
               
                 <div className="layout-main">          

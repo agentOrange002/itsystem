@@ -23,6 +23,7 @@ import { USERIMAGE } from './UserImageReducer';
 import { AUTHORITIES } from './AuthorityReducer';
 import { ADDRESSES } from './AddressReducer';
 import { MYDOCUMENTS } from './MyDocumentReducer';
+import { MDISSUELOGS } from './MDIssueLogReducer';
 
 // const encryptor = createEncryptor({
 //   secretKey: "mydirtylittlesecret",
@@ -79,7 +80,14 @@ const issuesPC = {
 const issuelogsPC = {
   key: 'issuelogs',
   storage: storageSession,
-  whitelist: ['ISSUELOGS'],
+  blacklist: ['ISSUELOGS'],
+  transforms: [encryptor],
+}
+
+const mdIssuelogsPC = {
+  key: 'mdissuelogs',
+  storage: storageSession,
+  whitelist: ['MDISSUELOGS'],
   transforms: [encryptor],
 }
 
@@ -147,6 +155,7 @@ const rootReducer = combineReducers({
   AUTHORITIES: persistReducer(authorityPC, AUTHORITIES),
   ADDRESSES: persistReducer(addressPC, ADDRESSES),
   MYDOCUMENTS: persistReducer(mdPC, MYDOCUMENTS),
+  MDISSUELOGS: persistReducer(mdIssuelogsPC, MDISSUELOGS),
   DASHBOARD: persistReducer(dashboardPC, DASHBOARD)
 });
 
