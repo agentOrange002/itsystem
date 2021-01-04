@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import Axios from "axios";
+import { Buffer } from "buffer";
 //import FileSaver from "file-saver";
 //import { saveAs } from 'file-saver';
 import _ from "lodash";
@@ -11,12 +11,12 @@ class Test extends Component {
     reportBlob: {},
     reportName: "IssueReport.pdf"
   };
-  async componentDidMount() {
+   async componentDidMount() {
     await Axios.get("http://localhost:8080/itsystem/api/reports/pdf/IID3CMU4gdxEN", {
-      responseType: "arraybuffer"
+      responseType: "arraybuffer"      
     })
-      .then(response => {
-        const res = Buffer.from(response.data, "binary").toString("base64");
+      .then(response => {      
+       let res = Buffer.from(response.data, "binary").toString("base64");      
         this.setState({ result: res });
       })
       .catch(error => console.log(error));
@@ -61,7 +61,7 @@ class Test extends Component {
                   src={`data:application/pdf;charset=utf-8;base64,${this.state.result}#toolbar=1`}
                   height='600px'
                   width='100%'
-                  
+                  loading='lazy'
                 />
               </div>
             </div>

@@ -5,7 +5,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { getMDIssueLogByIssueID } from '../../../redux/actions/IssueLogsActions';
-
+import {Fieldset} from 'primereact/fieldset';
 // data: [
 //   {
 //        issueLogId: 'TESTid',
@@ -14,6 +14,8 @@ import { getMDIssueLogByIssueID } from '../../../redux/actions/IssueLogsActions'
 //   },
 // ]
 
+import ProfilePic from '../../../../public/assets/layout/images/profile.png';
+
 const MyStyle = {
      padding: {padding: '.5em'},
      textAlign: {textAlign: 'center'},
@@ -21,7 +23,9 @@ const MyStyle = {
      left:{textAlign: 'left'},
      right:{textAlign: 'right'},
      dialog: {width: '50vw',borderStyle:'solid',borderColor:'white',borderWidth:'1px'},
- } 
+     shortdialogstyle: { width: '20vw', borderStyle: 'solid', borderColor: 'white', borderWidth: '1px' },
+    
+} 
 
 class IssueLogsPage extends Component {
      state = {
@@ -30,7 +34,7 @@ class IssueLogsPage extends Component {
           products: null,
           editDialog: false,
           deleteDialog: false,
-          product: this.emptyProduct,
+          issuelog: null,
           selectedProducts: null,
           submitted: false,
           globalFilter: null,
@@ -38,7 +42,7 @@ class IssueLogsPage extends Component {
 
      async componentDidMount() {
           const { issueid } = this.props.match.params;
-          await this.props.getIssueLogByIssueID(issueid);
+          await this.props.getMDIssueLogByIssueID(issueid);
      }
 
      refreshTable = async (event) => {
@@ -87,62 +91,69 @@ class IssueLogsPage extends Component {
           }
      }
 
-     editProduct(product) {
-          this.setState({
-               product: { ...product },
-               productDialog: true,
+     editLog = () => {         
+          this.setState({               
+               editDialog: true,
           });
      }
 
-     confirmDeleteProduct(product) {
-          this.setState({
-               product,
-               deleteProductDialog: true,
+     deleteLog = () => {          
+          this.setState({              
+               deleteDialog: true,
           });
      }
 
-     actionBodyTemplate(rowData) {
+     actionBodyTemplate = () => {
           return (
                <React.Fragment>
                     <Button
                          icon='pi pi-pencil'
                          className='p-button-rounded p-button-success p-mr-2'
-                         onClick={() => this.editProduct(rowData)}
+                         onClick={this.editLog}
                     />
                     <Button
                          icon='pi pi-trash'
                          className='p-button-rounded p-button-warning'
-                         onClick={() => this.confirmDeleteProduct(rowData)}
+                         onClick={this.deleteLog}
                     />
                </React.Fragment>
           );
      }
 
-     renderEditDialog() {
-          if (this.state.selectedIssueLog) {
-              return (
-                  <div className="p-grid" style={MyStyle.DivStyle}>
-                      <div className="p-col-12" style={MyStyle.textAlign}>
-                          <img src={process.env.PUBLIC_URL+`assets/layout/images/profile.png`} alt={this.state.selectedIssueLog.issueLogId} />
-                      </div>
+     renderEditDialog = (issuelog) =>  {    
+         if(!_.isEmpty(issuelog)) {
+          return (
+               <div>
+               <Fieldset legend='Edit Form'>
+               <div className="p-grid" style={MyStyle.DivStyle}>    
+                    <div className="p-col-12" style={MyStyle.textAlign}>
+                         <img src={ProfilePic} alt={this.state.selectedIssueLog.issueLogId} />
+                    </div>                  
   
-                      <div className="p-col-4">IssueLogID: </div>
-                      <div className="p-col-8">{this.state.selectedIssueLog.issueLogId}</div>
-  
-                      <div className="p-col-4">LogDate: </div>
-                      <div className="p-col-8">{this.state.selectedIssueLog.logDate}</div>
-  
-                      <div className="p-col-4">Message: </div>
-                      <div className="p-col-8">{this.state.selectedIssueLog.issueMessage}</div>
-  
-                      {/* <div className="p-col-4">Color: </div>
-                      <div className="p-col-8">{this.state.selectedIssueLog.color}</div> */}
-                  </div>
-              );
-          }
-          else {
-              return null;
-          }
+                    <div className="p-col-4">IssueLogID: </div>
+                    <div className="p-col-8">{issuelog.issueLogId}</div>
+
+                    <div className="p-col-4">LogDate: </div>
+                    <div className="p-col-8">{issuelog.logDate}</div>
+
+                    <div className="p-col-4">Message: </div>
+                    <div className="p-col-8">{issuelog.issueMessage}</div>                      
+                    </div>
+               </Fieldset>
+               </div> 
+              );     
+         }      
+      }
+      
+      footerDialog = () => {
+          return (
+              <div className='button' style={MyStyle.ButtonDivStyle}>
+                  <span>
+                      <Button label='No' onClick={this.hideDeleteDialog} className="p-button-danger" icon='pi pi-times' style={MyStyle.LoginButtonStyle} />
+                      <Button label='Yes' onClick={this.hideDeleteDialog} className="p-button-success" icon='pi pi-check' style={MyStyle.LoginButtonStyle} />
+                  </span>
+              </div>
+          );
       }
 
      render() {
@@ -182,7 +193,7 @@ class IssueLogsPage extends Component {
                                         <Column
                                              field='issueLogId'
                                              header='IssueLog ID'
-                                             style={{ width: '150px' }}
+                                             style={{ width: '180px' }}
                                         />
                                         <Column
                                              field='issueMessage'
@@ -192,7 +203,7 @@ class IssueLogsPage extends Component {
                                         <Column
                                              field='logDate'
                                              header='Log Date'
-                                             style={{ width: '170px' }}
+                                             style={{ width: '250px' }}
                                         />
                                         <Column
                                              field='issueLogUserDetails.userId'
@@ -202,7 +213,7 @@ class IssueLogsPage extends Component {
                                         <Column
                                              field='issueLogUserDetails.fullName'
                                              header='LogBy'
-                                             style={{ width: '200px' }}
+                                             style={{ width: '300px' }}
                                         />
                                    </DataTable>
                                    <Dialog
@@ -211,7 +222,21 @@ class IssueLogsPage extends Component {
                                         style={MyStyle.dialog}
                                         modal={true}
                                         onHide={this.hideEditDialog}>
-                                        {this.renderEditDialog()}
+                                        {this.renderEditDialog(this.state.selectedIssueLog)}
+                                   </Dialog>
+                                   <Dialog header="Delete Issue Log Details"
+                                        visible={this.state.deleteDialog}
+                                        footer={this.footerDialog()}
+                                        style={MyStyle.shortdialogstyle}
+                                        modal={true}
+                                        onHide={this.hideDeleteDialog}>
+                                        <Fieldset legend="Message">
+                                             <div className='p-grid p-fluid'>
+                                                  <div className='p-col-12 p-md-12 p-lg-12'>
+                                                       <h1>Are you sure?</h1>
+                                                  </div>
+                                             </div>
+                                        </Fieldset>
                                    </Dialog>
                               </div>
                          </div>
@@ -225,7 +250,7 @@ const mapStateToProps = (state, ownProps) => {
   const { issueid } = ownProps.match.params;
   return {
     MYDOCUMENTS: state.MYDOCUMENTS.mydocumentResponse[issueid],
-    MDISSUELOGS: state.MDISSUELOGS.mdIssueLogsResponse,
+    MDISSUELOGS: Object.values(state.MDISSUELOGS.mdIssueLogsResponse),
   };
 };
 

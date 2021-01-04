@@ -9,13 +9,12 @@ import _ from 'lodash';
 import history from "./routes/history";
 
 import {LogOut} from './components/commands/Logout';
-//import { LOGIN_PROFILE_RESET } from './redux/constants/LoginConstants';
+
+import profileimg from "../public/assets/layout/images/profile.png";
 
 const MyStyle={
     fonts: {fontSize:'13px'}
 }
-
-const profileimg = "../public/assets/layout/images/profile.png";
 
 class AppProfile extends Component {
 

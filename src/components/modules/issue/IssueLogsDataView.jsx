@@ -7,6 +7,8 @@ import {Dropdown} from "primereact/dropdown";
 import {connect} from 'react-redux';
 import {getIssueLogByIssueID} from '../../../redux/actions/IssueLogsActions';
 
+import ProfilePic from '../../../../public/assets/layout/images/profile.png';
+
 const MyStyle = {
     padding: {padding: '.5em'},
     textAlign: {textAlign: 'center'},
@@ -75,7 +77,7 @@ class IssueLogsDataView extends Component {
             <div className="p-col-12">
                 <div className='p-grid p-fluid'>
                     <div className="p-col-12 p-md-2">
-                        <img src={process.env.PUBLIC_URL + `assets/layout/images/profile.png`} alt={issuelog.issueLogId} />
+                        <img src={ProfilePic} alt={issuelog.issueLogId} />
                     </div>
                     <div className="p-col-12 p-md-9">
                         <div className="p-grid">
@@ -122,7 +124,7 @@ class IssueLogsDataView extends Component {
             return (
                 <div className="p-grid" style={MyStyle.DivStyle}>
                     <div className="p-col-12" style={MyStyle.textAlign}>
-                        <img src={process.env.PUBLIC_URL+`assets/layout/images/profile.png`} alt={this.state.selectedIssueLog.issueLogId} />
+                        <img src={ProfilePic} alt={this.state.selectedIssueLog.issueLogId} />
                     </div>
 
                     <div className="p-col-4">IssueLogID: </div>

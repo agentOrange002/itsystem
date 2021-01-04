@@ -15,6 +15,7 @@ import { Dialog } from 'primereact/dialog';
 import AddAddressDialog from './AddAddressDialog';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import history from "../../../routes/history";
+import imagepic from "../../../../public/assets/layout/images/profile.png" ;
 
 const urlparam = `${window.location.origin}/#/app/accountprofile`;
 
@@ -43,8 +44,7 @@ const MyStyle = {
 class AccountProfile extends Component {
   state = {
             profile: {},
-            image: [],
-            profileimg: "assets/layout/images/profile.png" ,    
+            image: [],            
             addressDialog: false,
             breadcrumdItems: [
                 { label: 'Account Profile',url: `${urlparam}`},            
@@ -189,7 +189,7 @@ class AccountProfile extends Component {
                     <div className="p-col-12 p-md-6" style={MyStyle.imageBorder}>                      
                         <h3 style={MyStyle.h3}>Current Image</h3>
                         {/* {_.isEmpty(this.props.LOGIN_PROFILE.userImage.image) ? undefined : <img alt='UserImage' label="UserImage" src={`data:image/png;charset=utf-8;base64,${this.props.LOGIN_PROFILE.userImage.image}`} style={MyStyle.image} />} */}
-                        <img src={_.isEmpty(this.props.LOGIN_PROFILE.userImage) ? this.state.profileimg : `data:image/png;charset=utf-8;base64,${this.props.LOGIN_PROFILE.userImage.image}`} alt='UserImage' label="UserImage" style={MyStyle.image} />
+                        <img src={_.isEmpty(this.props.LOGIN_PROFILE.userImage) ? imagepic : `data:image/png;charset=utf-8;base64,${this.props.LOGIN_PROFILE.userImage.image}`} alt='UserImage' label="UserImage" style={MyStyle.image} />
                          <span style={MyStyle.span} >
                             <label style={MyStyle.h3} >Image ID : {_.isEmpty(this.props.LOGIN_PROFILE.userImage) ? "NONE" :this.props.LOGIN_PROFILE.userImage.imageId}</label>
                         </span>
@@ -197,7 +197,7 @@ class AccountProfile extends Component {
                     <div className="p-col-12 p-md-6" style={MyStyle.imageBorder}>
                         <h3 style={MyStyle.h3}>Upload New Profile Image</h3>
                         {/* {_.isEmpty(this.state.image) ? undefined : <img alt='UploadImage' label="UploadImage" src={this.state.image} style={MyStyle.image} />} */}
-                        <img src={_.isEmpty(this.state.image)? this.state.profileimg : this.state.image } alt='UploadImage' label="UploadImage"  style={MyStyle.image} />
+                        <img src={_.isEmpty(this.state.image)? imagepic : this.state.image } alt='UploadImage' label="UploadImage"  style={MyStyle.image} />
                         <span style={MyStyle.fileupload}>
                             <FileUpload mode="basic" auto={true} accept="image/*" maxFileSize={1000000} onUpload={this.onUpload} customUpload={true} uploadHandler={this.uploadUserImage} />
                         </span>

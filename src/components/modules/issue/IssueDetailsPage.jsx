@@ -90,13 +90,7 @@ class IssueDetailsPage extends Component {
                 console.log("this issue has no ticket");
                 this.noticket();
             }
-        }
-
-        // if(this.state.ticketinfo !== prevState.ticketinfo) {    
-        //       if(!_.isEmpty(this.state.ticketinfodateOpened)&&_.isEmpty(!this.state.ticketinfo.dateClosed)) {
-        //           this.noticket();
-        //        }
-        // }       
+        }      
     }
 
 
@@ -115,8 +109,7 @@ class IssueDetailsPage extends Component {
 
     lastArrayTicket = () => {
         let ticketdetails = this.props.tickets;
-        this.setState({ ticketinfo: ticketdetails.pop() });
-        // return ticketdetails.pop();
+        this.setState({ ticketinfo: ticketdetails.pop() });       
     }
 
     checkLastTicketClosed = () => {
