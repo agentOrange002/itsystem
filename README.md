@@ -1,11 +1,18 @@
+### Hi there, I'm Jimboy- aka [agentOrange002][website] 👋
+
+[![Website](https://img.shields.io/website?label=agentOrange002.com&style=for-the-badge&url=https%3A%2F%2Fdistracted-einstein-e83f94.netlify.app)](https://distracted-einstein-e83f94.netlify.app/)
+
+
 <img src="public/readme.png" align="right" />
 
-# Awesome README [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/agentOrange002/itsystem#readme)
+# ITS [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/agentOrange002/itsystem#readme)
 > Issue Tracking System Front End
 
 a Web Application Front End - Issue Tracking System built with WebPack 5, ReactJS, Redux-Thunk and Primereact UI.
 
 It's an application that can track issues that being reported. It allows users, supports and administrators to manage issues.
+
+<br />
 
 ### Languages and Tools:
 
@@ -21,7 +28,7 @@ It's an application that can track issues that being reported. It allows users, 
 
 [<img align="left" alt="Visual Studio Code" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/visualstudiocode.svg"/>][website]
 
-
+<br />
 
 ## Available Scripts
 
@@ -43,3 +50,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+<br/>
+
+➡️ [more projects...](https://github.com/agentOrange002?tab=repositories)
+
+---
+
+
+
+[website]: https://distracted-einstein-e83f94.netlify.app/
