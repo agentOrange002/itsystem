@@ -5,10 +5,10 @@
 
 <img src="public/readme.png" align="right" />
 
-# ITS [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/agentOrange002/itsystem#readme)
+# ITS - Front End [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/agentOrange002/itsystem#readme)
 > Issue Tracking System Front End
 
-a Web Application Front End - Issue Tracking System built with WebPack 5, ReactJS, Redux-Thunk and Primereact UI.
+Issue Tracking System - Front End is a Web Application built with WebPack 5, ReactJS, Redux-Thunk and Primereact UI.
 
 It's an application that can track issues that being reported. It allows users, supports and administrators to manage issues.
 
@@ -55,7 +55,5 @@ Your app is ready to be deployed!
 ➡️ [more projects...](https://github.com/agentOrange002?tab=repositories)
 
 ---
-
-
 
 [website]: https://distracted-einstein-e83f94.netlify.app/
