@@ -14,6 +14,7 @@ import { Messages } from "primereact/messages";
 import logo from "../../../images/Logo.png";
 import HeaderProgressBar from '../tools/HeaderProgressBar';
 import { motion } from 'framer-motion';
+import _ from 'lodash';
 
 const MyStyle = {
     LoginSpanStyle: { width: '100%' },
@@ -108,11 +109,14 @@ class LoginPage extends Component {
     }
 
     showError(message) {
+        let msg = message;
+        if(_.isEmpty(message))
+            msg = "Authentication Failed";
         this.messages.show({
             sticky: true,
             severity: "error",
             summary: "Error Message :",
-            detail: message
+            detail: msg
         });
     }
 
